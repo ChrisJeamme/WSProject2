@@ -1,0 +1,47 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="../fragments/head.html :: head('Jobs Management')"></head>
+<body class="text-center">
+    <header th:replace="../fragments/header.html :: header('Jobs Management')"></header>
+
+	<section class="m-5">
+		<div>
+			<h3>Update a job:</h3>
+			<form id="updateJobForm" th:action="@{updateJob}" method="post">
+				<div class="form-group form-row justify-content-md-center">
+					<label> ID: <input type="text" name="jobId" id="formEditionId" class="form-control"/></label>
+                    <label> Title: <input type="text" name="jobTitle" id="formJobTitle" class="form-control"/></label>
+                    <label> Minimum salary: <input type="number" name="minSalary" id="formMinSalary" class="form-control"/></label>
+                    <label> Maximum salary: <input type="number" name="maxSalary" id="formMaxSalary" class="form-control"/></label>
+					<input type="submit" class="btn btn-dark m-3" value="Modify"/> <!-- onclick="ajaxUpdateJob()" -->
+				</div>
+			</form>
+		</div>
+	
+		<div>
+			<table class="table">
+				<thead class="thead-light">
+					<tr>
+						<th><strong>ID</strong></th>
+						<th>Title</th>
+                        <th>Minimum salary</th>
+                        <th>Maximum salary</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="job : ${jobs}" th:id="'row_' + ${job.jobId}">
+						<td class="jobIdField" data-th-text="${job.jobId}"></td>
+						<td class="jobTitleField" data-th-text="${job.jobTitle}"></td>
+                        <td class="minSalaryField" data-th-text="${job.minSalary}"></td>
+                        <td class="maxSalaryField" data-th-text="${job.maxSalary}"></td>
+                        <td><button th:id="'button_' + ${job.jobId}" class="btn btn-dark" onclick="editButtonPress(this)">Edit</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+    </section>
+
+    <script th:src="@{/js/jobs_functions.js}"></script>
+    <div th:insert="../fragments/scripts.html :: min_scripts"></div>
+</body>
+</html>

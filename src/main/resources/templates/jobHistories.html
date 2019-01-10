@@ -1,0 +1,61 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="../fragments/head.html :: head('Job Histories Management')"></head>
+<body class="text-center">
+    <header th:replace="../fragments/header.html :: header('Job Histories Management')"></header>
+
+	<section class="m-5">
+		<div>
+			<h3>Update a Job History:</h3>
+			<form id="updateJobHistoryForm" th:action="@{updateJobHistory}" method="post">
+				<div class="form-group form-row justify-content-md-center">
+                    <label> Employee ID: <input type="text" name="employeeId" id="formemployeeId" class="form-control"/></label>
+                    <label> Start date: <input type="date" name="startDate" id="formStartDate" class="form-control"/></label>
+                    <label> End date: <input type="date" name="endDate" id="formEndDate" class="form-control"/></label>
+					<label> Job: 
+                    <select id="formJobId" name="jobId" class="custom-select">
+                        <option th:each="job : ${jobs}" th:value="${job.jobId}" data-th-text="${job.jobTitle}"></option>
+                    </select></label>
+                    <label> Department: 
+                    <select id="formDepartmentId" name="departmentId" class="custom-select">
+                        <option th:each="department : ${departments}" th:value="${department.departmentId}" data-th-text="${department.departmentName}"></option>
+                    </select></label>
+					<input type="submit" class="btn btn-dark m-3" value="Modify"/>
+				</div>
+			</form>
+        </div>
+
+        <h2>Job Histories</h2>
+        <div>
+			<table class="table">
+				<thead class="thead-light">
+					<tr>
+                        <th>Employee</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Job</th>
+                        <th>Departement</th>
+                        <th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="jobHistory : ${jobHistories}" th:id="'row_' + ${jobHistory.id.employeeId} + ${jobHistory.id.startDate}">
+						<td class="employeeIdField" data-th-text="${jobHistory.id.employeeId}"></td>
+                        <td class="startDateField" data-th-text="${jobHistory.id.startDate}"></td>
+                        <td class="endDateField" data-th-text="${jobHistory.endDate}"></td>
+                        <td hidden class="jobIdField" data-th-text="${jobHistory.job.jobId}"></td>
+                        <td class="jobTitleField" data-th-text="${jobHistory.job.jobTitle}"></td>
+                        <td hidden class="departmentIdField" data-th-text="${jobHistory.department.departmentId}"></td>
+                        <td class="departmentNameField" data-th-text="${jobHistory.department.departmentName}"></td>
+
+                        <td><button th:id="'button_' + ${jobHistory.id.employeeId} + ${jobHistory.id.startDate}" class="btn btn-dark" onclick="editButtonPress(this)">Edit</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+        
+    </section>
+
+    <div th:insert="../fragments/scripts.html :: min_scripts"></div>
+    <script th:src="@{/js/jobHistories_functions.js}"></script>
+</body>
+</html>

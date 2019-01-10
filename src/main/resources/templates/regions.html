@@ -1,0 +1,41 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="../fragments/head.html :: head('Regions Management')"></head>
+<body class="text-center">
+    <header th:replace="../fragments/header.html :: header('Regions Management')"></header>
+
+	<section class="m-5">
+		<div>
+			<h3>Update a region:</h3>
+			<form id="updateRegionForm" th:action="@{updateRegion}" method="post">
+				<div class="form-group form-row justify-content-md-center">
+					<label> ID: <input type="text" name="regionId" id="formEditionId" class="form-control"/></label>
+                    <label> Name: <input type="text" name="regionName" id="formRegionName" class="form-control"/></label>
+					<input type="submit" class="btn btn-dark m-3" value="Modify"/> <!-- onclick="ajaxUpdateRegion()" -->
+				</div>
+			</form>
+		</div>
+	
+		<div>
+			<table class="table">
+				<thead class="thead-light">
+					<tr>
+						<th><strong>ID</strong></th>
+						<th>Name</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="region : ${regions}" th:id="'row_' + ${region.regionId}">
+						<td class="regionIdField" data-th-text="${region.regionId}"></td>
+						<td class="regionNameField" data-th-text="${region.regionName}"></td>
+                        <td><button th:id="'button_' + ${region.regionId}" class="btn btn-dark" onclick="editButtonPress(this)">Edit</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+    </section>
+
+    <script th:src="@{/js/regions_functions.js}"></script>
+    <div th:insert="../fragments/scripts.html :: min_scripts"></div>
+</body>
+</html>

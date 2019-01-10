@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="../fragments/head.html :: head('Login')"></head>
+<body class="text-center">
+    <header th:replace="../fragments/header.html :: header('Login')"></header>
+
+	<section class="m-5">
+        <div class="connectionBox">
+            <h2>Login</h2>
+            <div th:if="${param.error}">
+                <div class="alert alert-danger">
+                    Utilisateur inconnu / Mot de passe incorrect.
+                </div>
+            </div>
+            <form th:action="@{/appLogin}" method="POST"> 
+                User : <input type="text" th:value="${user}!=null? ${user} : '' " class="form-control" name="app_username" required=""/> <br/>
+                Password: <input type="password" class="form-control" th:value="${mdp}!=null? ${mdp} : ''"  name="app_password" required=""/> <br/>
+
+                <input type="submit" class="btn form-control btn-secondary" value="Login"/>
+            </form>
+        </div>
+
+	</section>
+
+	<script th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+    <script th:src="@{/webjars/chartjs/2.7.3/Chart.min.js}"></script>
+    
+</body>
+</html>

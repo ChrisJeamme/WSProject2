@@ -1,0 +1,57 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="../fragments/head.html :: head('Locations Management')"></head>
+<body class="text-center">
+    <header th:replace="../fragments/header.html :: header('Locations Management')"></header>
+
+	<section class="m-5">
+		<div sec:authorize="hasRole('ADMIN')">
+            <h3>Update a location:</h3>
+			<form id="updateLocationForm" th:action="@{updateLocation}" method="post">
+				<div class="form-group form-row justify-content-md-center">
+					<label> ID: <input type="text" name="locationId" id="formEditionId" class="form-control"/></label>
+                    <label> Street address: <input type="text" name="streetAddress" id="formStreetAddress" class="form-control"/></label>
+                    <label> Postal code: <input type="text" name="postalCode" id="formPostalCode" class="form-control"/></label>
+                    <label> City: <input type="text" name="city" id="formCity" class="form-control"/></label>
+                    <label> State province: <input type="text" name="stateProvince" id="formStateProvince" class="form-control"/></label>
+                    <label> Country: 
+                    <select id="formCountryId" name="countryId" class="custom-select">
+                        <option th:each="country : ${countries}" th:value="${country.countryId}" data-th-text="${country.countryName}"></option>
+                    </select></label>
+					<input type="submit" class="btn btn-dark m-3" value="Modify"/> <!-- onclick="ajaxUpdateLocation()" -->
+				</div>
+			</form>
+        </div>
+	
+		<div>
+			<table class="table">
+				<thead class="thead-light">
+					<tr>
+						<th><strong>ID</strong></th>
+						<th>Street address</th>
+                        <th>Postal code</th>
+                        <th>City</th>
+                        <th>State province</th>
+                        <th>Country</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="location : ${locations}" th:id="'row_' + ${location.locationId}">
+						<td class="locationIdField" data-th-text="${location.locationId}"></td>
+						<td class="streetAddressField" data-th-text="${location.streetAddress}"></td>
+						<td class="postalCodeField" data-th-text="${location.postalCode}"></td>
+                        <td class="cityField" data-th-text="${location.city}"></td>
+                        <td class="stateProvinceField" data-th-text="${location.stateProvince}"></td>
+                        <td hidden class="countryIdField" data-th-text="${location.country.countryId}"></td>
+                        <td class="countryNameField" data-th-text="${location.country.countryName}"></td>
+                        <td><button th:id="'button_' + ${location.locationId}" class="btn btn-dark" onclick="editButtonPress(this)">Edit</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+    </section>
+
+    <script th:src="@{/js/locations_functions.js}"></script>
+    <div th:insert="../fragments/scripts.html :: min_scripts"></div>
+</body>
+</html>

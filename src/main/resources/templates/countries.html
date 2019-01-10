@@ -1,0 +1,48 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="../fragments/head.html :: head('Countries Management')"></head>
+<body class="text-center">
+    <header th:replace="../fragments/header.html :: header('Countries Management')"></header>
+
+	<section class="m-5">
+		<div>
+			<h3>Update a country:</h3>
+			<form id="updateCountryForm" th:action="@{updateCountry}" method="post">
+				<div class="form-group form-row justify-content-md-center">
+					<label> ID: <input type="text" name="countryId" id="formEditionId" class="form-control"/></label>
+                    <label> Name: <input type="text" name="countryName" id="formCountryName" class="form-control"/></label>
+					<label> Region: 
+                    <select id="formRegionId" name="regionId" class="custom-select">
+                        <option th:each="region : ${regions}" th:value="${region.regionId}" data-th-text="${region.regionName}"></option>
+                    </select></label>
+					<input type="submit" class="btn btn-dark m-3" value="Modify"/> <!-- onclick="ajaxUpdateCountry()" -->
+				</div>
+			</form>
+		</div>
+	
+		<div>
+			<table class="table">
+				<thead class="thead-light">
+					<tr>
+						<th><strong>ID</strong></th>
+						<th>Country</th>
+                        <th>Region</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="country : ${countries}" th:id="'row_' + ${country.countryId}">
+						<td class="countryIdField" data-th-text="${country.countryId}"></td>
+						<td class="countryNameField" data-th-text="${country.countryName}"></td>
+                        <td class="regionNameField" data-th-text="${country.region.regionName}"></td>
+                        <td hidden class="regionIdField" data-th-text="${country.region.regionId}"></td>
+                        <td><button th:id="'button_' + ${country.countryId}" class="btn btn-dark" onclick="editButtonPress(this)">Edit</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+    </section>
+
+    <script th:src="@{/js/countries_functions.js}"></script>
+    <div th:insert="../fragments/scripts.html :: min_scripts"></div>
+</body>
+</html>

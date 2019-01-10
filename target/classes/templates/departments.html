@@ -1,0 +1,51 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="../fragments/head.html :: head('Departments Management')"></head>
+<body class="text-center">
+    <header th:replace="../fragments/header.html :: header('Departments Management')"></header>
+
+	<section class="m-5">
+		<div>
+			<h3>Update a department:</h3>
+			<form id="updateDepartmentForm" th:action="@{updateDepartment}" method="post">
+				<div class="form-group form-row justify-content-md-center">
+					<label> ID: <input type="text" name="departmentId" id="formEditionId" class="form-control"/></label>
+                    <label> Name: <input type="text" name="departmentName" id="formDepartmentName" class="form-control"/></label>
+                    <label> Manager ID: <input type="text" name="managerId" id="formManagerId" class="form-control"/></label>
+					<label> Location: 
+                    <select id="formLocationId" name="locationId" class="custom-select">
+                        <option th:each="location : ${locations}" th:value="${location.locationId}" data-th-text="${location.city}"></option>
+                    </select></label>
+					<input type="submit" class="btn btn-dark m-3" value="Modify"/> <!-- onclick="ajaxUpdateDepartment()" -->
+				</div>
+			</form>
+		</div>
+	
+		<div>
+			<table class="table">
+				<thead class="thead-light">
+					<tr>
+						<th><strong>ID</strong></th>
+						<th>Name</th>
+                        <th>Manager ID</th>
+                        <th>Location</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="department : ${departments}" th:id="'row_' + ${department.departmentId}">
+						<td class="departmentIdField" data-th-text="${department.departmentId}"></td>
+						<td class="departmentNameField" data-th-text="${department.departmentName}"></td>
+						<td class="managerIdField" data-th-text="${department.managerId}"></td>
+                        <td class="locationCityField" data-th-text="${department.location.city}"></td>
+                        <td hidden class="locationIdField" data-th-text="${department.location.locationId}"></td>
+                        <td><button th:id="'button_' + ${department.departmentId}" class="btn btn-dark" onclick="editButtonPress(this)">Edit</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+    </section>
+
+    <script th:src="@{/js/departments_functions.js}"></script>
+    <div th:insert="../fragments/scripts.html :: min_scripts"></div>
+</body>
+</html>
