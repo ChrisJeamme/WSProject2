@@ -26,11 +26,11 @@ import org.springframework.stereotype.Component;
  * Class to communicate with the table User in the database
  */
 @Component
-public class EmployeeService implements UserDetailsService
+public class UserService implements UserDetailsService
 {
 
     @Autowired
-    EmployeeRepository repo;
+    UserRepository repo;
 
     /**
      * encoder for passwords 
@@ -46,7 +46,7 @@ public class EmployeeService implements UserDetailsService
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {
-        Employee u = repo.findByUserName(username);
+        User u = repo.findByUserName(username);
         if (u == null)
         {
             throw new UsernameNotFoundException(username);
@@ -59,7 +59,7 @@ public class EmployeeService implements UserDetailsService
      * @param u
      * @return 0 (good), 1 (username already exists), 2 (mail already exists)
      */
-    public int addUser(Employee u)
+    public int addUser(User u)
     {
         if (repo.findByUserName(u.getUserName()) != null)
         {
@@ -79,8 +79,8 @@ public class EmployeeService implements UserDetailsService
      */
     public void makeUserAdmin(String username)
     {
-    	Employee u = repo.findByUserName(username);
-        u.getRoles().add(EmployeeRole.ROLE_ALL);
+    	User u = repo.findByUserName(username);
+        u.getRoles().add(UserRole.ROLE_ALL);
         repo.save(u);
     }
 
@@ -90,8 +90,8 @@ public class EmployeeService implements UserDetailsService
      */
     public void makeUserEditor(String username)
     {
-    	Employee u = repo.findByUserName(username);
-        u.getRoles().add(EmployeeRole.ROLE_EDITOR);
+    	User u = repo.findByUserName(username);
+        u.getRoles().add(UserRole.ROLE_EDITOR);
         repo.save(u);
     }
 
@@ -103,7 +103,7 @@ public class EmployeeService implements UserDetailsService
      */
     public int changeUserPassword(String userName, String newPassword)
     {
-    	Employee u = repo.findByUserName(userName);
+    	User u = repo.findByUserName(userName);
         if (u != null)
         {
             u.setPassword(encoder.encode(newPassword));

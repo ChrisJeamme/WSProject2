@@ -31,7 +31,7 @@ import org.springframework.security.core.GrantedAuthority;
 @Entity
 @Table(name="employees")
 @NamedQuery(name="Employee.findAll", query="SELECT e FROM Employee e")
-public class Employee implements Serializable
+public class User implements Serializable
 {
 	private static final long serialVersionUID = 2L;
 
@@ -68,7 +68,7 @@ public class Employee implements Serializable
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
-    private Set<EmployeeRole> roles = new HashSet<>();
+    private Set<UserRole> roles = new HashSet<>();
 
 	private BigDecimal salary;
 
@@ -82,7 +82,7 @@ public class Employee implements Serializable
 	@JoinColumn(name="JOB_ID")
 	private Job job;
 
-	public Employee(){}
+	public User(){}
 
 	public long getEmployeeId() {
 		return this.employeeId;
@@ -172,12 +172,12 @@ public class Employee implements Serializable
 		this.job = job;
 	}
 
-	public Set<EmployeeRole> getRoles()
+	public Set<UserRole> getRoles()
 	{
 		return roles;
 	}
 
-	public void setRoles(Set<EmployeeRole> roles)
+	public void setRoles(Set<UserRole> roles)
 	{
 		this.roles = roles;
 	}

@@ -23,10 +23,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.projetws.model.Department;
 import com.projetws.model.DepartmentRepository;
-import com.projetws.model.Employee;
-import com.projetws.model.EmployeeDTO;
-import com.projetws.model.EmployeeRepository;
-import com.projetws.model.EmployeeRole;
+import com.projetws.model.User;
+import com.projetws.model.UserDTO;
+import com.projetws.model.UserRepository;
+import com.projetws.model.UserRole;
 import com.projetws.model.Job;
 import com.projetws.model.JobRepository;
 import com.projetws.tools.SecurityTools;
@@ -36,21 +36,15 @@ import io.swagger.annotations.Api;
 @Controller
 @RequestMapping("/employee")
 @Api(value = "employees")
-public class EmployeeController
+public class UserController
 {
 	@Autowired
-	EmployeeRepository employeeRepository;
-	@Autowired
-	JobRepository jobRepository;
-	@Autowired
-	DepartmentRepository departmentRepository;
+	UserRepository userRepository;
 	
 	@RequestMapping("/all")
 	public String getAllEmployees(Model m)
 	{
-		List<Employee> employees = employeeRepository.findByOrderBySalary();
-		List<Job> jobs = jobRepository.findAll();
-		List<Department> departements = departmentRepository.findAll();
+		List<User> employees = userRepository.findByOrderBySalary();
 		
 		m.addAttribute("employees", employees);
 		m.addAttribute("jobs", jobs);
@@ -74,7 +68,7 @@ public class EmployeeController
 		if(!SecurityTools.hasRole("ROLE_EDITOR"))
 			return "redirect:/employee/all";
 		
-		Employee employee= employeeRepository.findByEmployeeId(employeeId);
+		User employee= userRepository.findByEmployeeId(employeeId);
 		if(employee != null)
 		{
 			Job job = jobRepository.findByJobId(jobId);
@@ -92,24 +86,24 @@ public class EmployeeController
 				employee.setDepartment(department);
 				employee.setJob(job);
 				updateEmployeeRights(employee);
-				employeeRepository.save(employee);
+				userRepository.save(employee);
 			}
 		}
 		return "redirect:/employee/all";
 	}
 	
 	@RequestMapping(value = "/firstName/{firstName}", method = RequestMethod.GET)
-	public @ResponseBody List<EmployeeDTO> getByFirstName(@PathVariable String firstName)
+	public @ResponseBody List<UserDTO> getByFirstName(@PathVariable String firstName)
 	{
 		ModelMapper mapper = new ModelMapper();
 		
-		List<EmployeeDTO> employeeDTOList = new ArrayList<>();
-		List<Employee> employeeList = employeeRepository.findAll();
+		List<UserDTO> employeeDTOList = new ArrayList<>();
+		List<User> employeeList = userRepository.findAll();
 		
-		for(Employee e : employeeList)
+		for(User e : employeeList)
 		{
 			if(e.getFirstName().equals(firstName))
-				employeeDTOList.add(mapper.map(e,  EmployeeDTO.class));
+				employeeDTOList.add(mapper.map(e,  UserDTO.class));
 		}
 		
 		return employeeDTOList;
@@ -118,7 +112,7 @@ public class EmployeeController
 	@RequestMapping(value = "/salaryDistribution", method = RequestMethod.GET)
 	public String getsalaryDistributionPage(Model m)
 	{
-		List<Employee> employees = employeeRepository.findByOrderBySalary();
+		List<User> employees = userRepository.findByOrderBySalary();
 		m.addAttribute("employees", employees);
 		
 		HashMap<String, Integer> salaryRangeList = new LinkedHashMap<>();
@@ -161,40 +155,40 @@ public class EmployeeController
 	@RequestMapping("/updateRoles")
 	public String updateRoles()
 	{
-		List<Employee> employees = employeeRepository.findAll();
+		List<User> employees = userRepository.findAll();
 
-		for (Employee employee : employees)
+		for (User employee : employees)
 		{
 			updateEmployeeRights(employee);
 		}
-		employeeRepository.saveAll(employees);
+		userRepository.saveAll(employees);
 		
 		return "employees";
 	}
 	
-	private void updateEmployeeRights(Employee employee)
+	private void updateEmployeeRights(User employee)
 	{
-		Set<EmployeeRole> roles = new HashSet<>();
+		Set<UserRole> roles = new HashSet<>();
 		if (employee.getJob().getJobTitle().equals("President"))
 		{
-			roles.add(EmployeeRole.ROLE_DEFAULT);
-			roles.add(EmployeeRole.ROLE_EDITOR);
-			roles.add(EmployeeRole.ROLE_CONSULT);
-			roles.add(EmployeeRole.ROLE_ALL);
+			roles.add(UserRole.ROLE_DEFAULT);
+			roles.add(UserRole.ROLE_EDITOR);
+			roles.add(UserRole.ROLE_CONSULT);
+			roles.add(UserRole.ROLE_ALL);
 		}
 		else if (employee.getDepartment().getDepartmentName().equals("Accounting") || employee.getDepartment().getDepartmentName().equals("Finance"))
 		{
-			roles.add(EmployeeRole.ROLE_DEFAULT);
-			roles.add(EmployeeRole.ROLE_EDITOR);
+			roles.add(UserRole.ROLE_DEFAULT);
+			roles.add(UserRole.ROLE_EDITOR);
 		}
 		else if (employee.getDepartment().getDepartmentName().equals("Sales"))
 		{
-			roles.add(EmployeeRole.ROLE_DEFAULT);
-			roles.add(EmployeeRole.ROLE_CONSULT);
+			roles.add(UserRole.ROLE_DEFAULT);
+			roles.add(UserRole.ROLE_CONSULT);
 		}
 		else 
 		{
-			roles.add(EmployeeRole.ROLE_DEFAULT);
+			roles.add(UserRole.ROLE_DEFAULT);
 		}
 		employee.setRoles(roles);
 	}
@@ -202,15 +196,15 @@ public class EmployeeController
 	@RequestMapping("/generateUsernameAndPassword")
 	public String generateUsernameAndPassword()
 	{
-		List<Employee> employees = employeeRepository.findAll();
+		List<User> employees = userRepository.findAll();
 
-		for (Employee employee : employees)
+		for (User employee : employees)
 		{
 			employee.setUserName(employee.getFirstName().toLowerCase()+"."+employee.getLastName().toLowerCase());
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			employee.setPassword(encoder.encode("password"));
 		}
-		employeeRepository.saveAll(employees);
+		userRepository.saveAll(employees);
 		
 		return "employees";
 	}

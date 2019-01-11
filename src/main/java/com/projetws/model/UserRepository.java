@@ -6,14 +6,14 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource(collectionResourceRel = "employee", path = "employee")
-public interface EmployeeRepository extends PagingAndSortingRepository<Employee, Long> {
+public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
-	List<Employee> findAll();
+	List<User> findAll();
 	
-	Employee findByEmployeeId(Long id);
+	User findByEmployeeId(Long id);
 	
-	List<Employee> findByOrderBySalary();
+	List<User> findByOrderBySalary();
 
-	Employee findByUserName(String username);
+	User findByUserName(String username);
 
 }

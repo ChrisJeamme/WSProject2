@@ -6,7 +6,7 @@ import org.modelmapper.ModelMapper;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class EmployeeDTO
+public class UserDTO
 {
     ModelMapper modelMapper = new ModelMapper();
     

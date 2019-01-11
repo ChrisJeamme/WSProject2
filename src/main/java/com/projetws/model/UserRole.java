@@ -5,23 +5,22 @@ import org.springframework.security.core.GrantedAuthority;
 /**
  * Enumerate the different roles a employee may have
  */
-public enum EmployeeRole implements GrantedAuthority
+public enum UserRole implements GrantedAuthority
 {
-
-    /**
-     * Consult data from locations, regions and country
+	/**
+     * School administrator
      */
-    ROLE_CONSULT,
+    ROLE_SCHOOLADMIN,
     /**
-     * Edit access rights for employees and jobs and can consult the rest
+     * Photographer
+     */
+    ROLE_PHOTOGRAPHER,
+    /**
+     * Parent
      */ 
-    ROLE_EDITOR,
+    ROLE_PARENT,
     /**
-     * All rights (CEO)
-     */
-    ROLE_ALL,
-    /**
-     * For others
+     * Default role
      */
     ROLE_DEFAULT;
 
