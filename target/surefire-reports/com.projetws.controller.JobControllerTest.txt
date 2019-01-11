@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.projetws.controller.JobControllerTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.284 s <<< FAILURE! - in com.projetws.controller.JobControllerTest
-testUpdate(com.projetws.controller.JobControllerTest)  Time elapsed: 0.016 s  <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.086 s <<< FAILURE! - in com.projetws.controller.JobControllerTest
+testUpdate(com.projetws.controller.JobControllerTest)  Time elapsed: 0.006 s  <<< ERROR!
 java.lang.NullPointerException
 	at com.projetws.controller.JobControllerTest.testUpdate(JobControllerTest.java:32)
 

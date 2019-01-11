@@ -24,7 +24,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.projetws.model.EmployeeService;
+import com.projetws.model.UserService;
 /**
  *
  * @author
@@ -44,38 +44,38 @@ public class WebSecu extends WebSecurityConfigurerAdapter
     protected void configure(HttpSecurity http) throws Exception
     {
         http.authorizeRequests()
-	    	.antMatchers("/updateCountry").hasRole("ALL")
-	    	.antMatchers("/updateDepartment").hasRole("ALL")
-	    	.antMatchers("/updateJobHistory").hasRole("ALL")
-	    	.antMatchers("/updateLocation").hasRole("ALL")
-	    	.antMatchers("/updateRegion").hasRole("ALL")
-	    	.antMatchers("/updateEmployee").hasRole("EDITOR")
-	    	.antMatchers("/updateJob").hasRole("EDITOR")
-	    	
-            .antMatchers("/location/all").hasRole("CONSULT")
-            .antMatchers("/region/all").hasRole("CONSULT")
-            .antMatchers("/department/all").hasRole("EDITOR")
-            .antMatchers("/employee/all").hasRole("EDITOR")
-            .antMatchers("/job/all").hasRole("EDITOR")
-            .antMatchers("/jobHistory/all").hasRole("EDITOR")
-            .antMatchers("/country/all").hasRole("EDITOR")
+//	    	.antMatchers("/updateCountry").hasRole("ALL")
+//	    	.antMatchers("/updateDepartment").hasRole("ALL")
+//	    	.antMatchers("/updateJobHistory").hasRole("ALL")
+//	    	.antMatchers("/updateLocation").hasRole("ALL")
+//	    	.antMatchers("/updateRegion").hasRole("ALL")
+//	    	.antMatchers("/updateEmployee").hasRole("EDITOR")
+//	    	.antMatchers("/updateJob").hasRole("EDITOR")
+//	    	
+//            .antMatchers("/location/all").hasRole("CONSULT")
+//            .antMatchers("/region/all").hasRole("CONSULT")
+//            .antMatchers("/department/all").hasRole("EDITOR")
+//            .antMatchers("/employee/all").hasRole("EDITOR")
+//            .antMatchers("/job/all").hasRole("EDITOR")
+//            .antMatchers("/jobHistory/all").hasRole("EDITOR")
+//            .antMatchers("/country/all").hasRole("EDITOR")
             .and()
             .formLogin()
             .loginPage("/login")
             .loginProcessingUrl("/appLogin")
             .usernameParameter("app_username")
             .passwordParameter("app_password")
-            .defaultSuccessUrl("/all")
+            .defaultSuccessUrl("/")
             .permitAll()
             .and()
             .logout()
             .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-            .logoutSuccessUrl("/all")
+            .logoutSuccessUrl("/")
             .permitAll();
     }
 
     @Autowired
-    EmployeeService userDetailsService;
+    UserService userDetailsService;
 
     /**
      *
