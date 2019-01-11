@@ -9,7 +9,7 @@ public class SecurityTools
 {
 	/**
 	 * 
-	 * @param consult ("ROLE_CONSULT","ROLE_EDITOR","ROLE_ADMIN")
+	 * @param role ( ROLE_SCHOOLADMIN, ROLE_PHOTOGRAPHER, ROLE_PARENT, ROLE_DEFAULT )
 	 * @return true/false
 	 */
 	public static boolean hasRole(String role)

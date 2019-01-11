@@ -9,7 +9,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface SchoolRepository extends PagingAndSortingRepository<School, Long>
 {
 	public List<School> findAll();
-	public School findByManagerId();
+//	public School findByManagerId();
 
 //	public List<Country> findByCountryName(String countryName);
 //	public Country findByCountryId(String id);

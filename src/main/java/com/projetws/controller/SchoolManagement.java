@@ -3,6 +3,7 @@ package com.projetws.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,10 +29,12 @@ public class SchoolManagement
 	@RequestMapping("/")
 	public String getAllCountries(Model m)
 	{
+		System.out.println(SecurityContextHolder.getContext().getAuthentication().getDetails());
 		
-		School school = schoolRepository.findByManagerId();
-		
-		m.addAttribute("school", school);
+//		if(SecurityTools.hasRole(""))
+//		School school = schoolRepository.findByManagerId();
+//		
+//		m.addAttribute("school", school);
 		return "schoolManagement";
 	}
 //	
