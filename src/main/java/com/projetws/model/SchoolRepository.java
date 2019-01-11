@@ -11,6 +11,8 @@ public interface SchoolRepository extends PagingAndSortingRepository<School, Lon
 	public List<School> findAll();
 //	public School findByManagerId();
 
+	public School findByManager(long userId);
+
 //	public List<Country> findByCountryName(String countryName);
 //	public Country findByCountryId(String id);
 }

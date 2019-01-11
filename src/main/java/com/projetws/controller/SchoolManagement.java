@@ -1,5 +1,8 @@
 package com.projetws.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.projetws.model.School;
 import com.projetws.model.SchoolRepository;
+import com.projetws.model.User;
+import com.projetws.model.UserRepository;
+import com.projetws.model.UserRole;
 import com.projetws.tools.SecurityTools;
 
 import io.swagger.annotations.Api;
@@ -23,16 +29,28 @@ public class SchoolManagement
 {
 	@Autowired
 	SchoolRepository schoolRepository;
+	@Autowired
+	UserRepository userRepository;
 
 	@RequestMapping("/")
-	public String getAllCountries(Model m)
+	public String getSchoolManagement(Principal principal, Model m)
 	{
-		System.out.println(SecurityContextHolder.getContext().getAuthentication().getDetails());
 		
-//		if(SecurityTools.hasRole(""))
-//		School school = schoolRepository.findByManagerId();
-//		
-//		m.addAttribute("school", school);
+		if(principal==null)
+			return "redirect:/error";
+
+		String userName;
+		userName = principal.getName();
+		
+		User user = userRepository.findByUserName(userName);
+		if(user==null)
+			return "redirect:/error";
+		
+		School school = schoolRepository.findByManager(user.getUserId());
+		if(school==null)
+			return "redirect:/error";
+		
+		m.addAttribute("school", school);
 		return "schoolManagement";
 	}
 //	
