@@ -32,4 +32,32 @@ public class SchoolClass implements Serializable
 	@ManyToOne
 	@JoinColumn(name="SCHOOL_ID")
 	private School school;
+
+	public SchoolClass(){}
+
+	public long getSchoolClassId() {
+		return schoolClassId;
+	}
+
+	public void setSchoolClassId(long schoolClassId) {
+		this.schoolClassId = schoolClassId;
+	}
+
+	public String getSchoolClassName() {
+		return schoolClassName;
+	}
+
+	public void setSchoolClassName(String schoolClassName) {
+		this.schoolClassName = schoolClassName;
+	}
+
+	public School getSchool() {
+		return school;
+	}
+
+	public void setSchool(School school) {
+		this.school = school;
+	}
+	
+	
 }

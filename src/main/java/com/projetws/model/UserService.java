@@ -74,24 +74,35 @@ public class UserService implements UserDetailsService
     }
 
     /**
-     * change the role of a user to admin
+     * change the role of a user to school administrator
      * @param username
      */
-    public void makeUserAdmin(String username)
+    public void makeUserSchoolAdmin(String username)
     {
     	User u = repo.findByUserName(username);
-        u.getRoles().add(UserRole.ROLE_ALL);
+        u.getRoles().add(UserRole.ROLE_SCHOOLADMIN);
         repo.save(u);
     }
 
     /**
-     * change the role of a user to editor
+     * change the role of a user to parent
      * @param username
      */
-    public void makeUserEditor(String username)
+    public void makeUserParent(String username)
     {
     	User u = repo.findByUserName(username);
-        u.getRoles().add(UserRole.ROLE_EDITOR);
+        u.getRoles().add(UserRole.ROLE_PARENT);
+        repo.save(u);
+    }
+    
+    /**
+     * change the role of a user to photographer
+     * @param username
+     */
+    public void makeUserPhotographer(String username)
+    {
+    	User u = repo.findByUserName(username);
+        u.getRoles().add(UserRole.ROLE_PHOTOGRAPHER);
         repo.save(u);
     }
 

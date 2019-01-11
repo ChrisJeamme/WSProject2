@@ -35,5 +35,41 @@ public class Child implements Serializable
 	@ManyToOne
 	@JoinColumn(name="SCHOOL_CLASS_ID")
 	private SchoolClass schoolClass;
+	
+	public Child(){}
+
+	public long getChildId() {
+		return childId;
+	}
+
+	public void setChildId(long childId) {
+		this.childId = childId;
+	}
+
+	public String getChildFirstName() {
+		return childFirstName;
+	}
+
+	public void setChildFirstName(String childFirstName) {
+		this.childFirstName = childFirstName;
+	}
+
+	public String getChildLastName() {
+		return childLastName;
+	}
+
+	public void setChildLastName(String childLastName) {
+		this.childLastName = childLastName;
+	}
+
+	public SchoolClass getSchoolClass() {
+		return schoolClass;
+	}
+
+	public void setSchoolClass(SchoolClass schoolClass) {
+		this.schoolClass = schoolClass;
+	}
+	
+	
 
 }
