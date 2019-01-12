@@ -5,6 +5,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import java.security.Principal;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -24,31 +26,42 @@ import io.swagger.annotations.Api;
 
 @Controller
 @Api(value = "school")
-@RequestMapping("/schoolManagement")
-public class SchoolManagement
+public class SchoolManagementController
 {
+	private static final Logger logger = LogManager.getLogger(SchoolManagementController.class);
+	
 	@Autowired
 	SchoolRepository schoolRepository;
 	@Autowired
 	UserRepository userRepository;
 
-	@RequestMapping("/")
+	@RequestMapping("/schoolManagement")
 	public String getSchoolManagement(Principal principal, Model m)
 	{
-		
 		if(principal==null)
+		{
+			logger.error("Not connected");
 			return "redirect:/error";
+		}
 
-		String userName;
-		userName = principal.getName();
+		String userName = principal.getName();
+		logger.debug(userName);
 		
-		User user = userRepository.findByUserName(userName);
-		if(user==null)
+		if(!userRepository.existsByUserName(userName))
+		{
+			logger.error("User not found");
 			return "redirect:/error";
+		}
 		
-		School school = schoolRepository.findByManager(user.getUserId());
-		if(school==null)
+		User manager = userRepository.findByUserName(userName);
+		if(!schoolRepository.existsByManager(manager))
+		{
+			logger.error("School not found");
 			return "redirect:/error";
+		}
+		School school = schoolRepository.findByManager(manager);
+		
+		logger.info(school.getSchoolName());
 		
 		m.addAttribute("school", school);
 		return "schoolManagement";
