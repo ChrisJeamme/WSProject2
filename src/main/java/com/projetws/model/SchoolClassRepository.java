@@ -11,4 +11,12 @@ public interface SchoolClassRepository extends PagingAndSortingRepository<School
 	public List<SchoolClass> findAll();
 //	public List<Country> findByCountryName(String countryName);
 //	public Country findByCountryId(String id);
+
+	public boolean existsBySchoolClassId(int i);
+
+
+	public SchoolClass findBySchoolClassId(int id);
+	public SchoolClass findBySchool(School school);
+
+	public List<SchoolClass> findAllBySchool(School school);
 }
