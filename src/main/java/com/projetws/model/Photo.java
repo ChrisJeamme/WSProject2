@@ -1,6 +1,7 @@
 package com.projetws.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -11,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -29,7 +32,13 @@ public class Photo implements Serializable
 	@Column(name="PHOTO_TYPE")
 	private PhotoType Type;
 	
-//	Pour les types individuels (Je sais faudrait des nouvelles classe qui extends etc. mais j'attends que tout marche avant de rajouter des sources d'erreur)
+	@Column(name="IMAGE_PATH")
+	private String imagePath;
+	
+	@Column(name="DESCRIPTION")
+	private String description;
+
+	//	Pour les types individuels (Je sais faudrait des nouvelles classe qui extends etc. mais j'attends que tout marche avant de rajouter des sources d'erreur)
 	@ManyToOne
 	@JoinColumn(name="CHILD_ID")
 	private Child child;
@@ -39,6 +48,9 @@ public class Photo implements Serializable
 	@JoinColumn(name="SCHOOL_CLASS_ID")
 	private SchoolClass schoolClass;
 
+	@Column(name="PHOTO_DATE")
+	private Date date;
+	
 	public Photo(){}
 
 	public long getPhotoId() {
@@ -73,5 +85,28 @@ public class Photo implements Serializable
 		this.schoolClass = schoolClass;
 	}
 	
+	public Date getDate() { 
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	
 }
