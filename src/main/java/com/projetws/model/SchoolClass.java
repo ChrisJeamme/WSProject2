@@ -28,10 +28,17 @@ public class SchoolClass implements Serializable
 
 	@Column(name="SCHOOL_CLASS_NAME")
 	private String schoolClassName;
+	
+	@Column(name="YEAR")
+	private int year;
 
 	@ManyToOne
 	@JoinColumn(name="SCHOOL_ID")
 	private School school;
+	
+	@OneToMany
+	@JoinColumn(name="CHILD_ID")
+	private List<Child> children;
 
 	public SchoolClass(){}
 
@@ -58,6 +65,20 @@ public class SchoolClass implements Serializable
 	public void setSchool(School school) {
 		this.school = school;
 	}
-	
-	
+
+	public List<Child> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<Child> children) {
+		this.children = children;
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
 }

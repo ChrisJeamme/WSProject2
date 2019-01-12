@@ -9,5 +9,11 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface SchoolClassRepository extends PagingAndSortingRepository<SchoolClass, Long>
 {
 	public List<SchoolClass> findAll();
-	
+	public boolean existsBySchoolClassId(long i);
+
+
+	public SchoolClass findBySchoolClassId(long id);
+	public SchoolClass findBySchool(School school);
+
+	public List<SchoolClass> findAllBySchool(School school);
 }

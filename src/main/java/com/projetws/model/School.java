@@ -32,6 +32,10 @@ public class School implements Serializable
 	@OneToOne
 	@JoinColumn(name="USER_ID")
 	private User manager;
+	
+	@OneToMany
+	@JoinColumn(name="SCHOOL_CLASS_ID")
+	private List<SchoolClass> schoolClasses;
 
 	public School(){}
 
@@ -49,6 +53,22 @@ public class School implements Serializable
 
 	public void setSchoolName(String schoolName) {
 		this.schoolName = schoolName;
+	}
+
+	public User getManager() {
+		return manager;
+	}
+
+	public void setManager(User manager) {
+		this.manager = manager;
+	}
+
+	public List<SchoolClass> getSchoolClasses() {
+		return schoolClasses;
+	}
+
+	public void setSchoolClasses(List<SchoolClass> schoolClasses) {
+		this.schoolClasses = schoolClasses;
 	}
 	
 	
