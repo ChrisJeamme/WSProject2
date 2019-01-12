@@ -17,6 +17,8 @@ public interface SchoolRepository extends PagingAndSortingRepository<School, Lon
 
 	public boolean existsBySchoolName(String string);
 
+	public School findBySchoolName(String string);
+
 //	public List<Country> findByCountryName(String countryName);
 //	public Country findByCountryId(String id);
 }

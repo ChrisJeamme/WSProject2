@@ -11,10 +11,12 @@
 	<p th:text="${school.schoolName}"></p>
 	
 	<h4>School Classes</h4>
-	<div th:each="schoolClass : ${schoolClasses}">
-		<p th:text="${schoolClass.schoolClassName}"></p>
-		<p th:text="${schoolClass.year}"></p>
-	</div>
+	<ul class="list-group" th:each="schoolClass : ${schoolClasses}">
+		<li class="list-group-item list-group-item-primary w-25 m-auto">
+			<h5>Name :</h5><span th:text="${schoolClass.schoolClassName}"></span>
+			<h5>Year :</h5><span th:text="${schoolClass.year}"></span>
+		</li>
+	</ul>
 	
 	
 	<h4>Sales</h4>

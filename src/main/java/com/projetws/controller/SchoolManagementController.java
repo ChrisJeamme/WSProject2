@@ -66,6 +66,8 @@ public class SchoolManagementController
 		School school = schoolRepository.findByManager(manager);
 		List<SchoolClass> schoolClasses = schoolClassRepository.findAllBySchool(school);
 		
+		logger.info(schoolClasses.size());
+		
 		m.addAttribute("school", school);
 		m.addAttribute("schoolClasses", schoolClasses);
 		return "schoolManagement";
