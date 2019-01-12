@@ -44,6 +44,8 @@ public class WebSecu extends WebSecurityConfigurerAdapter
     protected void configure(HttpSecurity http) throws Exception
     {
         http.authorizeRequests()
+    	.antMatchers("/schoolManagement").hasRole("SCHOOLADMIN")
+    	
 //	    	.antMatchers("/updateCountry").hasRole("ALL")
 //	    	.antMatchers("/updateDepartment").hasRole("ALL")
 //	    	.antMatchers("/updateJobHistory").hasRole("ALL")
@@ -52,13 +54,13 @@ public class WebSecu extends WebSecurityConfigurerAdapter
 //	    	.antMatchers("/updateEmployee").hasRole("EDITOR")
 //	    	.antMatchers("/updateJob").hasRole("EDITOR")
 //	    	
-//            .antMatchers("/location/all").hasRole("CONSULT")
-//            .antMatchers("/region/all").hasRole("CONSULT")
-//            .antMatchers("/department/all").hasRole("EDITOR")
-//            .antMatchers("/employee/all").hasRole("EDITOR")
-//            .antMatchers("/job/all").hasRole("EDITOR")
-//            .antMatchers("/jobHistory/all").hasRole("EDITOR")
-//            .antMatchers("/country/all").hasRole("EDITOR")
+//          .antMatchers("/location/all").hasRole("CONSULT")
+//          .antMatchers("/region/all").hasRole("CONSULT")
+//          .antMatchers("/department/all").hasRole("EDITOR")
+//          .antMatchers("/employee/all").hasRole("EDITOR")
+//          .antMatchers("/job/all").hasRole("EDITOR")
+//          .antMatchers("/jobHistory/all").hasRole("EDITOR")
+//          .antMatchers("/country/all").hasRole("EDITOR")
             .and()
             .formLogin()
             .loginPage("/login")
