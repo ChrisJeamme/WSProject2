@@ -2,7 +2,7 @@
     <nav class="navbar navbar-light bg-dark">
         <span class="navbar-brand mb-0 h1 text-light" th:text="${title}"></span>
         <div>
-            <a class="btn btn-secondary btn-lg mb-8 btn-success" href="/all">Hub</a>
+            <a class="btn btn-secondary btn-lg mb-8 btn-success" href="/">Home</a>
             <span sec:authorization="isAuthenticated()">
                 <!-- <span class="text-light mr-4"><span sec:authentication="username"></span> </span> -->
                 <a class="btn btn-secondary btn-lg mb-8 btn-warning" href="/logout">Log Out</a>
