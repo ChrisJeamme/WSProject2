@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.projetws.model.School;
+import com.projetws.model.SchoolClass;
+import com.projetws.model.SchoolClassRepository;
 import com.projetws.model.SchoolRepository;
 import com.projetws.model.User;
 import com.projetws.model.UserRepository;
@@ -34,6 +36,8 @@ public class SchoolManagementController
 	SchoolRepository schoolRepository;
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	SchoolClassRepository schoolClassRepository;
 
 	@RequestMapping("/schoolManagement")
 	public String getSchoolManagement(Principal principal, Model m)
@@ -60,10 +64,10 @@ public class SchoolManagementController
 			return "redirect:/error";
 		}
 		School school = schoolRepository.findByManager(manager);
-		
-		logger.info(school.getSchoolName());
+		List<SchoolClass> schoolClasses = schoolClassRepository.findAllBySchool(school);
 		
 		m.addAttribute("school", school);
+		m.addAttribute("schoolClasses", schoolClasses);
 		return "schoolManagement";
 	}
 //	

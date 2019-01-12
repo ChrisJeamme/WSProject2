@@ -1,10 +1,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="../fragments/head.html :: head('Users Management')"></head>
+<head th:replace="../fragments/head.html :: head('School Management')"></head>
 <body class="text-center">
-    <header th:replace="../fragments/header.html :: header('Users Management')"></header>
+    <header th:replace="../fragments/header.html :: header('School Management')"></header>
 
 	<section class="m-5">
 	
+	<h2>My School</h2>
+	
+	<h4>School Name</h4>
+	<p th:text="${school.schoolName}"></p>
+	
+	<h4>School Classes</h4>
+	<div th:each="schoolClass : ${schoolClasses}">
+		<p th:text="${schoolClass.schoolClassName}"></p>
+		<p th:text="${schoolClass.year}"></p>
+	</div>
+	
+	
+	<h4>Sales</h4>
+	
+	<!-- 
 	  	<div>
 			<h3>Manage your school:</h3>
 			<form id="updateEmployeeForm" th:action="@{updateEmployee}" method="post">
@@ -72,6 +87,7 @@
 			</table>
 		</div>
         
+     -->
     </section>
 
     <div th:insert="../fragments/scripts.html :: min_scripts"></div>

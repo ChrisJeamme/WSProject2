@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.projetws.model.School;
+import com.projetws.model.SchoolClass;
 import com.projetws.model.SchoolClassRepository;
 import com.projetws.model.SchoolRepository;
 import com.projetws.model.User;
@@ -89,18 +90,40 @@ public class MainController
         	logger.info("Test users created");
     	}
     	
+    	School s1;
     	
     	if(schoolRepository.existsBySchoolName("Ecole 1"))
     	{
     		logger.error("Test schools already exists");
-    		return "redirect:/";
+    		s1 = schoolRepository.findBySchoolName("Ecole 1");
     	}
-    	School s1 = new School();
-    	s1.setSchoolName("Ecole 1");
-    	s1.setSchoolId(1);
-    	s1.setManager(u1);
-    	schoolRepository.save(s1);
-    	logger.info("Test schools created");
+    	else
+    	{    		
+    		s1 = new School();
+    		s1.setSchoolName("Ecole 1");
+    		s1.setSchoolId(1);
+    		s1.setManager(u1);
+    		schoolRepository.save(s1);
+    		logger.info("Test schools created");
+    	}
+    	
+    	SchoolClass sc1;
+    	
+    	if(schoolClassRepository.existsBySchoolClassId(1))
+    	{
+    		logger.error("Test school classses already exists");
+    		sc1 = schoolClassRepository.findBySchoolClassId(1);
+    	}
+//    	else
+//    	{    		
+//    		sc1 = new SchoolClass();
+//    		sc1.setSchoolClassName("3eme");
+////    		sc1.setYear(2018);
+//    		sc1.setSchool(s1);
+////    		sc1.setSchoolClassId(1);
+//    		schoolClassRepository.save(sc1);
+//    		logger.info("Test school classses created"); 
+//    	}
     	
 		return "redirect:/";
 	}
