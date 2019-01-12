@@ -50,6 +50,15 @@ public class School implements Serializable
 	public void setSchoolName(String schoolName) {
 		this.schoolName = schoolName;
 	}
+
+	public User getManager() {
+		return manager;
+	}
+
+	public void setManager(User manager) {
+		this.manager = manager;
+	}
+	
 	
 	
 }
