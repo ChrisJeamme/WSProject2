@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.projetws.model.ChildRepository;
 import com.projetws.model.School;
 import com.projetws.model.SchoolClass;
 import com.projetws.model.SchoolClassRepository;
@@ -36,6 +37,8 @@ public class MainController
 	SchoolRepository schoolRepository;
 	@Autowired
 	SchoolClassRepository schoolClassRepository;
+	@Autowired
+	ChildRepository childRepository;
 	
 	@RequestMapping("/")
 	public String hub()
@@ -138,4 +141,13 @@ public class MainController
     	
 		return "redirect:/"; 
 	}
+    
+    @RequestMapping("/testUpload")
+    private String upload(Model model)
+    {
+    	
+    	model.addAttribute("schoolClasss", schoolClassRepository.findAll());
+    	model.addAttribute("childs", childRepository.findAll());
+    	return "upload";
+    }
 }
