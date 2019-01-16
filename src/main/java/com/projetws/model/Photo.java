@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -32,8 +33,8 @@ public class Photo implements Serializable
 	@Column(name="PHOTO_TYPE")
 	private PhotoType Type;
 	
-	@Column(name="IMAGE_PATH")
-	private String imagePath;
+	@Column(name="IMAGE_NAME")
+	private String name;
 	
 	@Column(name="DESCRIPTION")
 	private String description;
@@ -50,6 +51,12 @@ public class Photo implements Serializable
 
 	@Column(name="PHOTO_DATE")
 	private Date date;
+	
+	@Lob
+	private byte[] data;
+	
+	@Column(name="PHOTO_EXTENSION")
+	private String extension;
 	
 	public Photo(){}
 
@@ -93,12 +100,12 @@ public class Photo implements Serializable
 		this.date = date;
 	}
 
-	public String getImagePath() {
-		return imagePath;
+	public String getName() {
+		return name;
 	}
 
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {
@@ -108,5 +115,21 @@ public class Photo implements Serializable
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
+	public byte[] getData() {
+		return data;
+	}
+
+	public void setData(byte[] data) {
+		this.data = data;
+	}
+
+	public String getExtension() {
+		return extension;
+	}
+
+	public void setExtension(String extension) {
+		this.extension = extension;
+	}
+
 }
