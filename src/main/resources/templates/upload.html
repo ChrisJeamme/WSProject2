@@ -1,0 +1,102 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="../fragments/head.html :: head('Hub Page')"></head>
+<body class="text-center">
+    <header th:replace="../fragments/header.html :: header('Hub Page')"></header>
+	<section class="m-5">
+	<h3>Upload Photo </h3>
+	  	<div class="form-group form-row justify-content-md-center">
+		
+			<form id="uploadForm" name="uploadForm">
+                        <label>Image : </label><input class="form-control" id="uploadInput" type="file" name="file" required />
+                        <label>Description : </label><input placeholder="Photo description" class="form-control" id="description" type="text" name="description" />
+                    	<label>Capture date : </label><input class="form-control" id="date" type="date" name="date" />
+         				<label> Child : </label> 
+                    	<select th:each="child : ${childs}"  id="childId" name="childId" class="custom-select form-control">
+                        	<option	th:if="${child == null}" th:value="-1" data-th-text="No Child found"></option>
+                        	<option th:unless="${child == null}" th:value="${child.childId}" data-th-text="${child.childFirstName + ' ' + child.childLastName}"></option>
+                    	</select>
+						
+						<label> SchoolClass : </label>         
+                    	<select th:each="schoolClass : ${schoolClasss}" th:if="${schoolClass != null}" id="schoolClassId" name="schoolClassId" class="custom-select form-control">
+                        	<option th:value="${schoolClass.schoolClassId}" data-th-text="${schoolClass.SchoolClassName}"></option>
+                    		<option	th:if="${schoolClass == null}" th:value="-1" data-th-text="No SchoolClass found" />
+                    	</select>
+                    	
+         				<label>Photo type : </label> 
+                    	<select id="type" name="type" class="custom-select form-control">
+                        	<option th:value="0" data-th-text="Individual"></option>
+                        	<option th:value="1" data-th-text="Class"></option>
+                        	<option th:value="0" data-th-text="Unknown" selected="selected"></option>
+                    	</select>    
+         		
+         				
+                        <button type="submit" class="btn btn-dark m-3">Submit</button>
+                    </form>
+                    <div class="upload-response">
+                        <div id="uploadError"></div>
+                        <div id="uploadSuccess"></div>
+                    </div>
+        </div>
+
+</section>
+
+	<script th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
+    <script th:src="@{/webjars/chartjs/2.7.3/Chart.min.js}"></script>
+<script type="text/javascript">
+
+'use strict';
+
+var uploadForm = document.querySelector('#uploadForm');
+var uploadInput = document.querySelector('#uploadInput');
+var uploadError = document.querySelector('#uploadError');
+var uploadSuccess = document.querySelector('#uploadSuccess');
+
+function uploadSingleFile(file, description, type, date, childId, schoolClassId) {
+    var formData = new FormData();
+    
+    formData.append("file", file);
+    formData.append("description", description);
+    formData.append("type", type);
+    formData.append("date", date);
+    formData.append("childId", childId);
+    formData.append("schoolClassId", schoolClassId);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/transfer/upload");
+
+    xhr.onload = function() {
+        console.log(xhr.responseText);
+        var response = JSON.parse(xhr.responseText);
+        if(xhr.status == 200) {
+            uploadError.style.display = "none";
+            uploadSuccess.innerHTML = "<p>Photo Uploaded Successfully.</p><p>DownloadUrl : <a href='" + response.fileDownloadUri + "' target='_blank'>" + response.fileDownloadUri + "</a></p>";
+            uploadSuccess.style.display = "block";
+        } else {
+            uploadSuccess.style.display = "none";
+            uploadError.innerHTML = (response && response.message) || "Some Error Occurred";
+        }
+    }
+
+    xhr.send(formData);
+}
+
+uploadForm.addEventListener('submit', function(event){
+    var file = uploadInput.file;
+    var description = uploadInput.description;
+    var type = uploadInput.type;
+    var date = uploadInput.date;
+    var childId = uploadInput.childId;
+    var schoolClassId = uploadInput.schoolClassId;
+    
+    if(file === 0) {
+        uploadError.innerHTML = "Please select an Image";
+        uploadError.style.display = "block";
+    }
+    uploadSingleFile(file,description, type, date, childId, schoolClassId);
+    event.preventDefault();
+}, true);
+
+
+</script>
+</body>
+</html>
