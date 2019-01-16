@@ -9,6 +9,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface ChildRepository extends PagingAndSortingRepository<Child, Long>
 {
 	public List<Child> findAll();
-//	public List<Country> findByCountryName(String countryName);
-//	public Country findByCountryId(String id);
+	public Child findByChildId(long id);
 }
