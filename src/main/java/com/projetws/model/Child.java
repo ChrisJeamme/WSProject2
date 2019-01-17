@@ -1,7 +1,6 @@
 package com.projetws.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,10 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -28,14 +24,14 @@ public class Child implements Serializable
 
 	@Column(name="CHILD_FIRSTNAME")
 	private String childFirstName;
-	
+
 	@Column(name="CHILD_LASTNAME")
 	private String childLastName;
-	
+
 	@ManyToOne
 	@JoinColumn(name="SCHOOL_CLASS_ID")
 	private SchoolClass schoolClass;
-	
+
 	public Child(){}
 
 	public long getChildId() {
@@ -69,7 +65,7 @@ public class Child implements Serializable
 	public void setSchoolClass(SchoolClass schoolClass) {
 		this.schoolClass = schoolClass;
 	}
-	
-	
+
+
 
 }

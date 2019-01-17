@@ -1,9 +1,9 @@
 package com.projetws.tools;
 
-	import org.springframework.beans.factory.annotation.Autowired;
-	import org.springframework.stereotype.Service;
-	import org.springframework.util.StringUtils;
-	import org.springframework.web.multipart.MultipartFile;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.projetws.model.Child;
 import com.projetws.model.Photo;
@@ -14,46 +14,46 @@ import com.projetws.model.SchoolClass;
 import java.io.IOException;
 import java.util.Date;
 
-	@Service
-	public class PhotoStorageService {
+@Service
+public class PhotoStorageService {
 
-	    @Autowired
-	    private PhotoRepository photoRepository;
+	@Autowired
+	private PhotoRepository photoRepository;
 
-	    public Photo storeFile(MultipartFile file, PhotoType type, 
-	    		String description, Date date, Child child, SchoolClass schoolClass) {
-	        // Normalize file name
-	        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+	public Photo storeFile(MultipartFile file, PhotoType type, 
+			String description, Date date, Child child, SchoolClass schoolClass) {
+		// Normalize file name
+		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
-	        try {
-	            // Invalid file's name
-	            if(fileName.contains("..")) {
-	                throw new PhotoStorageExceptionHandler("Filename contains invalid path sequence : " + fileName);
-	            }
+		try {
+			// Invalid file's name
+			if(fileName.contains("..")) {
+				throw new PhotoStorageExceptionHandler("Filename contains invalid path sequence : " + fileName);
+			}
 
-	            Photo photo = new Photo();
-	            photo.setName(file.getOriginalFilename());
-	            photo.setChild(child);
-	            photo.setData(file.getBytes());
-	            photo.setDate(date);
-	            photo.setDescription(description);
-	            photo.setSchoolClass(schoolClass);
-	            photo.setType(type);
-	            photo.setExtension(file.getContentType());
-	            
-	            return photoRepository.save(photo);
-	        } catch (IOException ex) {
-	            throw new PhotoStorageExceptionHandler("Could not store file " + fileName + ". Please try again!", ex);
-	        }
-	    }
+			Photo photo = new Photo();
+			photo.setName(file.getOriginalFilename());
+			photo.setChild(child);
+			photo.setData(file.getBytes());
+			photo.setDate(date);
+			photo.setDescription(description);
+			photo.setSchoolClass(schoolClass);
+			photo.setType(type);
+			photo.setExtension(file.getContentType());
 
-	    public Photo getFile(long fileId) {
-	        return photoRepository.findByPhotoId(fileId);
-	        	//	.orElseThrow(() -> new MyFileNotFoundException("File not found with id " + fileId));
-	    }
+			return photoRepository.save(photo);
+		} catch (IOException ex) {
+			throw new PhotoStorageExceptionHandler("Could not store file " + fileName + ". Please try again!", ex);
+		}
 	}
-	/*
-	 * import java.io.IOException;
+
+	public Photo getFile(long fileId) {
+		return photoRepository.findByPhotoId(fileId);
+		//	.orElseThrow(() -> new MyFileNotFoundException("File not found with id " + fileId));
+	}
+}
+/*
+ * import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -73,14 +73,14 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class PhotoStorageService implements StorageService {
 
-	
+
     private final Path rootLocation;
-    
+
     @Autowired
     public PhotoStorageService(StorageProperties properties) {
         this.rootLocation = Paths.get(properties.getLocation());
     }
-    
+
     @Override
     public void init() {
         try {
@@ -90,7 +90,7 @@ public class PhotoStorageService implements StorageService {
             throw new StorageExceptionHandler("Could not initialize storage", e);
         }
     }
-    
+
     @Override
     public void store(MultipartFile file) {
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
@@ -156,5 +156,5 @@ public class PhotoStorageService implements StorageService {
         FileSystemUtils.deleteRecursively(rootLocation.toFile());
     }
 
-    
+
 }*/
