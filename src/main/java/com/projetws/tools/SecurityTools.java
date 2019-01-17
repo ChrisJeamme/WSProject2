@@ -3,8 +3,6 @@ package com.projetws.tools;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import com.projetws.model.UserRole;
-
 public class SecurityTools
 {
 	/**

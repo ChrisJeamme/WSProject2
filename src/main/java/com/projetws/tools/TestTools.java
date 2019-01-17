@@ -2,18 +2,11 @@ package com.projetws.tools;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.springframework.boot.SpringApplication;
-
-import com.projetws.ProjetWsApplication;
 
 public class TestTools
 {

@@ -3,8 +3,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -26,7 +24,6 @@ import com.projetws.model.SchoolClassRepository;
 import com.projetws.tools.PhotoStorageService;
 import com.projetws.tools.UploadPhotoResponse;
 
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
@@ -60,11 +57,12 @@ public class UploadController {
 		} catch (ParseException e) {
 			formatedDate = null;
 		} 
-
+		System.out.println("### Start upload");
 		Photo photo = photoStorageService.storeFile(file,type,
 				description,formatedDate,childRepository.findByChildId(childId),
 				schoolClassRepository.findBySchoolClassId(schoolClassId));
 
+		System.out.println("### Image uploaded");
 		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
 				.path("/downloadFile/")
 				.path("" + photo.getPhotoId())

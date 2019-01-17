@@ -1,5 +1,8 @@
 package com.projetws.tools;
 
+import java.io.IOException;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -11,9 +14,6 @@ import com.projetws.model.PhotoRepository;
 import com.projetws.model.PhotoType;
 import com.projetws.model.SchoolClass;
 
-import java.io.IOException;
-import java.util.Date;
-
 @Service
 public class PhotoStorageService {
 
@@ -22,6 +22,7 @@ public class PhotoStorageService {
 
 	public Photo storeFile(MultipartFile file, PhotoType type, 
 			String description, Date date, Child child, SchoolClass schoolClass) {
+		System.out.println("### Saving Photo");
 		// Normalize file name
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 

@@ -1,11 +1,5 @@
 package com.projetws.model;
 
-import javax.validation.constraints.NotNull;
-
-import org.modelmapper.ModelMapper;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 public class UserDTO
 {
 //    ModelMapper modelMapper = new ModelMapper();

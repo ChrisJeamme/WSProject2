@@ -3,7 +3,12 @@ package com.projetws.tools;
 public class StorageExceptionHandler extends RuntimeException{
 
 
-    public StorageExceptionHandler(String message) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public StorageExceptionHandler(String message) {
         super(message);
     }
 

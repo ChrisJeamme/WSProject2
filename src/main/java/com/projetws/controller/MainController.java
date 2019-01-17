@@ -2,16 +2,15 @@ package com.projetws.controller;
 
 import java.util.HashSet;
 
-import org.hibernate.annotations.common.util.impl.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.projetws.model.ChildRepository;
@@ -22,9 +21,6 @@ import com.projetws.model.SchoolRepository;
 import com.projetws.model.User;
 import com.projetws.model.UserRepository;
 import com.projetws.model.UserRole;
-import com.projetws.tools.SecurityTools;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 
 @Controller
 public class MainController
@@ -142,7 +138,7 @@ public class MainController
 		return "redirect:/"; 
 	}
     
-    @RequestMapping("/testUpload")
+	@RequestMapping("/testUpload")
     private String upload(Model model)
     {
     	
@@ -150,4 +146,5 @@ public class MainController
     	model.addAttribute("childs", childRepository.findAll());
     	return "upload";
     }
+	
 }
