@@ -47,24 +47,23 @@
 
 	<script th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
 	<script th:src="@{/webjars/chartjs/2.7.3/Chart.min.js}"></script>
-	<script type="text/javascript">
+	<script>
 
-'use strict';
+	
+//'use strict';
 
 var uploadForm = document.querySelector('#uploadForm');
 var uploadInput = document.querySelector('#uploadInput');
 var uploadError = document.querySelector('#uploadError');
 var uploadSuccess = document.querySelector('#uploadSuccess');
+console.log("hello");
 
 function uploadSingleFile(file, description, type, date, childId, schoolClassId) {
     var formData = new FormData();
-    var token = $("meta[name='_csrf']").attr("content");
-    var header = $("meta[name='_csrf_header']").attr("content");
+
     var xhr = new XMLHttpRequest();
     
-    $(document).ajaxSend(function(e, xhr, options) {
-      xhr.setRequestHeader(header, token);
-    });
+    console.log("Send photo");
     
     formData.append("file", file);
     formData.append("description", description);
@@ -73,26 +72,30 @@ function uploadSingleFile(file, description, type, date, childId, schoolClassId)
     formData.append("childId", childId);
     formData.append("schoolClassId", schoolClassId);
 
-    
+    console.log("get params");
     xhr.open("POST", "/upload");
-
+    console.log("Photo posted");
+    
     xhr.onload = function() {
         console.log(xhr.responseText);
         var response = JSON.parse(xhr.responseText);
         if(xhr.status == 200) {
             uploadError.style.display = "none";
-            uploadSuccess.innerHTML = "<p>Photo Uploaded Successfully.</p><p>DownloadUrl : <a href='" + response.fileDownloadUri + "' target='_blank'>" + response.fileDownloadUri + "</a></p>";
+            uploadSuccess.innerHTML = "<p>Photo Uploaded Successfully.</p><p>DownloadUrl : <a href='" 
+            	+ response.fileDownloadUri + "' target='_blank'>" 
+            	+ response.fileDownloadUri + "</a></p>";
             uploadSuccess.style.display = "block";
         } else {
             uploadSuccess.style.display = "none";
             uploadError.innerHTML = (response && response.message) || "Some Error Occurred";
         }
     }
-
     xhr.send(formData);
+    
 }
 
 uploadForm.addEventListener('submit', function(event){
+	console.log("Add event listener");
     var file = uploadInput.file;
     var description = uploadInput.description;
     var type = uploadInput.type;
@@ -104,6 +107,7 @@ uploadForm.addEventListener('submit', function(event){
         uploadError.innerHTML = "Please select an Image";
         uploadError.style.display = "block";
     }
+    console.log("Call upload");
     uploadSingleFile(file,description, type, date, childId, schoolClassId);
     event.preventDefault();
 }, true);

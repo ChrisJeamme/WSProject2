@@ -3,6 +3,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -30,7 +32,7 @@ import io.swagger.annotations.ApiParam;
 @RestController
 public class UploadController {
 
-	//private static final Logger logger = LogManager.getLogger(UploadController.class);
+	private static final Logger logger = LogManager.getLogger(UploadController.class);
 
 	@Autowired
 	private PhotoStorageService photoStorageService;
@@ -50,6 +52,7 @@ public class UploadController {
 			@ApiParam(value="TEST, should be suppr. later", required=true)@RequestParam("childId") long childId,
 			@ApiParam(value="TEST, should be suppr. later", required=true)@RequestParam("schoolClassId") long schoolClassId)				
 	{
+		logger.debug("Try store photo");
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		Date formatedDate;
 		try {
@@ -57,12 +60,13 @@ public class UploadController {
 		} catch (ParseException e) {
 			formatedDate = null;
 		} 
-		System.out.println("### Start upload");
+		
+		logger.info("Try store photo");
 		Photo photo = photoStorageService.storeFile(file,type,
 				description,formatedDate,childRepository.findByChildId(childId),
 				schoolClassRepository.findBySchoolClassId(schoolClassId));
 
-		System.out.println("### Image uploaded");
+		logger.info("Photo stored");
 		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
 				.path("/downloadFile/")
 				.path("" + photo.getPhotoId())
