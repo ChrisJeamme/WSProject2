@@ -2,11 +2,16 @@ package com.projetws.tools;
 
 public class PhotoStorageExceptionHandler extends StorageExceptionHandler {
 
-	public PhotoStorageExceptionHandler(String message) {
-        super(message);
-    }
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-    public PhotoStorageExceptionHandler(String message, Throwable cause) {
-        super(message, cause);
-    }
+	public PhotoStorageExceptionHandler(String message) {
+		super(message);
+	}
+
+	public PhotoStorageExceptionHandler(String message, Throwable cause) {
+		super(message, cause);
+	}
 }

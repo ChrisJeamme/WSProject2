@@ -1,16 +1,5 @@
 package com.projetws.controller;
 
-import static org.junit.Assert.*;
-
-import java.math.BigDecimal;
-
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
-//import com.projetws.model.Job;
-//import com.projetws.model.JobRepository;
-import com.projetws.tools.TestTools;
-
 public class JobControllerTest
 {
 //	@Autowired

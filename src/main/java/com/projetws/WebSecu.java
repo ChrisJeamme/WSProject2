@@ -16,7 +16,6 @@ package com.projetws;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.*;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -35,68 +34,70 @@ import com.projetws.model.UserService;
 public class WebSecu extends WebSecurityConfigurerAdapter
 {
 
-    /**
-     *
-     * @param http
-     * @throws Exception
-     */
-    @Override
-    protected void configure(HttpSecurity http) throws Exception
-    {
-        http.authorizeRequests()
-    	.antMatchers("/schoolManagement").hasRole("SCHOOLADMIN")
-    	
-//	    	.antMatchers("/updateCountry").hasRole("ALL")
-//	    	.antMatchers("/updateDepartment").hasRole("ALL")
-//	    	.antMatchers("/updateJobHistory").hasRole("ALL")
-//	    	.antMatchers("/updateLocation").hasRole("ALL")
-//	    	.antMatchers("/updateRegion").hasRole("ALL")
-//	    	.antMatchers("/updateEmployee").hasRole("EDITOR")
-//	    	.antMatchers("/updateJob").hasRole("EDITOR")
-//	    	
-//          .antMatchers("/location/all").hasRole("CONSULT")
-//          .antMatchers("/region/all").hasRole("CONSULT")
-//          .antMatchers("/department/all").hasRole("EDITOR")
-//          .antMatchers("/employee/all").hasRole("EDITOR")
-//          .antMatchers("/job/all").hasRole("EDITOR")
-//          .antMatchers("/jobHistory/all").hasRole("EDITOR")
-//          .antMatchers("/country/all").hasRole("EDITOR")
-            .and()
-            .formLogin()
-            .loginPage("/login")
-            .loginProcessingUrl("/appLogin")
-            .usernameParameter("app_username")
-            .passwordParameter("app_password")
-            .defaultSuccessUrl("/")
-            .permitAll()
-            .and()
-            .logout()
-            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-            .logoutSuccessUrl("/")
-            .permitAll();
-    }
+	/**
+	 *
+	 * @param http
+	 * @throws Exception
+	 */
+	@Override
+	protected void configure(HttpSecurity http) throws Exception
+	{
+		http.authorizeRequests()    
+		.antMatchers("/upload").hasRole("SCHOOLADMIN")
+		.antMatchers("/schoolManagement").hasRole("SCHOOLADMIN")
+		//	    	.antMatchers("/updateCountry").hasRole("ALL")
+		//	    	.antMatchers("/updateDepartment").hasRole("ALL")
+		//	    	.antMatchers("/updateJobHistory").hasRole("ALL")
+		//	    	.antMatchers("/updateLocation").hasRole("ALL")
+		//	    	.antMatchers("/updateRegion").hasRole("ALL")
+		//	    	.antMatchers("/updateEmployee").hasRole("EDITOR")
+		//	    	.antMatchers("/updateJob").hasRole("EDITOR")
+		//	    	
+		//          .antMatchers("/location/all").hasRole("CONSULT")
+		//          .antMatchers("/region/all").hasRole("CONSULT")
+		//          .antMatchers("/department/all").hasRole("EDITOR")
+		//          .antMatchers("/employee/all").hasRole("EDITOR")
+		//          .antMatchers("/job/all").hasRole("EDITOR")
+		//          .antMatchers("/jobHistory/all").hasRole("EDITOR")
+		//          .antMatchers("/country/all").hasRole("EDITOR")
+		.and()
+		.formLogin()
+		.loginPage("/login")
+		.loginProcessingUrl("/appLogin")
+		.usernameParameter("app_username")
+		.passwordParameter("app_password")
+		.defaultSuccessUrl("/")
+		.permitAll()
+		.and()
+		.logout()
+		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+		.logoutSuccessUrl("/")
+		.permitAll();
+		
+		http.csrf().disable();
+	}
 
-    @Autowired
-    UserService userDetailsService;
+	@Autowired
+	UserService userDetailsService;
 
-    /**
-     *
-     * @param auth
-     * @throws Exception
-     */
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception
-    {
-        auth.inMemoryAuthentication()
-        .withUser("parent").password("parent").roles("PARENT")
-        .and()
-        .withUser("photographer").password("photographer").roles("PHOTOGRAPHER")
-        .and()
-        .withUser("SCHOOLADMIN").password("SCHOOLADMIN").roles("SCHOOLADMIN")
-        .and()
-        .withUser("m.brochant").password("m.brochant").roles("PARENT","PHOTOGRAPHER","SCHOOLADMIN"); // ON A LES DROITS !
-        auth
-            .userDetailsService(userDetailsService)
-            .passwordEncoder(userDetailsService.encoder);
-    }
+	/**
+	 *
+	 * @param auth
+	 * @throws Exception
+	 */
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception
+	{
+		auth.inMemoryAuthentication()
+		.withUser("parent").password("parent").roles("PARENT")
+		.and()
+		.withUser("photographer").password("photographer").roles("PHOTOGRAPHER")
+		.and()
+		.withUser("SCHOOLADMIN").password("SCHOOLADMIN").roles("SCHOOLADMIN")
+		.and()
+		.withUser("m.brochant").password("m.brochant").roles("PARENT","PHOTOGRAPHER","SCHOOLADMIN"); // ON A LES DROITS !
+		auth
+		.userDetailsService(userDetailsService)
+		.passwordEncoder(userDetailsService.encoder);
+	}
 }

@@ -11,10 +11,10 @@ public class LoginController
 	{
 		return "loginPage";
 	}
-	
-    @RequestMapping("appLogin")
-    public String setSession()
-    {
-        return "";
-    }
+
+	@RequestMapping("appLogin")
+	public String setSession()
+	{
+		return "";
+	}
 }

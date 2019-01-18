@@ -1,19 +1,14 @@
 package com.projetws.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
-
 import java.security.Principal;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.projetws.model.School;
 import com.projetws.model.SchoolClass;
@@ -21,8 +16,6 @@ import com.projetws.model.SchoolClassRepository;
 import com.projetws.model.SchoolRepository;
 import com.projetws.model.User;
 import com.projetws.model.UserRepository;
-import com.projetws.model.UserRole;
-import com.projetws.tools.SecurityTools;
 
 import io.swagger.annotations.Api;
 
