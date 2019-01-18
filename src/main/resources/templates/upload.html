@@ -7,35 +7,37 @@
 		<div class="form-group form-row justify-content-md-center">
 
 			<form id="uploadForm" name="uploadForm">
-				<label>Image : </label><input class="form-control" id="uploadInput"
-					type="file" name="file" required /> <label>Description : </label><input
-					placeholder="Photo description" class="form-control"
-					id="description" type="text" name="description" /> <label>Capture
-					date : </label><input class="form-control" id="date" type="date"
-					name="date" /> <label> Child : </label> <select
-					th:each="child : ${childs}" id="childId" name="childId"
-					class="custom-select form-control">
-					<option th:if="${child == null}" th:value="-1"
-						data-th-text="No Child found"></option>
-					<option th:unless="${child == null}" th:value="${child.childId}"
-						data-th-text="${child.childFirstName + ' ' + child.childLastName}"></option>
-				</select> <label> SchoolClass : </label> <select
-					th:each="schoolClass : ${schoolClasss}"
-					th:if="${schoolClass != null}" id="schoolClassId"
-					name="schoolClassId" class="custom-select form-control">
-					<option th:value="${schoolClass.schoolClassId}"
-						data-th-text="${schoolClass.SchoolClassName}"></option>
-					<option th:if="${schoolClass == null}" th:value="-1"
-						data-th-text="No SchoolClass found" />
-				</select> <label>Photo type : </label> <select id="type" name="type"
-					class="custom-select form-control">
-					<option th:value="0" data-th-text="Individual"></option>
-					<option th:value="1" data-th-text="Class"></option>
-					<option th:value="0" data-th-text="Unknown" selected="selected"></option>
-				</select>
+                <label>Image :</label>
+                <input class="form-control" id="file" type="file" name="file" required />
+                
+                <label>Description :</label>
+                <input placeholder="Photo description" class="form-control" id="description" type="text" name="description" />
+                
+                <label>Capture date :</label>
+                <input class="form-control" id="date" type="date" name="date" />
+                
+                <label> Child :</label>
+                <select th:each="child : ${childs}" id="childId" name="childId" class="custom-select form-control">
+                    <option th:if="${child == null}" th:value="-1" data-th-text="No Child found"></option>
+                    <option th:unless="${child == null}" th:value="${child.childId}"
+                    data-th-text="${child.childFirstName + ' ' + child.childLastName}"></option>
+                </select>
+                <label> SchoolClass :</label>
+                <select th:each="schoolClass : ${schoolClasss}" th:if="${schoolClass != null}"
+                id="schoolClassId" name="schoolClassId" class="custom-select form-control">
+                    <option th:value="${schoolClass.schoolClassId}"
+                        data-th-text="${schoolClass.SchoolClassName}"></option>
+                    <option th:if="${schoolClass == null}" th:value="-1"
+                        data-th-text="No SchoolClass found" />
+                </select>
+                <label>Photo type :</label>
+                <select id="type" name="type" class="custom-select form-control">
+                    <option th:value="0" data-th-text="Individual"></option>
+                    <option th:value="1" data-th-text="Class"></option>
+                    <option th:value="0" data-th-text="Unknown" selected="selected"></option>
+                </select>
 
-
-				<button type="submit" class="btn btn-dark m-3">Submit</button>
+				<button type="button" id="submitButton" class="btn btn-dark m-3">Submit</button>
 			</form>
 			<div class="upload-response">
 				<div id="uploadError"></div>
@@ -62,6 +64,7 @@ function uploadSingleFile(file, description, type, date, childId, schoolClassId)
     var formData = new FormData();
 
     var xhr = new XMLHttpRequest();
+
     
     console.log("Send photo");
     
@@ -94,8 +97,13 @@ function uploadSingleFile(file, description, type, date, childId, schoolClassId)
     
 }
 
-uploadForm.addEventListener('submit', function(event){
-	console.log("Add event listener");
+uploadForm.addEventListener('#submitButton', function(event){
+    console.log("Add event listener");
+    if(uploadInput==null)
+    {
+        console.log("Error : The file is null");
+        return ;
+    }
     var file = uploadInput.file;
     var description = uploadInput.description;
     var type = uploadInput.type;
