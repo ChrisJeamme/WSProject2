@@ -45,14 +45,15 @@ public class UploadController {
 	
 	@ApiOperation(value="Store a Photo into the database" , httpMethod="POST", response= UploadPhotoResponse.class)
 	@PostMapping("/upload")
-	public UploadPhotoResponse uploadFile(@ApiParam(value="Image file", required=true) @RequestParam("file") MultipartFile file,
-			@ApiParam(value="PhotoType (individual, class, unknown)", required=true) @RequestParam("type") PhotoType type,
-			@ApiParam(value="Photo description text", required=true) @RequestParam("description") String description,
-			@ApiParam(value="Capture date", required=true) @RequestParam("date") String date,
-			@ApiParam(value="TEST, should be suppr. later", required=true)@RequestParam("childId") long childId,
-			@ApiParam(value="TEST, should be suppr. later", required=true)@RequestParam("schoolClassId") long schoolClassId)				
+	public UploadPhotoResponse uploadFile(@ApiParam(value="Image file", required=false) @RequestParam("file") MultipartFile file,
+			@ApiParam(value="PhotoType (individual, class, unknown)", required=false) @RequestParam("type") PhotoType type,
+			@ApiParam(value="Photo description text", required=false) @RequestParam("description") String description,
+			@ApiParam(value="Capture date", required=false) @RequestParam("date") String date,
+			@ApiParam(value="TEST, should be suppr. later", required=false)@RequestParam("childId") long childId,
+			@ApiParam(value="TEST, should be suppr. later", required=false)@RequestParam("schoolClassId") long schoolClassId)				
 	{
-		logger.debug("Try store photo");
+		System.out.println("test");
+		logger.info("Try store photo");
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		Date formatedDate;
 		try {

@@ -37,7 +37,7 @@
                     <option th:value="0" data-th-text="Unknown" selected="selected"></option>
                 </select>
 
-				<button type="button" id="submitButton" class="btn btn-dark m-3">Submit</button>
+				<button type="button" onclick="onSubmit" class="btn btn-dark m-3">Submit</button>
 			</form>
 			<div class="upload-response">
 				<div id="uploadError"></div>
@@ -55,7 +55,7 @@
 //'use strict';
 
 var uploadForm = document.querySelector('#uploadForm');
-var uploadInput = document.querySelector('#uploadInput');
+var uploadInput = document.querySelector('#file');
 var uploadError = document.querySelector('#uploadError');
 var uploadSuccess = document.querySelector('#uploadSuccess');
 console.log("hello");
@@ -97,13 +97,14 @@ function uploadSingleFile(file, description, type, date, childId, schoolClassId)
     
 }
 
-uploadForm.addEventListener('#submitButton', function(event){
+const onSubmit = function(event)
+{
     console.log("Add event listener");
     if(uploadInput==null)
     {
         console.log("Error : The file is null");
-        return ;
-    }
+        return null;
+    }    
     var file = uploadInput.file;
     var description = uploadInput.description;
     var type = uploadInput.type;
@@ -117,9 +118,7 @@ uploadForm.addEventListener('#submitButton', function(event){
     }
     console.log("Call upload");
     uploadSingleFile(file,description, type, date, childId, schoolClassId);
-    event.preventDefault();
-}, true);
-
+}
 
 </script>
 </body>
