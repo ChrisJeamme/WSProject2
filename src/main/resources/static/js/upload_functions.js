@@ -38,8 +38,8 @@ function uploadSingleFile(file, description, type, date, childId, schoolClassId)
         if(xhr.status == 200) {
             uploadError.style.display = "none";
             uploadSuccess.innerHTML = "<p>Photo Uploaded Successfully.</p><p>DownloadUrl : <a href='" 
-            	+ response.fileDownloadUri + "' target='_blank'>" 
-            	+ response.fileDownloadUri + "</a></p>";
+            	+ response.downloadUri + "' target='_blank'>" 
+            	+ response.name + "</a></p>";
             uploadSuccess.style.display = "block";
         } else {
             uploadSuccess.style.display = "none";

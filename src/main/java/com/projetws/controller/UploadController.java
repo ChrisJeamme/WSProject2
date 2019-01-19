@@ -92,7 +92,9 @@ public class UploadController {
 				.path("/downloadFile/")
 				.path("" + photo.getPhotoId())
 				.toUriString();
+		
 		logger.info("Photo uri : " + fileDownloadUri);
+		
 		return new UploadPhotoResponse(file.getName(), fileDownloadUri,
 				file.getContentType(), file.getSize());
 	}
