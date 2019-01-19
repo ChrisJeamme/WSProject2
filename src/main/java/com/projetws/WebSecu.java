@@ -43,7 +43,8 @@ public class WebSecu extends WebSecurityConfigurerAdapter
 	protected void configure(HttpSecurity http) throws Exception
 	{
 		http.authorizeRequests()    
-		.antMatchers("/upload").hasRole("SCHOOLADMIN")
+		.antMatchers("/upload").hasRole("PHOTOGRAPHER")
+		.antMatchers("/testUpload").hasRole("PHOTOGRAPHER")
 		.antMatchers("/schoolManagement").hasRole("SCHOOLADMIN")
 		//	    	.antMatchers("/updateCountry").hasRole("ALL")
 		//	    	.antMatchers("/updateDepartment").hasRole("ALL")
