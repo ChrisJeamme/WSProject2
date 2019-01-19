@@ -42,7 +42,7 @@ public class UploadController {
 
 	@Autowired
 	private SchoolClassRepository schoolClassRepository;
-	
+	 
 	@ApiOperation(value="Store a Photo into the database" , httpMethod="POST", response= UploadPhotoResponse.class)
 	@PostMapping("/upload")
 	public UploadPhotoResponse uploadFile(@ApiParam(value="Image file", required=false) @RequestParam("file") MultipartFile file,
