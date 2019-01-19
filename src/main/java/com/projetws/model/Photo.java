@@ -2,12 +2,14 @@ package com.projetws.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -36,9 +38,9 @@ public class Photo implements Serializable
 	private String description;
 
 	//	Pour les types individuels (Je sais faudrait des nouvelles classe qui extends etc. mais j'attends que tout marche avant de rajouter des sources d'erreur)
-	@ManyToOne
+	@ManyToMany
 	@JoinColumn(name="CHILD_ID")
-	private Child child;
+	private List<Child> childs;
 
 //	Pour les types photo de classe
 	@ManyToOne
@@ -73,12 +75,12 @@ public class Photo implements Serializable
 		Type = type;
 	}
 
-	public Child getChild() {
-		return child;
+	public List<Child> getChilds() {
+		return childs;
 	}
 
-	public void setChild(Child child) {
-		this.child = child;
+	public void setChilds(List<Child> childs) {
+		this.childs = childs;
 	}
 
 	public SchoolClass getSchoolClass() {
