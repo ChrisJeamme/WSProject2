@@ -1,7 +1,8 @@
 package com.projetws.controller;
+import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -45,34 +46,53 @@ public class UploadController {
 	
 	@ApiOperation(value="Store a Photo into the database" , httpMethod="POST", response= UploadPhotoResponse.class)
 	@PostMapping("/upload")
-	public UploadPhotoResponse uploadFile(@ApiParam(value="Image file", required=false) @RequestParam("file") MultipartFile file,
-			@ApiParam(value="PhotoType (individual, class, unknown)", required=false) @RequestParam("type") PhotoType type,
+	public UploadPhotoResponse uploadFile(@ApiParam(value="Image file", required=true) @RequestParam("file") MultipartFile file,
+			@ApiParam(value="PhotoType (individual, class, unknown)", required=true) @RequestParam("type") String type,
 			@ApiParam(value="Photo description text", required=false) @RequestParam("description") String description,
 			@ApiParam(value="Capture date", required=false) @RequestParam("date") String date,
-			@ApiParam(value="TEST, should be suppr. later", required=false)@RequestParam("childId") long childId,
-			@ApiParam(value="TEST, should be suppr. later", required=false)@RequestParam("schoolClassId") long schoolClassId)				
+			@ApiParam(value="TEST, should be suppr. later", required=false)@RequestParam("childId") String childId,
+			@ApiParam(value="TEST, should be suppr. later", required=false)@RequestParam("schoolClassId") String schoolClassId)				
 	{
-		System.out.println("test");
-		logger.info("Try store photo");
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+		logger.info("Try get params");
+		logger.info(date);
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date formatedDate;
 		try {
-			formatedDate = format.parse (date);
+			formatedDate = format.parse(date);
 		} catch (ParseException e) {
 			formatedDate = null;
+			logger.info("exception date");
 		} 
+		logger.info(formatedDate);
 		
-		logger.info("Try store photo");
-		Photo photo = photoStorageService.storeFile(file,type,
-				description,formatedDate,childRepository.findByChildId(childId),
-				schoolClassRepository.findBySchoolClassId(schoolClassId));
+		PhotoType photoType;
+		
+		switch (Integer.parseInt(type)) {
+		case 0:
+			photoType = PhotoType.INDIVIDUAL_PHOTO;
+			break;
+		case 1:
+			photoType = PhotoType.CLASS_PHOTO;
+			break;	
+		case 2:
+			photoType = PhotoType.UNKNOWN_TYPE_PHOTO;
+			break;
+		default: photoType = PhotoType.UNKNOWN_TYPE_PHOTO;
+			break;
+		}
+		
+		Photo photo = photoStorageService.storeFile(file,photoType,
+				description,formatedDate,childRepository.findByChildId(Long.parseLong(childId)),
+				schoolClassRepository.findBySchoolClassId(Long.parseLong(schoolClassId)));
 
 		logger.info("Photo stored");
 		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
 				.path("/downloadFile/")
 				.path("" + photo.getPhotoId())
 				.toUriString();
-
+		logger.info("Photo uri : " + fileDownloadUri);
 		return new UploadPhotoResponse(file.getName(), fileDownloadUri,
 				file.getContentType(), file.getSize());
 	}

@@ -11,6 +11,8 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 @Entity
@@ -44,6 +46,7 @@ public class Photo implements Serializable
 	private SchoolClass schoolClass;
 
 	@Column(name="PHOTO_DATE")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
 	
 	@Lob

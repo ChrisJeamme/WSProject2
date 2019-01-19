@@ -15,7 +15,10 @@ function uploadSingleFile(file, description, type, date, childId, schoolClassId)
     let xhr = new XMLHttpRequest();
     
     console.log("Send photo");
-    
+    console.log(description);
+    console.log(type);
+    console.log(date);
+    console.log(childId);
     formData.append("file", file);
     formData.append("description", description);
     formData.append("type", type);
@@ -56,11 +59,11 @@ function onSubmit()
         return null;
     }    
     var file = uploadInput.files[0];
-    var description = uploadInput.description;
-    var type = uploadInput.type;
-    var date = uploadInput.date;
-    var childId = uploadInput.childId;
-    var schoolClassId = uploadInput.schoolClassId;
+    var description = uploadForm.description.value;
+    var type = uploadForm.type.value;
+    var date = uploadForm.date.value;
+    var childId = uploadForm.childId.value;
+    var schoolClassId = uploadForm.schoolClassId.value;
     
     if(file === 0) {
         uploadError.innerHTML = "Please select an Image";
