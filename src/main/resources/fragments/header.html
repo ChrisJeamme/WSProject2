@@ -2,12 +2,14 @@
     <nav class="navbar navbar-light bg-dark">
         <span class="navbar-brand mb-0 h1 text-light" th:text="${title}"></span>
         <div>
+            <span sec:authorize="isAuthenticated()">
+                <span class="text-light mr-4">Welcome <span sec:authentication="name"></span> </span>
+            </span>
             <a class="btn btn-secondary btn-lg mb-8 btn-success" href="/">Home</a>
-            <span sec:authorization="isAuthenticated()">
-                <!-- <span class="text-light mr-4"><span sec:authentication="username"></span> </span> -->
+            <span sec:authorize="isAuthenticated()">
                 <a class="btn btn-secondary btn-lg mb-8 btn-warning" href="/logout">Log Out</a>
             </span>
-            <a sec:authorization="!isAuthenticated()" class="btn btn-secondary btn-lg mb-8 btn-info" href="/login">Login</a>
+            <a sec:authorize="!isAuthenticated()" class="btn btn-secondary btn-lg mb-8 btn-info" href="/login">Login</a>
         </div>
     </nav>
 </header>

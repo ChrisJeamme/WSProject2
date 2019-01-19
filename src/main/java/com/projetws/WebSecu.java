@@ -26,10 +26,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 
 import com.projetws.model.UserService;
-/**
- *
- * @author
- */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
