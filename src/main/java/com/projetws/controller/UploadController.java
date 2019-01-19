@@ -1,5 +1,6 @@
 package com.projetws.controller;
 import java.util.Date;
+import java.util.List;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -50,7 +51,7 @@ public class UploadController {
 			@ApiParam(value="PhotoType (individual, class, unknown)", required=true) @RequestParam("type") String type,
 			@ApiParam(value="Photo description text", required=false) @RequestParam("description") String description,
 			@ApiParam(value="Capture date", required=false) @RequestParam("date") String date,
-			@ApiParam(value="TEST, should be suppr. later", required=false)@RequestParam("childId") String childId,
+			@ApiParam(value="TEST, should be suppr. later", required=false)@RequestParam("childsId") List<String> childsId,
 			@ApiParam(value="TEST, should be suppr. later", required=false)@RequestParam("schoolClassId") String schoolClassId)				
 	{
 
@@ -82,9 +83,9 @@ public class UploadController {
 		default: photoType = PhotoType.UNKNOWN_TYPE_PHOTO;
 			break;
 		}
-		
+		//TODO child list
 		Photo photo = photoStorageService.storeFile(file,photoType,
-				description,formatedDate,childRepository.findByChildId(Long.parseLong(childId)),
+				description,formatedDate,childRepository.findAll(),
 				schoolClassRepository.findBySchoolClassId(Long.parseLong(schoolClassId)));
 
 		logger.info("Photo stored");

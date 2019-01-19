@@ -19,12 +19,12 @@
                 <label>Capture date :</label>
                 <input class="form-control" id="date" type="date" name="date" />
                 
-                <label> Child :</label>
-                <select th:each="child : ${childs}" id="childId" name="childId" class="custom-select form-control">
-                    <option th:if="${child == null}" th:value="-1" data-th-text="No Child found"></option>
-                    <option th:unless="${child == null}" th:value="${child.childId}"
-                    data-th-text="${child.childFirstName + ' ' + child.childLastName}"></option>
-                </select>
+                <label>Captured Childs :</label>
+                <th:block th:each="child : ${childs}">
+                <input type="checkbox" name="capturedChild" th:value="${child.childId}"/>
+                 <label th:text="${child.childFirstName + ' ' + child.childLastName}"></label>
+               	</th:block>
+                    
                 <label> SchoolClass :</label>
                 <select th:each="schoolClass : ${schoolClasss}" th:if="${schoolClass != null}"
                 id="schoolClassId" name="schoolClassId" class="custom-select form-control">

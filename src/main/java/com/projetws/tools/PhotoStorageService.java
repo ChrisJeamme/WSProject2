@@ -2,6 +2,7 @@ package com.projetws.tools;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class PhotoStorageService {
 	private PhotoRepository photoRepository;
 
 	public Photo storeFile(MultipartFile file, PhotoType type, 
-			String description, Date date, Child child, SchoolClass schoolClass) {
+			String description, Date date, List<Child> childs, SchoolClass schoolClass) {
 		System.out.println("### Saving Photo");
 		// Normalize file name
 		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
@@ -33,8 +34,8 @@ public class PhotoStorageService {
 			}
 
 			Photo photo = new Photo();
-			photo.setName(file.getOriginalFilename());
-			photo.setChild(child);
+			photo.setName(fileName);
+			photo.setChilds(childs);
 			photo.setData(file.getBytes());
 			photo.setDate(date);
 			photo.setDescription(description);
