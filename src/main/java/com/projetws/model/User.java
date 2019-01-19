@@ -2,6 +2,7 @@ package com.projetws.model;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -58,6 +59,22 @@ public class User implements Serializable
     private Set<UserRole> roles = new HashSet<>();
 
 	public User(){}
+	
+	public User(String email, String firstName, String lastName, String phoneNumber, String password, String userName, List<String> roles)
+	{
+		super();
+		this.email = email;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phoneNumber = phoneNumber;
+		this.password = password;
+		this.userName = userName;
+
+        roles.forEach((r) ->
+        {
+            this.roles.add(UserRole.valueOf(r));
+        });
+	}
 
 	public long getUserId() {
 		return userId;
