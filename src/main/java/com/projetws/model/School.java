@@ -32,7 +32,7 @@ public class School implements Serializable
 	private User manager;
 	
 	@OneToMany
-	@JoinColumn(name="SCHOOL_CLASS_ID")
+	@JoinColumn(name="SCHOOL_ID")
 	private List<SchoolClass> schoolClasses;
 
 	public School(){}
