@@ -40,7 +40,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 @RestController
-@Scope("session")
 public class OrderController {
 
 	private static final Logger logger = LogManager.getLogger(OrderController.class);
@@ -59,26 +58,30 @@ public class OrderController {
 	 
 	@ApiOperation(value="Store a Photo into the database" , httpMethod="POST", response= UploadPhotoResponse.class)
 	@GetMapping("/display")
-	public List<DisplayPhotoResponse> uploadFile(Principal principal)				
+	public List<DisplayPhotoResponse> displayPhotos(Principal principal)				
 	{
+		logger.info("principal = " + principal);
 		String username = principal.getName();
 		if(!parentRepository.existsByUserName(username))
 		{
 			logger.error("User doesn't exist");
 			return null;
 		}
-		
+		logger.info("Getting parent");
 		User parent = parentRepository.findByUserName(username);
-		List<Child> children = childRepository.findByParent(parent.getUserId());		
+		
+		logger.info("Getting children");
+		List<Child> children = childRepository.findByParent_UserId(parent.getUserId());		
 		ArrayList<Photo> photoList = new ArrayList<>();
 		
+		logger.info("Getting photos");
 		for(Child c : children)
 		{
 			photoList.addAll(photoStorageService.getChildPhoto(c.getChildId()));	
 		}
 		
 		ArrayList<DisplayPhotoResponse> photoResponseList = new ArrayList<DisplayPhotoResponse>();
-		
+		logger.info("Building response");
 		for(Photo p : photoList)
 		{
 			String downloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
