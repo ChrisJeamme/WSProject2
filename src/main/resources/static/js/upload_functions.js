@@ -9,21 +9,18 @@ var uploadSuccess = document.querySelector('#uploadSuccess');
 let csrfParameterName = document.querySelector("#csrf_parameter_name").value;
 let csrfToken = document.querySelector("#csrf_token").value;
 
-function uploadSingleFile(file, description, type, date, childId, schoolClassId)
+function uploadSingleFile(file, description, type, date, childsId, schoolClassId)
 {
     let formData = new FormData();
     let xhr = new XMLHttpRequest();
     
     console.log("Send photo");
-    console.log(description);
-    console.log(type);
-    console.log(date);
-    console.log(childId);
+    console.log(childsId);
     formData.append("file", file);
     formData.append("description", description);
     formData.append("type", type);
     formData.append("date", date);
-    formData.append("childId", childId);
+    formData.append("childsId", childsId);
     formData.append("schoolClassId", schoolClassId);
     formData.append(csrfParameterName, csrfToken);
     
@@ -62,7 +59,22 @@ function onSubmit()
     var description = uploadForm.description.value;
     var type = uploadForm.type.value;
     var date = uploadForm.date.value;
-    var childId = uploadForm.childId.value;
+    var childsId = "";
+    
+    var checkboxes = document.getElementsByName('capturedChild');
+    console.log(checkboxes.length);
+    
+    for (var i=0, n=checkboxes.length;i<n;i++) 
+    {
+        if (checkboxes[i].checked) 
+        {
+        	childsId += ","+checkboxes[i].value;
+        	console.log("id :" + childsId);
+        }
+    }
+    if (childsId) 
+    	childsId = childsId.substring(1);
+    
     var schoolClassId = uploadForm.schoolClassId.value;
     
     if(file === 0) {
@@ -70,5 +82,5 @@ function onSubmit()
         uploadError.style.display = "block";
     }
     console.log("Call upload");
-    uploadSingleFile(file,description, type, date, childId, schoolClassId);
+    uploadSingleFile(file,description, type, date, childsId, schoolClassId);
 }

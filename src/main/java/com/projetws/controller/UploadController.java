@@ -1,4 +1,5 @@
 package com.projetws.controller;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.text.ParseException;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.projetws.model.Child;
 import com.projetws.model.ChildRepository;
 import com.projetws.model.Photo;
 import com.projetws.model.PhotoType;
@@ -51,12 +53,12 @@ public class UploadController {
 			@ApiParam(value="PhotoType (individual, class, unknown)", required=true) @RequestParam("type") String type,
 			@ApiParam(value="Photo description text", required=false) @RequestParam("description") String description,
 			@ApiParam(value="Capture date", required=false) @RequestParam("date") String date,
-			@ApiParam(value="TEST, should be suppr. later", required=false)@RequestParam("childsId") List<String> childsId,
+			@ApiParam(value="TEST, should be suppr. later", required=false)@RequestParam("childsId") String childsId,
 			@ApiParam(value="TEST, should be suppr. later", required=false)@RequestParam("schoolClassId") String schoolClassId)				
 	{
 
 		logger.info("Try get params");
-		logger.info(date);
+		logger.info(childsId);
 		
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date formatedDate;
@@ -83,9 +85,20 @@ public class UploadController {
 		default: photoType = PhotoType.UNKNOWN_TYPE_PHOTO;
 			break;
 		}
-		//TODO child list
+		
+		String[] childs = childsId.split(",");
+		ArrayList<Child> childsList= new ArrayList<>();
+		
+		if(childs.length > 0)
+		{
+			for(String child: childs)
+			{
+				childsList.add(childRepository.findByChildId(Long.parseLong(child)));
+			}
+		}
+		
 		Photo photo = photoStorageService.storeFile(file,photoType,
-				description,formatedDate,childRepository.findAll(),
+				description,formatedDate,childsList,
 				schoolClassRepository.findBySchoolClassId(Long.parseLong(schoolClassId)));
 
 		logger.info("Photo stored");
