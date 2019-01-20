@@ -38,7 +38,7 @@ public class SchoolClass implements Serializable
 	private School school;
 	
 	@ManyToMany
-	@JoinColumn(name="CHILDS_ID")
+	@JoinColumn(name="CHILD_ID")
 	private List<Child> children;
 
 	public SchoolClass(){}

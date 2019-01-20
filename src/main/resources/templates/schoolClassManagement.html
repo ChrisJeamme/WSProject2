@@ -9,11 +9,13 @@
 	
 	<div class="connectionBox">
 		<h2>School Class</h2>
-		<h4>School Name</h4>
-		<p th:text="${school.schoolName}"></p>	
+		<strong>Name : </strong>		<small><span th:text="${schoolClass.schoolClassName}"></span></small><br />	
+		<strong>Year : </strong>		<small><span th:text="${schoolClass.year}"></span></small>
 	</div>
 	
 	<div class="connectionBox">
+		
+			<h4>New child</h4>
 		
 			<form th:action="@{/newChild}" method="POST"> 
 		        First Name : <input type="text" class="form-control" name="firstName" required/> <br/>
@@ -21,8 +23,12 @@
 		
 		        <input type="submit" class="btn form-control btn-secondary" value="Add"/>
 		    </form>
+		    
+	        <hr />
 			
-			<table class="table">
+			<h4>Children</h4>
+			
+			<table class="table text-light	">
 				<thead>
 					<tr>
 						<th>First Name</th>
@@ -31,8 +37,8 @@
 				</thead>
 				<tbody>
 					<tr th:each="child : ${schoolClass.children}" class="row">
-						<td th:text="child.childFirstName"></td>
-						<td th:text="child.childLastName"></td>
+						<td th:text="${child.childFirstName}"></td>
+						<td th:text="${child.childLastName}"></td>
 					</tr>			
 				</tbody>
 			</table>
