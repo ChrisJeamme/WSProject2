@@ -137,7 +137,7 @@ public class SchoolManagementController
 	}
 	
 	@RequestMapping("/schoolClassManagement")
-	public String getSchoolClassManagement(Principal principal, Model m)
+	public String getSchoolClassManagement(Principal principal, Model m, @RequestParam("id") int id)
 	{
 		if(principal==null)
 		{
@@ -147,6 +147,7 @@ public class SchoolManagementController
 
 		String userName = principal.getName();
 		logger.info(userName);
+		//TODO Vérifier qu'il a le droit d'afficher ça
 		
 		if(!userRepository.existsByUserName(userName))
 		{
@@ -161,12 +162,11 @@ public class SchoolManagementController
 			return "schoolCreation";
 		}
 		School school = schoolRepository.findByManager(manager);
-		List<SchoolClass> schoolClasses = schoolClassRepository.findAllBySchool(school);
-		
-		logger.info(schoolClasses.size());
+		SchoolClass schoolClass = schoolClassRepository.findBySchoolClassId(id);
 		
 		m.addAttribute("school", school);
-		m.addAttribute("schoolClasses", schoolClasses);
+		m.addAttribute("schoolClass", schoolClass);
+
 		return "schoolClassManagement";
 	}
 }
