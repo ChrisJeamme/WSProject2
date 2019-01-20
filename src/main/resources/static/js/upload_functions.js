@@ -34,7 +34,10 @@ function uploadSingleFile(file, description, type, date, childsId, schoolClassId
         var response = JSON.parse(xhr.responseText);
         if(xhr.status == 200) {
             uploadError.style.display = "none";
-            uploadSuccess.innerHTML = "<p>Photo Uploaded Successfully.</p><p>DownloadUrl : <a href='" 
+            uploadSuccess.innerHTML = "<p>Photo Uploaded Successfully.</p>" +
+            	"<img class=\"img-fluid\" src= \"" + response.downloadUri + "\" alt=\"Uploaded photo\"/>"		
+            
+           + "<p>DownloadUrl : <a href='" 
             	+ response.downloadUri + "' target='_blank'>" 
             	+ response.name + "</a></p>";
             uploadSuccess.style.display = "block";
