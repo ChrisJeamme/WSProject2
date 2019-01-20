@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="../fragments/head.html :: head('School Management')"></head>
+<head th:replace="../fragments/head.html :: head('Phemp')"></head>
 <body class="text-center">
-    <header th:replace="../fragments/header.html :: header('School Management')"></header>
+    <header th:replace="../fragments/header.html :: header('Phemp')"></header>
 
 	<section class="m-5">
 	
@@ -20,76 +20,6 @@
 	
 	
 	<h4>Sales</h4>
-	
-	<!-- 
-	  	<div>
-			<h3>Manage your school:</h3>
-			<form id="updateEmployeeForm" th:action="@{updateEmployee}" method="post">
-				<div class="form-group form-row justify-content-md-center">
-					<label> ID: <input type="text" name="employeeId" id="formEditionId" class="form-control"/></label>
-                    <label> First Name: <input type="text" name="employeeFirstName" id="formEmployeeFirstName" class="form-control"/></label>
-                    <label> Last Name: <input type="text" name="employeeLastName" id="formEmployeeLastName" class="form-control"/></label>
-                    <label> Commission: <input type="number" name="employeeCommissionPct" id="formEmployeeCommissionPct" class="form-control"/></label>
-                    <label> Salary: <input type="number" name="employeeSalary" id="formEmployeeSalary" class="form-control"/></label>
-                    <label> Email: <input type="text" name="employeeEmail" id="formEmployeeEmail" class="form-control"/></label>
-                    <label> Manager Id: <input type="text" name="employeeManagerId" id="formEmployeeManagerId" class="form-control"/></label>
-                    <label> HireDate: <input type="date" name="employeeHireDate" id="formEmployeeHireDate" class="form-control"/></label>
-                    <label> PhoneNumber: <input type="text" name="employeePhoneNumber" id="formEmployeePhoneNumber" class="form-control"/></label>
-                    <label> Departement: 
-                    <select id="formDepartementId" name="departementId" class="custom-select form-control">
-                        <option th:each="departement : ${departements}" th:value="${departement.departmentId}" data-th-text="${departement.departmentName}"></option>
-                    </select></label>
-					<label> Job: 
-                    <select id="formJobId" name="jobId" class="custom-select">
-                        <option th:each="job : ${jobs}" th:value="${job.jobId}" data-th-text="${job.jobTitle}"></option>
-                    </select></label>
-					<input type="submit" class="btn btn-dark m-3" value="Modify"/>
-				</div>
-			</form>
-        </div>
-
-        <h2>Employees</h2>
-        <div>
-			<table class="table">
-				<thead class="thead-light">
-					<tr>
-						<th><strong>ID</strong></th>
-                        <th>First Name</th>
-						<th>Last Name</th>
-                        <th>Commission</th>
-                        <th>Salary</th>
-                        <th>Email</th>
-                        <th>Manager ID</th>
-                        <th>Hire Date</th>
-                        <th>Phone Number</th>
-                        <th>Departement</th>
-                        <th>Job</th>
-                        <th></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="employee : ${employees}" th:id="'row_' + ${employee.employeeId}">
-						<td class="employeeIdField" data-th-text="${employee.employeeId}"></td>
-                        <td class="firstNameField" data-th-text="${employee.firstName}"></td>
-                        <td class="lastNameField" data-th-text="${employee.lastName}"></td>
-                        <td class="commissionPctField" data-th-text="${employee.commissionPct}"></td>
-                        <td class="salaryField" data-th-text="${employee.salary}"></td>
-                        <td class="emailField" data-th-text="${employee.email}"></td>
-                        <td class="managerIdField" data-th-text="${employee.managerId}"></td>
-                        <td class="hireDateField" data-th-text="${employee.hireDate}"></td>
-                        <td class="phoneNumberField" data-th-text="${employee.phoneNumber}"></td>
-                        <td hidden class="departmentIdField" data-th-text="${employee.department.departmentId}"></td>
-                        <td class="departmentNameField" data-th-text="${employee.department.departmentName}"></td>
-                        <td hidden class="jobIdField" data-th-text="${employee.job.jobId}"></td>
-                        <td class="jobTitleField" data-th-text="${employee.job.jobTitle}"></td>
-
-                        <td><button th:id="'button_' + ${employee.employeeId}" class="btn btn-dark" onclick="editButtonPress(this)">Edit</button></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-        
-     -->
     </section>
 
     <div th:insert="../fragments/scripts.html :: min_scripts"></div>
