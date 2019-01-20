@@ -62,21 +62,33 @@ function onSubmit()
     var childsId = "";
     
     var checkboxes = document.getElementsByName('capturedChild');
-    console.log(checkboxes.length);
+    console.log("nb children :" + checkboxes.length);
+    
     
     for (var i=0, n=checkboxes.length;i<n;i++) 
     {
         if (checkboxes[i].checked) 
         {
         	childsId += ","+checkboxes[i].value;
-        	console.log("id :" + childsId);
         }
     }
     if (childsId) 
     	childsId = childsId.substring(1);
     
-    var schoolClassId = uploadForm.schoolClassId.value;
+    var schoolClassId = "-1";
     
+    var classes = document.getElementsByName('schoolClassId');
+    console.log("nb schoolClasses = " + classes.length);
+    
+    
+    for (var i=0, n=classes.length;i<n;i++) 
+    {
+        if (classes[i].selected) 
+        {
+        	schoolClassId = classes[i].value;
+        }
+    }
+    console.log("schoolClassID = " + schoolClassId);
     if(file === 0) {
         uploadError.innerHTML = "Please select an Image";
         uploadError.style.display = "block";

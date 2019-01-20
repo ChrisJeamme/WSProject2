@@ -29,12 +29,9 @@
                	</th:block>
                     
                 <label> SchoolClass :</label>
-                <select th:each="schoolClass : ${schoolClasss}" th:if="${schoolClass != null}"
-                id="schoolClassId" name="schoolClassId" class="custom-select form-control">
-                    <option th:value="${schoolClass.schoolClassId}"
+                <select  class="custom-select form-control">
+                    <option th:each="schoolClass : ${schoolClasss}"  name="schoolClassId"  th:value="${schoolClass.schoolClassId}"
                         data-th-text="${schoolClass.SchoolClassName}"></option>
-                    <option th:if="${schoolClass == null}" th:value="-1"
-                        data-th-text="No SchoolClass found" />
                 </select>
                 <label>Photo type :</label>
                 <select id="type" name="type" class="custom-select form-control">
