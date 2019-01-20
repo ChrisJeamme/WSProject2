@@ -10,7 +10,7 @@
 				<h1 class="cover-heading m-5">You are a school administrator ?</h1>
 				<p class="lead">Make it <strong>easier</strong> to manage your class photos ! Register now, it's free !</p>
 				<p class="lead">
-					<a href="/signupSchoolAdministator" class="btn btn-lg btn-primary">I am a School Administrator</a>
+					<a href="/signupSchoolAdministrator" class="btn btn-lg btn-primary">I am a School Administrator</a>
 				</p>
 			</div>
 			<div class="ad photographerAd">
@@ -20,15 +20,17 @@
 					<a href="/signupPhotographer" class="btn btn-lg btn-danger">I am a Photographer</a>
 				</p>
 			</div>
-    	</div>
+    	</div>vile
     </span>
     <span sec:authorize="isAuthenticated()"> <!-- CONNECTED USERS INTERFACE -->
+    	
    		<h2>Welcome to your hub, <span sec:authentication="name"></span></h2>
    		
         <div class="list-group">
             <a sec:authorize="hasRole('ROLE_SCHOOLADMIN')" href="/schoolManagement" class="list-group-item list-group-item-action list-group-item-dark">School Management</a>
-            <a href="/test" class="list-group-item list-group-item-action list-group-item-dark">Test Entities</a>
-            <a href="/testUpload" class="list-group-item list-group-item-action list-group-item-dark">Test Upload</a>
+            <a sec:authorize="hasRole('ROLE_PHOTOGRAPHER')" href="/testUpload" class="list-group-item list-group-item-action list-group-item-dark">Upload a photo</a>
+            
+            <a sec:authorize="hasRole('ROLE_SCHOOLADMIN')&&hasRole('ROLE_PHOTOGRAPHER')" href="/test" class="list-group-item list-group-item-action list-group-item-dark">Test Entities</a>
         </div>
     </span>
 	</section>
