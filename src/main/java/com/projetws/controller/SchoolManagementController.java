@@ -63,6 +63,47 @@ public class SchoolManagementController
 		return "redirect:/schoolManagement";
 	}
 	
+	@RequestMapping("/newSchoolClass")
+	public String newSchoolClass(Principal principal,
+							Model m,
+							@RequestParam("schoolClassName") String schoolClassName,
+							@RequestParam("year") int year,
+							@RequestParam("schoolId") String schoolId)
+	{
+		logger.info("new school class = "+schoolClassName);
+
+		if(principal==null)
+		{
+			logger.error("Not connected");
+			return "redirect:/login";
+		}
+
+		if(schoolClassRepository.existsBySchoolClassName(schoolClassName))
+		{
+			if(schoolClassRepository.existsBySchoolClassNameAndYear(schoolClassName, year))
+			{
+				m.addAttribute("error","School class name already taken with this year");		
+				return "redirect:/schoolManagement";
+			}
+		}
+
+		logger.info("schoolId="+schoolId);
+		/*CA BUG ICI*/
+		logger.info("existBySchoolId="+schoolRepository.existsBySchoolId(schoolId));
+		School school = schoolRepository.findBySchoolId(schoolId);
+		
+		if(school==null)
+		{
+			m.addAttribute("error","School not found");		
+			return "redirect:/schoolManagement";
+		}
+
+		logger.info("4");
+		schoolClassRepository.save(new SchoolClass(schoolClassName, year, school));
+	
+		return "redirect:/schoolManagement";
+	}
+	
 	@RequestMapping("/schoolManagement")
 	public String getSchoolManagement(Principal principal, Model m)
 	{
@@ -97,4 +138,37 @@ public class SchoolManagementController
 		return "schoolManagement";
 	}
 	
+	@RequestMapping("/schoolClassManagement")
+	public String getSchoolClassManagement(Principal principal, Model m)
+	{
+		if(principal==null)
+		{
+			logger.error("Not connected");
+			return "redirect:/error";
+		}
+
+		String userName = principal.getName();
+		logger.info(userName);
+		
+		if(!userRepository.existsByUserName(userName))
+		{
+			logger.error("User not found");
+			return "redirect:/error";
+		}
+		
+		User manager = userRepository.findByUserName(userName);
+		if(!schoolRepository.existsByManager(manager))
+		{
+			logger.info("School not found");
+			return "schoolCreation";
+		}
+		School school = schoolRepository.findByManager(manager);
+		List<SchoolClass> schoolClasses = schoolClassRepository.findAllBySchool(school);
+		
+		logger.info(schoolClasses.size());
+		
+		m.addAttribute("school", school);
+		m.addAttribute("schoolClasses", schoolClasses);
+		return "schoolClassManagement";
+	}
 }
