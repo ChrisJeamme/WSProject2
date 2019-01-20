@@ -36,7 +36,7 @@ public class SchoolManagementController
 	@RequestMapping("/newSchool")
 	public String newSchool(Principal principal, Model m, @RequestParam("schoolName") String schoolName)
 	{
-		logger.info("new school = "+schoolName);
+		logger.info("Request new school");
 		
 		if(principal==null)
 		{
@@ -60,6 +60,7 @@ public class SchoolManagementController
 			schoolRepository.save(new School(schoolName, manager));
 		}
 		
+		logger.info("New school created = "+schoolName);
 		return "redirect:/schoolManagement";
 	}
 	
@@ -70,7 +71,7 @@ public class SchoolManagementController
 							@RequestParam("year") int year,
 							@RequestParam("schoolId") String schoolId)
 	{
-		logger.info("new school class = "+schoolClassName);
+		logger.info("Request of new school class");
 
 		if(principal==null)
 		{
@@ -87,10 +88,7 @@ public class SchoolManagementController
 			}
 		}
 
-		logger.info("schoolId="+schoolId);
-		/*CA BUG ICI*/
-		logger.info("existBySchoolId="+schoolRepository.existsBySchoolId(schoolId));
-		School school = schoolRepository.findBySchoolId(schoolId);
+		School school = schoolRepository.findBySchoolId(Long.parseLong(schoolId));
 		
 		if(school==null)
 		{
@@ -98,9 +96,9 @@ public class SchoolManagementController
 			return "redirect:/schoolManagement";
 		}
 
-		logger.info("4");
 		schoolClassRepository.save(new SchoolClass(schoolClassName, year, school));
-	
+
+		logger.info("New school class created = "+schoolClassName);
 		return "redirect:/schoolManagement";
 	}
 	
