@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.projetws.model.Child;
 import com.projetws.model.ChildRepository;
 import com.projetws.model.School;
 import com.projetws.model.SchoolClass;
@@ -133,6 +134,39 @@ public class MainController
 //    		sc2.setSchoolClassId(2);
 //    		schoolClassRepository.save(sc2);
 //    		logger.info("Test school classses created"); 
+    	}
+    		
+    	Child c1;
+    	
+    	if(childRepository.existsByChildFirstName("FirstName1"))
+    	{
+    		logger.error("Test child already exists");
+    		c1 = childRepository.findByChildFirstName("FirstName1");
+    	}
+    	else
+    	{    		
+    		c1 = new Child();
+    		c1.setChildFirstName("FirstName1");
+    		c1.setChildLastName("LastName1");
+    		c1.setSchoolClass(schoolClassRepository.findBySchoolClassId(1));
+    		childRepository.save(c1);
+    		logger.info("Test Children created");
+    	}
+    	
+    	Child c2;
+    	
+    	if(childRepository.existsByChildFirstName("FirstName2"))
+    	{
+    		logger.error("Test child2 already exists");
+    	}
+    	else
+    	{    		
+    		c2 = new Child();
+    		c2.setChildFirstName("FirstName2");
+    		c2.setChildLastName("LastName2");
+    		c2.setSchoolClass(schoolClassRepository.findBySchoolClassId(1));
+    		childRepository.save(c2);
+    		logger.info("Test Children created");
     	}
     	
 		return "redirect:/"; 

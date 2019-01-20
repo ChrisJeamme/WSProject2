@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -23,6 +24,7 @@ public class SchoolClass implements Serializable
 
 	@Id
 	@Column(name="SCHOOL_CLASS_ID")
+	@GeneratedValue
 	private long schoolClassId;
 
 	@Column(name="SCHOOL_CLASS_NAME")

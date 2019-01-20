@@ -10,4 +10,6 @@ public interface ChildRepository extends PagingAndSortingRepository<Child, Long>
 {
 	public List<Child> findAll();
 	public Child findByChildId(long id);
+	public boolean existsByChildFirstName(String fn);
+	public Child findByChildFirstName(String string);
 }

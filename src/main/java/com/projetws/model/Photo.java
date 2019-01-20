@@ -4,8 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -26,6 +29,7 @@ public class Photo implements Serializable
 
 	@Id
 	@Column(name="PHOTO_ID")
+	@GeneratedValue
 	private long photoId;
 
 	@Column(name="PHOTO_TYPE")
@@ -37,11 +41,11 @@ public class Photo implements Serializable
 	@Column(name="DESCRIPTION")
 	private String description;
 
-	//	Pour les types individuels (Je sais faudrait des nouvelles classe qui extends etc. mais j'attends que tout marche avant de rajouter des sources d'erreur)
-	@ManyToMany
-	@JoinColumn(name="CHILD_ID")
+	@ElementCollection
+	@CollectionTable(name = "child_on_photo", joinColumns = {@JoinColumn(name = "PHOTO_ID", referencedColumnName="PHOTO_ID")})   
+	//@JoinColumn(name="CHILD_ID")
 	private List<Child> childs;
-
+	
 //	Pour les types photo de classe
 	@ManyToOne
 	@JoinColumn(name="SCHOOL_CLASS_ID")
