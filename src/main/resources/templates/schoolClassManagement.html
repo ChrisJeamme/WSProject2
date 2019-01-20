@@ -3,8 +3,8 @@
 <body class="text-center">
     <header th:replace="../fragments/header.html :: header('Phemp')"></header>
 
-	<a href="/" class="btn btn-info btn-lg">Back to the hub</a>
-	<a href="/schoolManagement" class="btn btn-info btn-lg">Back to the school page</a>
+	<a href="/" class="btn btn-info btn-lg mt-2">Back to the hub</a>
+	<a href="/schoolManagement" class="btn btn-info btn-lg mt-2">Back to the school page</a>
 	<section class="m-5">
 	
 	<div class="connectionBox">
@@ -20,6 +20,10 @@
 			<form th:action="@{/newChild}" method="POST"> 
 		        First Name : <input type="text" class="form-control" name="firstName" required/> <br/>
 		        Last Name : <input type="text" class="form-control" name="lastName" required/> <br/>
+		        Email of parent : <input type="text" class="form-control" name="emailParent" required/> <br/>
+		        Phone number of parent : <input type="text" class="form-control" name="phoneNumberParent" required/> <br/>
+		        
+		        <input type="hidden" name="schoolClassId" th:value="${schoolClass.schoolClassId}"/>
 		
 		        <input type="submit" class="btn form-control btn-secondary" value="Add"/>
 		    </form>
@@ -28,17 +32,19 @@
 			
 			<h4>Children</h4>
 			
-			<table class="table text-light	">
+			<table class="table text-light text-center">
 				<thead>
 					<tr>
 						<th>First Name</th>
 						<th>Last Name</th>
+						<th>Parent Access</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="child : ${schoolClass.children}" class="row">
+					<tr th:each="child : ${schoolClass.children}">
 						<td th:text="${child.childFirstName}"></td>
 						<td th:text="${child.childLastName}"></td>
+						<td><button class="btn btn-info" th:text="'test'+${child.parent}"></button></td>
 					</tr>			
 				</tbody>
 			</table>

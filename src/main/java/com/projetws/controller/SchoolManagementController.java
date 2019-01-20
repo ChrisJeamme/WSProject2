@@ -1,22 +1,29 @@
 package com.projetws.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.security.RolesAllowed;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.BeanDefinitionDsl.Role;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.projetws.model.Child;
+import com.projetws.model.ChildRepository;
 import com.projetws.model.School;
 import com.projetws.model.SchoolClass;
 import com.projetws.model.SchoolClassRepository;
 import com.projetws.model.SchoolRepository;
 import com.projetws.model.User;
 import com.projetws.model.UserRepository;
+import com.projetws.model.UserRole;
 
 import io.swagger.annotations.Api;
 
@@ -26,6 +33,8 @@ public class SchoolManagementController
 {
 	private static final Logger logger = LogManager.getLogger(SchoolManagementController.class);
 	
+	@Autowired
+	ChildRepository childRepository;
 	@Autowired
 	SchoolRepository schoolRepository;
 	@Autowired
@@ -99,6 +108,39 @@ public class SchoolManagementController
 		schoolClassRepository.save(new SchoolClass(schoolClassName, year, school));
 
 		logger.info("New school class created = "+schoolClassName);
+		return "redirect:/schoolManagement";
+	}
+	
+	@RequestMapping("/newChild")
+	public String newChild(Principal principal,
+							Model m,
+							@RequestParam("firstName") String firstName,
+							@RequestParam("lastName") String lastName,
+							@RequestParam("schoolClassId") String schoolClassId,
+							@RequestParam("emailParent") String emailParent,
+							@RequestParam("phoneNumberParent") int phoneNumberParent)
+	{
+		logger.info("Request of new child");
+
+		if(principal==null)
+		{
+			logger.error("Not connected");
+			return "redirect:/login";
+		}
+		
+		List<String> roles = new ArrayList<>();
+        roles.add("ROLE_DEFAULT");
+        roles.add("ROLE_PARENT");
+		
+        User parent = new User(emailParent, "M./MS.", lastName, ""+phoneNumberParent, "parent", emailParent, roles);
+		
+		logger.info("New parents created");
+        
+		SchoolClass schoolClass = schoolClassRepository.findBySchoolClassId(Long.parseLong(schoolClassId));
+		
+		childRepository.save(new Child(firstName, lastName, parent, schoolClass));
+
+		logger.info("New child created = "+firstName+" "+lastName);
 		return "redirect:/schoolManagement";
 	}
 	

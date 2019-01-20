@@ -41,6 +41,14 @@ public class Child implements Serializable
 
 	public Child(){}
 
+	public Child(String firstName, String lastName, User parent, SchoolClass schoolClass)
+	{
+		this.childFirstName = firstName;
+		this.childLastName = lastName;
+		this.parent = parent;
+		this.schoolClass = schoolClass;
+	}
+	
 	public long getChildId() {
 		return childId;
 	}
