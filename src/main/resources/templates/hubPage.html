@@ -1,38 +1,39 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="../fragments/head.html :: head('Phemp')"></head>
-<body class="text-center">
+<body class="text-center backgroundDefault">
     <header th:replace="../fragments/header.html :: header('Phemp')"></header>
     
 	<section>
-	<span sec:authorize="!isAuthenticated()"> <!-- NOT CONNECTED USERS INTERFACE -->
-   		<div class="cover-container d-flex h-100 mx-auto flex-column">
-   			<div class="ad schoolAdministratorAd">
-				<h1 class="cover-heading m-5">You are a school administrator ?</h1>
-				<p class="lead">Make it <strong>easier</strong> to manage your class photos ! Register now, it's free !</p>
-				<p class="lead">
-					<a href="/signupSchoolAdministrator" class="btn btn-lg btn-primary">I am a School Administrator</a>
-				</p>
-			</div>
-			<div class="ad photographerAd">
-				<h1 class="cover-heading m-5">You are a photographer ?</h1>
-				<p class="lead">Save time and find new customers !</p>
-				<p class="lead">
-					<a href="/signupPhotographer" class="btn btn-lg btn-danger">I am a Photographer</a>
-				</p>
-			</div>
-    	</div>
-    </span>
-    <span sec:authorize="isAuthenticated()"> <!-- CONNECTED USERS INTERFACE -->
-    	
-   		<h2>Welcome to your hub, <span sec:authentication="name"></span></h2>
-   		
-        <div class="list-group">
-            <a sec:authorize="hasRole('ROLE_SCHOOLADMIN')" href="/schoolManagement" class="list-group-item list-group-item-action list-group-item-dark">School Management</a>
-            <a sec:authorize="hasRole('ROLE_PHOTOGRAPHER')" href="/testUpload" class="list-group-item list-group-item-action list-group-item-dark">Upload a photo</a>
-            
-            <a sec:authorize="hasRole('ROLE_SCHOOLADMIN')&&hasRole('ROLE_PHOTOGRAPHER')" href="/test" class="list-group-item list-group-item-action list-group-item-dark">Test Entities</a>
-        </div>
-    </span>
+		<span sec:authorize="!isAuthenticated()"> <!-- NOT CONNECTED USERS INTERFACE -->
+	   		<div class="cover-container d-flex h-100 mx-auto flex-column">
+	   			<div class="ad schoolAdministratorAd">
+					<h1 class="cover-heading m-5">You are a school administrator ?</h1>
+					<p class="lead">Make it <strong>easier</strong> to manage your class photos ! Register now, it's free !</p>
+					<p class="lead">
+						<a href="/signupSchoolAdministrator" class="btn btn-lg btn-success">I am a School Administrator</a>
+					</p>
+				</div>
+				<div class="ad photographerAd">
+					<h1 class="cover-heading m-5">You are a photographer ?</h1>
+					<p class="lead">Save time and find new customers !</p>
+					<p class="lead">
+						<a href="/signupPhotographer" class="btn btn-lg btn-danger">I am a Photographer</a>
+					</p>
+				</div>
+	    	</div>
+	    </span>
+	    <span sec:authorize="isAuthenticated()"> <!-- CONNECTED USERS INTERFACE -->
+	        <div class="connectionBox">
+		   		<h2>Welcome to your hub, <span sec:authentication="name"></span></h2>
+		   		
+		        <div class="list-group">
+		            <a sec:authorize="hasRole('ROLE_SCHOOLADMIN')" href="/schoolManagement" class="list-group-item list-group-item-action list-group-item-info">School Management</a>
+		            <a sec:authorize="hasRole('ROLE_PHOTOGRAPHER')" href="/testUpload" class="list-group-item list-group-item-action list-group-item-info">Upload a photo</a>
+		            
+		            <a sec:authorize="hasRole('ROLE_SCHOOLADMIN')&&hasRole('ROLE_PHOTOGRAPHER')" href="/test" class="list-group-item list-group-item-action list-group-item-info">Test Entities</a>
+		        </div>
+		    </div>
+   		</span>
 	</section>
 
 	<script th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
