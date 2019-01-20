@@ -21,3 +21,36 @@
     padding: 10px 20px;
     margin: 10px 30% 10px 30%;
 }
+
+.dark
+{
+	background-color: #343a40;
+	color: white;
+	height: 100vh;
+}
+
+/* Ads */
+
+.ad
+{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	
+	color: white;
+	margin:0;
+	width: 100vw;
+	height: 100%;
+}
+
+.schoolAdministratorAd
+{
+	/*No specific copyright on this image*/
+	background-image: url('../img/image2blur10px.jpg');
+}
+
+.photographerAd
+{
+	/*No specific copyright on this image*/
+	background-image: url('../img/image1blur10px.jpg');
+}
