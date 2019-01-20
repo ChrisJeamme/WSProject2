@@ -37,6 +37,13 @@ public class School implements Serializable
 
 	public School(){}
 
+	public School(String schoolName, User manager)
+	{
+		super();
+		this.schoolName = schoolName;
+		this.manager = manager;
+	}
+
 	public long getSchoolId() {
 		return schoolId;
 	}

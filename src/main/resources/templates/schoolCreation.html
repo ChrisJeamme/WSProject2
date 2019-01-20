@@ -3,12 +3,10 @@
 <body class="text-center">
     <header th:replace="../fragments/header.html :: header('School Management')"></header>
 
-	<section class="m-5">
-	
+    <p th:if="${error}!=null" th:text="${error}" class="alert alert-danger"></p>
 	<section class="m-5">
         <div class="connectionBox">
             <h2>School Creation</h2>
-            <div th:if="${param.error}"></div>
             <form th:action="@{/newSchool}" method="POST"> 
                 School Name : <input type="text" class="form-control" name="schoolName" required/> <br/>
 
@@ -17,8 +15,6 @@
         </div>
 
 	</section>
-	
-    </section>
 
     <div th:insert="../fragments/scripts.html :: min_scripts"></div>
     <script th:src="@{/js/school_management_functions.js}"></script>

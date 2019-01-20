@@ -34,9 +34,32 @@ public class SchoolManagementController
 	SchoolClassRepository schoolClassRepository;
 
 	@RequestMapping("/newSchool")
-	public String newSchool(@RequestParam("schoolName") String schoolName)
+	public String newSchool(Principal principal, Model m, @RequestParam("schoolName") String schoolName)
 	{
 		logger.info("new school = "+schoolName);
+		
+		if(principal==null)
+		{
+			logger.error("Not connected");
+			return "redirect:/login";
+		}
+		String username = principal.getName();
+		if(!userRepository.existsByUserName(username))
+		{
+			logger.error("User doesn't exist");
+			return "redirect:/login";
+		}
+		User manager = userRepository.findByUserName(username);
+		
+		if(schoolRepository.existsBySchoolName(schoolName))
+		{
+			m.addAttribute("error","School name already taken");
+		}
+		else
+		{
+			schoolRepository.save(new School(schoolName, manager));
+		}
+		
 		return "redirect:/schoolManagement";
 	}
 	
@@ -73,25 +96,5 @@ public class SchoolManagementController
 		m.addAttribute("schoolClasses", schoolClasses);
 		return "schoolManagement";
 	}
-//	
-//	@RequestMapping(value="/updateCountry", method=RequestMethod.POST)
-//	public String updateCountry(@RequestParam("countryId") String id, @RequestParam("countryName") String name, @RequestParam("regionId") Long regionId)
-//	{
-//		if(!SecurityTools.hasRole("ROLE_ALL"))
-//			return "redirect:/country/all";
-//		
-//		Country country = countryRepository.findByCountryId(id);
-//		if(country != null)
-//		{
-//			Region region = regionRepository.findByRegionId(regionId);
-//			if(region!= null)
-//			{
-//				country.setCountryName(name);
-//				country.setRegion(region);
-//				countryRepository.save(country);
-//			}
-//		}
-//		return "redirect:/country/all";
-//	}
 	
 }
