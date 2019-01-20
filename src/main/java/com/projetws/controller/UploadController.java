@@ -103,13 +103,13 @@ public class UploadController {
 
 		logger.info("Photo stored");
 		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-				.path("/downloadFile/")
+				.path("/download/")
 				.path("" + photo.getPhotoId())
 				.toUriString();
 		
 		logger.info("Photo uri : " + fileDownloadUri);
 		
-		return new UploadPhotoResponse(file.getName(), fileDownloadUri,
+		return new UploadPhotoResponse(file.getOriginalFilename(), fileDownloadUri,
 				file.getContentType(), file.getSize());
 	}
 
