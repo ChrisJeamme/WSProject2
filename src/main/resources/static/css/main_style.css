@@ -34,6 +34,23 @@
 	font-family: 'Pacifico', cursive;
 }
 
+.backgroundSchoolAdmin
+{
+	background-image: url('../img/image5blur10px.jpg');
+}
+
+.backgroundPhotograph
+{
+	background-image: url('../img/image1blur10px.jpg');
+}
+
+.backgroundDefault
+{
+	background-image: url('../img/image4blur10px.jpg');
+	background-size: 100%;
+}
+
+
   /*******/
  /* Ads */
 /*******/

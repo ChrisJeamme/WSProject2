@@ -1,6 +1,6 @@
 <header th:fragment="header(title)">
     <nav class="navbar navbar-light bg-dark">
-        <span class="navbar-brand mb-0 h1 text-light" th:text="${title}"></span>
+        <span class="navbar-brand mb-0 h1 text-light logo" th:text="${title}"></span>
         <div>
             <span sec:authorize="isAuthenticated()">
                 <span class="text-light mr-4">Welcome <span sec:authentication="name"></span> </span>
@@ -10,8 +10,8 @@
                 <a class="btn btn-secondary btn-lg mb-8 btn-warning" href="/logout">Log Out</a>
             </span>
             <a sec:authorize="!isAuthenticated()" class="btn btn-lg mb-8 btn-secondary" href="/login">Login</a>
-            <a sec:authorize="!isAuthenticated()" class="btn btn-lg ml-15 btn-secondary" href="/signupSchoolAdministrator">Signup School Admin</a>
-            <a sec:authorize="!isAuthenticated()" class="btn btn-lg mb-8 btn-secondary" href="/signupPhotographer">Signup Photographer</a>
+            <!-- <a sec:authorize="!isAuthenticated()" class="btn btn-lg ml-15 btn-secondary" href="/signupSchoolAdministrator">Signup School Admin</a>
+            <a sec:authorize="!isAuthenticated()" class="btn btn-lg mb-8 btn-secondary" href="/signupPhotographer">Signup Photographer</a> -->
         </div>
     </nav>
 </header>

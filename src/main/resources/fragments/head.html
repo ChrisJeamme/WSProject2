@@ -1,7 +1,8 @@
 <head th:fragment="head(title)">
-	<title th:value="${title}"></title>
+	<title th:text="${title}"></title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css} "/>
     <link rel="stylesheet" th:href="@{/css/main_style.css}"/>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet"> 
     <meta name="_csrf" content="${_csrf.token}"/>
     <!-- default header name is X-CSRF-TOKEN -->
     <meta name="_csrf_header" content="${_csrf.headerName}"/>
