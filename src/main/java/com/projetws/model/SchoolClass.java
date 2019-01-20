@@ -41,6 +41,14 @@ public class SchoolClass implements Serializable
 
 	public SchoolClass(){}
 
+	public SchoolClass(String schoolClassName, int year, School school)
+	{
+		super();
+		this.schoolClassName = schoolClassName;
+		this.year = year;
+		this.school = school;
+	}
+
 	public long getSchoolClassId() {
 		return schoolClassId;
 	}

@@ -16,4 +16,6 @@ public interface SchoolClassRepository extends PagingAndSortingRepository<School
 	public SchoolClass findBySchool(School school);
 
 	public List<SchoolClass> findAllBySchool(School school);
+	public boolean existsBySchoolClassName(String schoolClassName);
+	public boolean existsBySchoolClassNameAndYear(String schoolClassName, int year);
 }
