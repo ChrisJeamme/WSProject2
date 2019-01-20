@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -30,6 +31,10 @@ public class Child implements Serializable
 	@Column(name="CHILD_LASTNAME")
 	private String childLastName;
 
+	@OneToOne
+	@JoinColumn(name="USER_ID")
+	private User parent;
+	
 	@ManyToOne
 	@JoinColumn(name="SCHOOL_CLASS_ID")
 	private SchoolClass schoolClass;
@@ -66,6 +71,14 @@ public class Child implements Serializable
 
 	public void setSchoolClass(SchoolClass schoolClass) {
 		this.schoolClass = schoolClass;
+	}
+
+	public User getParent() {
+		return parent;
+	}
+
+	public void setParent(User parent) {
+		this.parent = parent;
 	}
 
 

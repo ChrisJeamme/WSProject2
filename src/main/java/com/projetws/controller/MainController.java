@@ -108,9 +108,9 @@ public class MainController
     	}
     	
     	SchoolClass sc1;
-//    	SchoolClass sc2;
+    	SchoolClass sc2;
     	
-    	if(schoolClassRepository.existsBySchoolClassId(1) /*&& schoolClassRepository.existsBySchoolClassId(2)*/)
+    	if(schoolClassRepository.existsBySchoolClassId(1) && schoolClassRepository.existsBySchoolClassId(2))
     	{
     		logger.error("Test school classses already exists");
     		sc1 = schoolClassRepository.findBySchoolClassId(1);
@@ -133,7 +133,7 @@ public class MainController
 //    		sc2.setSchool(s1);
 //    		sc2.setSchoolClassId(2);
 //    		schoolClassRepository.save(sc2);
-//    		logger.info("Test school classses created"); 
+    		logger.info("Test school classses created"); 
     	}
     		
     	Child c1;

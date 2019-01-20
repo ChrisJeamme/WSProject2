@@ -1,6 +1,6 @@
 <header th:fragment="header(title)">
     <nav class="navbar navbar-light bg-dark">
-        <span class="navbar-brand mb-0 h1 text-light logo"><span class="text-info">P</span>hemp</span>
+        <a href="/" class="navbar-brand mb-0 h1 text-light logo"><span class="text-info">P</span>hemp</a>
         <div>
             <span sec:authorize="isAuthenticated()">
                 <span class="text-light mr-4">Welcome <span sec:authentication="name"></span> </span>

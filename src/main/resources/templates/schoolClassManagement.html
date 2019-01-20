@@ -1,0 +1,47 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="../fragments/head.html :: head('Phemp')"></head>
+<body class="text-center">
+    <header th:replace="../fragments/header.html :: header('Phemp')"></header>
+
+	<a href="/" class="btn btn-info btn-lg">Back to the hub</a>
+	<a href="/schoolManagement" class="btn btn-info btn-lg">Back to the school page</a>
+	<section class="m-5">
+	
+	<div class="connectionBox">
+		<h2>School Class</h2>
+		<h4>School Name</h4>
+		<p th:text="${school.schoolName}"></p>	
+	</div>
+	
+	<div class="connectionBox">
+		
+			<form th:action="@{/newChild}" method="POST"> 
+		        First Name : <input type="text" class="form-control" name="firstName" required/> <br/>
+		        Last Name : <input type="text" class="form-control" name="lastName" required/> <br/>
+		
+		        <input type="submit" class="btn form-control btn-secondary" value="Add"/>
+		    </form>
+			
+			<table class="table">
+				<thead>
+					<tr>
+						<th>First Name</th>
+						<th>Last Name</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="child : ${schoolClass.children}" class="row">
+						<td th:text="child.childFirstName"></td>
+						<td th:text="child.childLastName"></td>
+					</tr>			
+				</tbody>
+			</table>
+	</div>
+	
+	<h4>Sales</h4>
+    </section>
+
+    <div th:insert="../fragments/scripts.html :: min_scripts"></div>
+    <script th:src="@{/js/school_management_functions.js}"></script>
+</body>
+</html>
