@@ -60,12 +60,12 @@ public class SignupController
         }
     	
         List<String> roles = new ArrayList<>();
-    	if(type == "schoolAdmin")
+    	if(type.compareTo("schoolAdmin")==0)
     	{
             roles.add("ROLE_DEFAULT");
             roles.add("ROLE_SCHOOLADMIN");
     	}
-    	else if(type == "photographer")
+    	else if(type.compareTo("photographer")==0)
     	{
             roles.add("ROLE_DEFAULT");
             roles.add("ROLE_PHOTOGRAPHER");
