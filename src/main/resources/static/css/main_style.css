@@ -8,6 +8,11 @@
     display: none !important; 
 }
 
+.info
+{
+	font-style: italic;
+}
+
 .connectionBox
 {
     background: #343a40;
