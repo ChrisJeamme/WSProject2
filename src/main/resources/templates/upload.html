@@ -24,9 +24,12 @@
                 
                 <label>Captured Childs :</label>
                 <th:block th:each="child : ${childs}">
-                <input type="checkbox" name="capturedChild" th:value="${child.childId}"/>
-                 <label th:text="${child.childFirstName + ' ' + child.childLastName}"></label>
+                <div>
+                	<input type="checkbox" name="capturedChild" th:value="${child.childId}" />
+                 	<label id="defaultUnchecked" th:text="${child.childFirstName + ' ' + child.childLastName}"></label>
+               	</div>
                	</th:block>
+
                     
                 <label> SchoolClass :</label>
                 <select  class="custom-select form-control">
