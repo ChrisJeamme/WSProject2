@@ -24,6 +24,7 @@ import com.projetws.model.SchoolRepository;
 import com.projetws.model.User;
 import com.projetws.model.UserRepository;
 import com.projetws.model.UserRole;
+import com.projetws.model.UserService;
 
 import io.swagger.annotations.Api;
 
@@ -39,6 +40,8 @@ public class SchoolManagementController
 	SchoolRepository schoolRepository;
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	UserService userService;
 	@Autowired
 	SchoolClassRepository schoolClassRepository;
 
@@ -132,15 +135,24 @@ public class SchoolManagementController
         roles.add("ROLE_DEFAULT");
         roles.add("ROLE_PARENT");
 		
-        User parent = new User(emailParent, "M./MS.", lastName, ""+phoneNumberParent, "parent", emailParent, roles);
+        int parentAdd = userService.addUser(new User(emailParent, "M./MS.", lastName, ""+phoneNumberParent, "parent", emailParent, roles));
+        if(parentAdd == 1)
+        {
+        	m.addAttribute("error","parent already exists");
+			return "redirect:/schoolManagement";
+        }
+        logger.info("New parents created");
 		
-		logger.info("New parents created");
-        
+        User parent = userRepository.findByEmail(emailParent);
 		SchoolClass schoolClass = schoolClassRepository.findBySchoolClassId(Long.parseLong(schoolClassId));
-		
-		childRepository.save(new Child(firstName, lastName, parent, schoolClass));
+		Child child = childRepository.save(new Child(firstName, lastName, parent, schoolClass));
+		logger.info("New child created = "+firstName+" "+lastName+" (ID="+child.getChildId()+")");
 
-		logger.info("New child created = "+firstName+" "+lastName);
+		
+		schoolClass.getChildren().add(child);
+		schoolClassRepository.save(schoolClass);
+		logger.info("New child add to the school class : "+schoolClass.getSchoolClassName()+" "+schoolClass.getYear());
+
 		return "redirect:/schoolManagement";
 	}
 	
