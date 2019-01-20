@@ -26,10 +26,17 @@
 {
 	background-color: #343a40;
 	color: white;
-	height: 100vh;
 }
 
-/* Ads */
+.logo
+{
+	font-size: 2.5em;
+	font-family: 'Pacifico', cursive;
+}
+
+  /*******/
+ /* Ads */
+/*******/
 
 .ad
 {
@@ -45,12 +52,12 @@
 
 .schoolAdministratorAd
 {
-	/*No specific copyright on this image*/
+	/*No copyright on this image*/
 	background-image: url('../img/image2blur10px.jpg');
 }
 
 .photographerAd
 {
-	/*No specific copyright on this image*/
+	/*No copyright on this image*/
 	background-image: url('../img/image1blur10px.jpg');
 }
