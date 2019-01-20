@@ -41,16 +41,17 @@ public class Photo implements Serializable
 	@Column(name="DESCRIPTION")
 	private String description;
 
-	@ElementCollection
-	@CollectionTable(name = "child_on_photo", joinColumns = {@JoinColumn(name = "PHOTO_ID", referencedColumnName="PHOTO_ID")})   
+	//@ElementCollection
+	//@CollectionTable(name = "child_on_photo", joinColumns = {@JoinColumn(name = "CHILD_ID", referencedColumnName="CHILD_ID")})   
 	//@JoinColumn(name="CHILD_ID")
+	@ManyToMany
 	private List<Child> childs;
 	
 //	Pour les types photo de classe
 	@ManyToOne
 	@JoinColumn(name="SCHOOL_CLASS_ID")
 	private SchoolClass schoolClass;
-
+ 
 	@Column(name="PHOTO_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;

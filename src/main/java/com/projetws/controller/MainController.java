@@ -107,32 +107,27 @@ public class MainController
     		logger.info("Test schools created");
     	}
     	
-    	SchoolClass sc1;
-    	SchoolClass sc2;
+    	SchoolClass sc1, sc2;
+    
     	
-    	if(schoolClassRepository.existsBySchoolClassId(1) && schoolClassRepository.existsBySchoolClassId(2))
+    	if(schoolClassRepository.existsBySchoolClassName("3eme")&&schoolClassRepository.existsBySchoolClassName("4eme"))
     	{
     		logger.error("Test school classses already exists");
-    		sc1 = schoolClassRepository.findBySchoolClassId(1);
-//    		sc2 = schoolClassRepository.findBySchoolClassId(2);
     	}
     	else
     	{    		
-//    		if(schoolClassRepository.existsBySchoolClassId(1) || schoolClassRepository.existsBySchoolClassId(2))
-//    			return "redirect:/";
-    		
     		sc1 = new SchoolClass();
     		sc1.setSchoolClassName("3eme");
     		sc1.setYear(2018);
     		sc1.setSchool(s1);
-    		sc1.setSchoolClassId(1);
     		schoolClassRepository.save(sc1);
-//    		sc2 = new SchoolClass();
-//    		sc2.setSchoolClassName("4eme");
-//    		sc2.setYear(2018);
-//    		sc2.setSchool(s1);
-//    		sc2.setSchoolClassId(2);
-//    		schoolClassRepository.save(sc2);
+    		
+    		sc2 = new SchoolClass();
+    		sc2.setSchoolClassName("4eme");
+    		sc2.setYear(2018);
+    		sc2.setSchool(s1);    		
+    		schoolClassRepository.save(sc2);
+
     		logger.info("Test school classses created"); 
     	}
     		
