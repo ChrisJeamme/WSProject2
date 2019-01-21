@@ -10,6 +10,9 @@ var displayArea = document.querySelector('#displayArea');
 
 let csrfParameterName = document.querySelector("#csrf_parameter_name").value;
 let csrfToken = document.querySelector("#csrf_token").value;
+console.log("param name: " +csrfParameterName);
+console.log("token:" + csrfToken);
+
 
 $(document).ready(function () {
 	let xhr = new XMLHttpRequest();
@@ -47,7 +50,7 @@ function displayPhoto(photo)
 			"</div></td>" +
 			"<td><a href=\"javascript:;\" class=\"star\"><i class=\"glyphicon glyphicon-star\"></i></a> </td>"+
 			"<td><div class=\"media\"><a href=\"" + photo.downloadUri + "\" class=\"pull-left\">" +
-				"<img class=\"img-fluid\"  src=\"" + photo.downloadUri + "\" class=\"media-photo\"></a>" +
+				"<img  src=\"" + photo.downloadUri + "\" class=\"media-photo\"></a>" +
 				"<div class=\"media-body\">" +
 					"<span class=\"media-meta pull-right\">" + photo.date + "</span>" +
 					"<h4 class=\"title\">Description<span class=\"pull-right "+photo.type+"\">("+photo.type+")</span></h4>" +
@@ -72,7 +75,8 @@ function executeOrder(photosId)
     let xhr = new XMLHttpRequest();
    
     formData.append("photosId", photosId);
-    let url = "/execute_order";
+    formData.append(csrfParameterName, csrfToken);
+    let url = "/executeOrder";
     xhr.open("POST", url);
     
     xhr.onload = function() {
