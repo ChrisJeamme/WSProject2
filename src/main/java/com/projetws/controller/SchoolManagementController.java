@@ -183,7 +183,7 @@ public class SchoolManagementController
         int parentAdd = userService.addUser(new User(emailParent, "M./MS.", lastName, ""+phoneNumberParent, ""+phoneNumberParent, emailParent, roles));
         if(parentAdd == 1)
         {
-        	m.addAttribute("error","parent already exists");
+        	m.addAttribute("error","Parent already exists");
 			return "redirect:/schoolManagement";
         }
         logger.info("New parents created");
