@@ -1,78 +1,88 @@
-.form-row *
-{
-    margin: 4px;
+.form-row * {
+	margin: 4px;
 }
 
-.hide
-{
-    display: none !important; 
+.hide {
+	display: none !important;
 }
 
-.info
-{
+.info {
 	font-style: italic;
 }
 
-.connectionBox
-{
-    background: #343a40;
-    color: #fff;
-    border-radius: 8px;
-    padding: 10px 20px;
-    margin: 10px 20% 10px 20%;
+.connectionBox {
+	background: #343a40;
+	color: #fff;
+	border-radius: 8px;
+	padding: 10px 20px;
+	margin: 10px 20% 10px 20%;
 }
 
-@media only screen and (max-width: 900px)
-{
-	.connectionBox
-	{
-	    border-radius: 0;
-	    margin: 10px 0 10px 0;
+@media only screen and (max-width: 900px) {
+	.connectionBox {
+		border-radius: 0;
+		margin: 10px 0 10px 0;
 	}
-	nav
-	{
+	nav {
 		display: flex;
 		flex-direction: column;
 	}
-	nav .btn
-	{
+	nav .btn {
 		display: flex;
 		flex-direction: column;
 	}
 }
 
-.dark
-{
+.dark {
 	background-color: #343a40;
 	color: white;
 }
 
-.logo
-{
+.logo {
 	font-size: 2.5em;
 	font-family: 'Pacifico', cursive;
 }
 
 /*No copyright on these image*/
-.backgroundSchoolAdmin	{background-image: url('../img/image5blur10px.jpg'); 	background-size: 100%;}
-.backgroundPhotograph	{background-image: url('../img/image1blur10px.jpg'); 	background-size: 100%;}
-.backgroundDefault		{background-image: url('../img/image4blur10px.jpg'); 	background-size: 100%;}
-.backgroundManagement	{background-image: url('../img/image6blur10px.jpg'); 	background-size: 100%;}
-.backgroundUploadPhoto	{background-image: url('../img/image8blur10px.jpg'); 	background-size: 100%;}
-.backgroundHub			{background-image: url('../img/texture3blur33px.jpg'); 	background-size: 100%;}
+.backgroundSchoolAdmin {
+	background-image: url('../img/image5blur10px.jpg');
+	background-size: 100%;
+}
 
-   /********/
-  /* Menu */
- /********/
- 
-.mainMenu
-{
+.backgroundPhotograph {
+	background-image: url('../img/image1blur10px.jpg');
+	background-size: 100%;
+}
+
+.backgroundDefault {
+	background-image: url('../img/image4blur10px.jpg');
+	background-size: 100%;
+}
+
+.backgroundManagement {
+	background-image: url('../img/image6blur10px.jpg');
+	background-size: 100%;
+}
+
+.backgroundUploadPhoto {
+	background-image: url('../img/image8blur10px.jpg');
+	background-size: 100%;
+}
+
+.backgroundHub {
+	background-image: url('../img/texture3blur33px.jpg');
+	background-size: 100%;
+}
+
+/********/
+/* Menu */
+/********/
+.mainMenu {
 	display: flex;
 	flex-direction: column;
 }
- 
-.mainMenuItem
-{
+
+.mainMenuItem {
 	position: relative;
 	display: block;
 	border-radius: 0 !important;
@@ -80,49 +90,59 @@
 	padding: 25px;
 }
 
-.colorFlat
-{
+.colorFlat {
 	color: white;
 	font-weight: bold;
 }
-.colorFlat:hover
-{
+
+.colorFlat:hover {
 	color: white;
 	background-color: grey;
 }
-.colorFlatYellow{background-color: #f1c40f;}
-.colorFlatYellow:hover{background-color: #FFE26C;}
 
-.colorFlatBlue{background-color: #3498db;}
-.colorFlatBlue:hover{background-color: #58ACE3;}
+.colorFlatYellow {
+	background-color: #f1c40f;
+}
 
-.colorFlatRed{background-color: #e74c3c;}
-.colorFlatRed:hover{background-color: #FF7364;}
+.colorFlatYellow:hover {
+	background-color: #FFE26C;
+}
 
-  /*******/
- /* Ads */
+.colorFlatBlue {
+	background-color: #3498db;
+}
+
+.colorFlatBlue:hover {
+	background-color: #58ACE3;
+}
+
+.colorFlatRed {
+	background-color: #e74c3c;
+}
+
+.colorFlatRed:hover {
+	background-color: #FF7364;
+}
+
 /*******/
-
-.ad
-{
+/* Ads */
+/*******/
+.ad {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	
 	color: white;
-	margin:0;
+	margin: 0;
 	width: 100vw;
 	height: 100%;
 }
 
-.schoolAdministratorAd
-{
+.schoolAdministratorAd {
 	/*No copyright on this image*/
 	background-image: url('../img/image2blur10px.jpg');
 }
 
-.photographerAd
-{
+.photographerAd {
 	/*No copyright on this image*/
 	background-image: url('../img/image1blur10px.jpg');
 }
