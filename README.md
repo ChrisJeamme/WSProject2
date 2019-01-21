@@ -4,14 +4,15 @@
 
 Plateforme de gestion de photos de classe.
 
-## Entités
+## Rôles (types de compte)
 
-Un directeur peut inscrire son école.
-Il aura alors un compte et pourra gérer son école, ajouter les classes ainsi que les élèves.
-Il pourra alors générer des identifiants de connexion qu'il pourra communiquer aux parents.
-Les parents pourront grace à leur compte commander les photos de classe et individuelles de leur enfant.
-Le directeur aura une interface de visualisation des commandes.
-Les photographes eux, s'inscrivent séparément.
+* **Directeur** : 
+Une fois son compte créé, il pourra inscrire son école, et ajouter des classes à cette dernière. Il est alors possible de créer et d'assigner des élèves à ces classes.
+Lors de la création d'un élève les informations recueillies permettent la création du compte du **Parent** (login: email / pass: "parent"). Le **directeur** dispose d'une interface de visualisation des commandes.
+
+* **Parent** : A partir de ce compte, ils pourront consulter et commander les photos de classe et individuelles de leur enfant.
+
+* **Photographe** : Ils s'inscrivent séparément.
 Ils peuvent ajouter des photos de classes et des photos individuelles.
 
 ## Installation pour développement (Windows avec Eclipse, depuis Git)
