@@ -19,6 +19,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="photo")
@@ -44,10 +46,12 @@ public class Photo implements Serializable
 	//@ElementCollection
 	//@CollectionTable(name = "child_on_photo", joinColumns = {@JoinColumn(name = "CHILD_ID", referencedColumnName="CHILD_ID")})   
 	//@JoinColumn(name="CHILD_ID")
+	@JsonIgnore
 	@ManyToMany
 	private List<Child> childs;
 	
 //	Pour les types photo de classe
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="SCHOOL_CLASS_ID")
 	private SchoolClass schoolClass;

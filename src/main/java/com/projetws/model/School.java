@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="school")
@@ -30,10 +32,12 @@ public class School implements Serializable
 	@Column(name="SCHOOL_NAME")
 	private String schoolName;
 	
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name="USER_ID")
 	private User manager;
 	
+	@JsonIgnore
 	@OneToMany
 	@JoinColumn(name="SCHOOL_ID")
 	private List<SchoolClass> schoolClasses;

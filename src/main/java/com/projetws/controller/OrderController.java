@@ -104,6 +104,9 @@ public class OrderController {
 	@PostMapping("/executeOrder")
 	public OrderResponse executeOrder(Principal principal,@ApiParam(value="Ordered Photos", required=true) @RequestParam("photosId") String photosId)				
 	{
+		if(photosId.isEmpty())
+			return null;
+		
 		logger.info("principal = " + principal);
 		String username = principal.getName();
 		if(!parentRepository.existsByUserName(username))

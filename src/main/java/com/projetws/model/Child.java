@@ -13,6 +13,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="child")
@@ -32,6 +34,7 @@ public class Child implements Serializable
 	@Column(name="CHILD_LASTNAME")
 	private String childLastName;
 
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="USER_ID")
 	private User parent;
