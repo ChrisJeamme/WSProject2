@@ -15,41 +15,61 @@
 	
 	<div class="connectionBox">
 		
-			<h4>New child</h4>
-		
-			<form th:action="@{/newChild}" method="POST"> 
-		        First Name : <input type="text" class="form-control" name="firstName" required/> <br/>
-		        Last Name : <input type="text" class="form-control" name="lastName" required/> <br/>
-		        Email of parent : <input type="text" class="form-control" name="emailParent" required/> <br/>
-		        Phone number of parent : <input type="text" class="form-control" name="phoneNumberParent" required/> <br/>
+		<h4>New child</h4>
+	
+		<form th:action="@{/newChild}" method="POST">
+			<div class="form-group row">
+				<label for="firstName" class="col-sm-2 col-form-label">First Name</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" required/>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="firstName" class="col-sm-2 col-form-label">Last Name</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" required/>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="emailParent" class="col-sm-2 col-form-label">Email of parents</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="emailParent" name="emailParent" placeholder="Email of parents" required/>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="phoneNumberParent" class="col-sm-2 col-form-label">Phone number of parent</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="phoneNumberParent" name="phoneNumberParent" placeholder="Phone number of parent" required/>
+				</div>
+			</div>
 		        
 		        <input type="hidden" name="schoolClassId" th:value="${schoolClass.schoolClassId}"/>
-		
-		        <input type="submit" class="btn form-control btn-secondary" value="Add"/>
-		    </form>
+		        <input type="submit" class="btn form-control btn-info" value="Add the new child"/>
+		      
+	    </form>
 		    
-	        <hr />
-			
-			<h4>Children</h4>
-			
-			<table class="table text-light text-center">
-				<thead>
-					<tr>
-						<th>First Name</th>
-						<th>Last Name</th>
-						<th>Parent Access Login</th>
-						<th>Parent Access Password (Default)</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="child : ${schoolClass.children}">
-						<td th:text="${child.childFirstName}"></td>
-						<td th:text="${child.childLastName}"></td>
-						<td th:text="${child.parent.email}"></td>
-						<td>0<span th:text="${child.parent.phoneNumber}"></span></td>
-					</tr>			
-				</tbody>
-			</table>
+        <hr />
+		
+		<h4>Children</h4>
+		
+		<table class="table text-light text-center border border-info">
+			<thead class="bg-info border border-info">
+				<tr>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Parent Access Login</th>
+					<th>Parent Access Password (Default)</th>
+				</tr>
+			</thead>
+			<tbody class="bg-light text-dark">
+				<tr th:each="child : ${schoolClass.children}">
+					<td th:text="${child.childFirstName}"></td>
+					<td th:text="${child.childLastName}"></td>
+					<td th:text="${child.parent.email}"></td>
+					<td th:text="${child.parent.phoneNumber}"></td>
+				</tr>			
+			</tbody>
+		</table>
 	</div>
     </section>
 
