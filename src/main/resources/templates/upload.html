@@ -5,7 +5,7 @@
 	<section class="m-5">
 		<div class="form-group form-row justify-content-md-center connectionBox">
 
-			<h2>Upload Photo</h3>
+			<h2>Upload Photo</h2>
 			<form id="uploadForm" name="uploadForm">
 				<input type="hidden" th:value="${_csrf.parameterName}" id="csrf_parameter_name"/>
 				<input type="hidden" th:value="${_csrf.token}" id="csrf_token"/>
@@ -33,7 +33,7 @@
                     
                 <label> SchoolClass :</label>
                 <select  class="custom-select form-control">
-                    <option th:each="schoolClass : ${schoolClasss}"  name="schoolClassId"  th:value="${schoolClass.schoolClassId}"
+                    <option th:each="schoolClass : ${schoolClasss}" name="schoolClassId"  th:value="${schoolClass.schoolClassId}"
                         data-th-text="${schoolClass.SchoolClassName}"></option>
                 </select>
                 <label>Photo type :</label>
