@@ -16,7 +16,7 @@ Les parents pourront grace à leur compte **visualiser** et **commander** les ph
 Tous les utilisateurs pourront **modifier leur mot de passe**.
 Le directeur aura une interface de **visualisation des commandes**.
 
-## Installation pour développement (Windows avec Eclipse, depuis Git)
+## Lancement / Installation pour développement (Windows avec Eclipse, depuis Git)
 - Importer le projet depuis Eclipse :  *File > Import > Git*
 - Saisir l'url git: https://github.com/ChrisJeamme/WSProject2
 - Importer en tant que General Project quand Eclipse le demande
@@ -27,10 +27,4 @@ Le directeur aura une interface de **visualisation des commandes**.
 - Ajouter un schéma vide nommé *wsprojet*
 - (Retour dans Eclipse) Lancer en tant comme Spring Boot App
 
-## Deployement wsproject.war
-- Installer JDK
-- Installer Tomcat
-- Démarrer Tomcat (bin/starup.bat)
-- Copier dans le répertoire ‘webapps’ de tomcat la livraison **wsproject.war**
-- Lancer votre navigateur vers : http://localhost:8080/wsproject
 
