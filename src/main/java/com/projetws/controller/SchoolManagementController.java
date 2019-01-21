@@ -234,6 +234,7 @@ public class SchoolManagementController
 			logger.info("School not found");
 			return "schoolCreation";
 		}
+		
 		School school = schoolRepository.findByManager(manager);
 		List<SchoolClass> schoolClasses = schoolClassRepository.findAllBySchool(school);
 		List<Order> orders = orderRepository.findAll();

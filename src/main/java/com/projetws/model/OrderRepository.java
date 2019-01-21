@@ -11,5 +11,6 @@ public interface OrderRepository extends PagingAndSortingRepository<Order, Long>
 	public List<Order> findAll();
 	public Order findByOrderId(long orderId);
 	public List<Order> findByParent_UserId(long userId);
+	//public List<Order> findByManager(User manager);
 	
 }

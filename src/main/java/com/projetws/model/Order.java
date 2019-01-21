@@ -57,6 +57,19 @@ public class Order implements Serializable
 	@JoinColumn(name="USER_ID")
 	private User parent;
 	
+	/*
+	@ManyToOne
+	@JoinColumn(name="USER_ID")
+	private User manager;
+	
+	public User getManager() {
+		return manager;
+	}
+
+	public void setManager(User manager) {
+		this.manager = manager;
+	}
+*/
 	@ManyToMany
 	@JoinColumn(name="PHOTO_ID")
 	private List<Photo> photos;
