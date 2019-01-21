@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -137,5 +138,13 @@ public class OrderController {
 		OrderResponse or = new OrderResponse(order.getOrderId(), parent.getUserId(), photoIdsList);
 		
 		return or;
+	}
+	
+	@ApiOperation(value="Display Order with orderId matching param Id" , httpMethod="GET", response= UploadPhotoResponse.class)
+	@GetMapping("/displayOrder")
+	public Order getitem(@RequestParam("id") String orderId){
+		Order o = orderRepository.findByOrderId(Long.parseLong(orderId));
+	    
+	    return o;
 	}
 }
