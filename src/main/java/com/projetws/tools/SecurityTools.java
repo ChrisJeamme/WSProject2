@@ -100,6 +100,6 @@ public class SecurityTools
 	{
 		logger.error(errorMessage);
 		m.addAttribute("error",errorMessage);
-		return "redirect:"+redirectPage;
+		return "forward:"+redirectPage;
 	}
 }
