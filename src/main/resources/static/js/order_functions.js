@@ -46,8 +46,8 @@ function displayPhoto(photo)
 			"<label for=" + photo.id + "></label>" +
 			"</div></td>" +
 			"<td><a href=\"javascript:;\" class=\"star\"><i class=\"glyphicon glyphicon-star\"></i></a> </td>"+
-			"<td><div class=\"media\"><a href=\"#\" class=\"pull-left\">" +
-				"<img src=\"" + photo.downloadUri + "\" class=\"media-photo\"></a>" +
+			"<td><div class=\"media\"><a href=\"" + photo.downloadUri + "\" class=\"pull-left\">" +
+				"<img class=\"img-fluid\"  src=\"" + photo.downloadUri + "\" class=\"media-photo\"></a>" +
 				"<div class=\"media-body\">" +
 					"<span class=\"media-meta pull-right\">" + photo.date + "</span>" +
 					"<h4 class=\"title\">Description<span class=\"pull-right "+photo.type+"\">("+photo.type+")</span></h4>" +

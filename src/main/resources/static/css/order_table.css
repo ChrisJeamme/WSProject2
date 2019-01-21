@@ -1,32 +1,9 @@
 @charset "ISO-8859-1";
 
-/*    --------------------------------------------------
-	:: General
-	-------------------------------------------------- */
-body {
-	font-family: 'Open Sans', sans-serif;
-	color: white;
-}
-.content h1 {
-	text-align: center;
-}
-.content .content-footer p {
-	color: #6d6d6d;
-    font-size: 12px;
-    text-align: center;
-}
-.content .content-footer p a {
-	color: inherit;
-	font-weight: bold;
-}
-
 /*	--------------------------------------------------
 	:: Table Filter
 	-------------------------------------------------- */
-.panel {
-	border: 1px solid #ddd;
-	background-color: #fcfcfc;
-}
+
 .panel .btn-group {
 	margin: 15px 0 30px;
 }
@@ -34,7 +11,7 @@ body {
 	transition: background-color .3s ease;
 }
 .table-filter {
-	background-color: #fff;
+	/*background-color: #fff;*/
 	border-bottom: 1px solid #eee;
 }
 .table-filter tbody tr:hover {
@@ -46,11 +23,9 @@ body {
 	vertical-align: middle;
 	border-top-color: #eee;
 }
-.table-filter tbody tr.selected td {
-	background-color: #eee;
-}
+
 .table-filter tr td:first-child {
-	width: 38px;
+	width: 80px;
 }
 .table-filter tr td:nth-child(2) {
 	width: 35px;
@@ -79,10 +54,12 @@ body {
 	border: 1px solid #bbb;
 	background-color: #fff;
 }
+
 .ckbox input[type="checkbox"]:checked + label:before {
 	border-color: #2BBCDE;
 	background-color: #2BBCDE;
 }
+
 .ckbox input[type="checkbox"]:checked + label:after {
 	top: 3px;
 	left: 3.5px;
@@ -107,7 +84,7 @@ body {
 	color: #F0AD4E;
 }
 .table-filter .media-photo {
-	width: 35px;
+	width: 80px;
 }
 .table-filter .media-body {
     display: block;
@@ -115,7 +92,7 @@ body {
 }
 .table-filter .media-meta {
 	font-size: 11px;
-	color: #999;
+	color: #eee;
 }
 .table-filter .media .title {
 	color: #2BBCDE;
@@ -128,15 +105,16 @@ body {
 	font-size: .8em;
 	margin-right: 20px;
 }
-.table-filter .media .title span.pagado {
+.table-filter .media .title span.individual {
 	color: #5cb85c;
 }
-.table-filter .media .title span.pendiente {
+.table-filter .media .title span.class {
 	color: #f0ad4e;
 }
-.table-filter .media .title span.cancelado {
+.table-filter .media .title span.not_tagged {
 	color: #d9534f;
 }
 .table-filter .media .summary {
 	font-size: 14px;
+	color: #fff;
 }
