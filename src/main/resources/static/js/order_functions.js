@@ -78,7 +78,7 @@ function executeOrder(photosId)
             orderSuccess.style.display = "block";
         } else {
             orderSuccess.style.display = "none";
-            orderError.innerHTML = (response && response.message) || "Some Error Occurred";
+            orderError.innerHTML = "<p>Order Fail, salect at least one photo.</p>";
         }
     }
     xhr.send(formData);
