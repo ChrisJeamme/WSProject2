@@ -13,6 +13,7 @@ import org.springframework.context.support.BeanDefinitionDsl.Role;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.projetws.model.Child;
@@ -27,6 +28,7 @@ import com.projetws.model.User;
 import com.projetws.model.UserRepository;
 import com.projetws.model.UserRole;
 import com.projetws.model.UserService;
+import com.projetws.tools.SecurityTools;
 
 import io.swagger.annotations.Api;
 
@@ -68,8 +70,14 @@ public class SchoolManagementController
 		
 		return userRepository.findByUserName(username);
 	}
-	
-	@RequestMapping("/newSchool")
+	/**
+	 *
+	 * @param principal
+	 * @param m
+	 * @param schoolName
+	 * @return
+	 */
+	@RequestMapping(value="/newSchool",method=RequestMethod.POST)
 	public String newSchool(Principal principal, Model m, @RequestParam(value="schoolName",required=true) String schoolName)
 	{
 		logger.info("Request new school");
@@ -94,7 +102,7 @@ public class SchoolManagementController
 		return "redirect:/schoolManagement";
 	}
 	
-	@RequestMapping("/newSchoolClass")
+	@RequestMapping(value="/newSchoolClass",method=RequestMethod.POST)
 	public String newSchoolClass(Principal principal,
 							Model m,
 							@RequestParam("schoolClassName") String schoolClassName,
@@ -132,7 +140,18 @@ public class SchoolManagementController
 		return "redirect:/schoolManagement";
 	}
 	
-	@RequestMapping("/newChild")
+	/**
+	 *  Create a new child and a new associated parent
+	 * @param principal The connected user's principal
+	 * @param m Model
+	 * @param firstName firstName of the child
+	 * @param lastName lastName of the child
+	 * @param schoolClassId School class id of the child
+	 * @param emailParent Email of the parent
+	 * @param phoneNumberParent Phone number of the parent
+	 * @return A redirection to schoolManagement page or login page
+	 */
+	@RequestMapping(value="/newChild",method=RequestMethod.POST)
 	public String newChild(Principal principal,
 							Model m,
 							@RequestParam("firstName") String firstName,
@@ -149,11 +168,9 @@ public class SchoolManagementController
 			return "redirect:/login";
 		}
 		
-		List<String> roles = new ArrayList<>();
-        roles.add("ROLE_DEFAULT");
-        roles.add("ROLE_PARENT");
+		List<String> roles = SecurityTools.generateRolesWith("ROLE_DEFAULT","ROLE_PARENT");
 		
-        int parentAdd = userService.addUser(new User(emailParent, "M./MS.", lastName, ""+phoneNumberParent, "parent", emailParent, roles));
+        int parentAdd = userService.addUser(new User(emailParent, "M./MS.", lastName, ""+phoneNumberParent, ""+phoneNumberParent, emailParent, roles));
         if(parentAdd == 1)
         {
         	m.addAttribute("error","parent already exists");
@@ -174,6 +191,14 @@ public class SchoolManagementController
 		return "redirect:/schoolManagement";
 	}
 	
+	/**
+	 * Controller for the school management page
+	 * If the user don't have a school, it will redirect him to the school creation page
+	 * It will provide school and the associated schoolclasses in the model
+	 * @param principal The connected user's principal
+	 * @param m Model 
+	 * @return schoolCreation, schoolManagement, or a redirection to login/error
+	 */
 	@RequestMapping("/schoolManagement")
 	public String getSchoolManagement(Principal principal, Model m)
 	{
@@ -207,6 +232,14 @@ public class SchoolManagementController
 		return "schoolManagement";
 	}
 	
+	/**
+	 * Controller for the school class management page
+	 * It will provide school and the associated schoolclasses in the model
+	 * @param principal The connected user's principal
+	 * @param m Model 
+	 * @param id Id of the connected user (the manager)
+	 * @return schoolCreation, schoolClassManagement, or a redirection to login/error
+	 */
 	@RequestMapping("/schoolClassManagement")
 	public String getSchoolClassManagement(Principal principal, Model m, @RequestParam(value="id",required=true) int id)
 	{
