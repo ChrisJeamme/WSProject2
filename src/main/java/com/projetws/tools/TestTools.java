@@ -81,16 +81,4 @@ public class TestTools
 		return null;
 	}
 	
-	public static void main(String[] args)
-	{
-		String result = getRequest("http://localhost:8080/job/list");
-		System.out.println(result);
-
-		String result2 = putRequest("http://localhost:8080/job/update/AC_ACCOUNT",
-				"{\r\n" + 
-				"	\"jobTitle\": \"Public Accountant de son père\"\r\n" + 
-				"}");
-		System.out.println(result2);
-	}
-	
 }

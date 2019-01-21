@@ -45,27 +45,41 @@ public class SchoolManagementController
 	@Autowired
 	SchoolClassRepository schoolClassRepository;
 
-	@RequestMapping("/newSchool")
-	public String newSchool(Principal principal, Model m, @RequestParam("schoolName") String schoolName)
+	private User getActualConnectedUser(Principal principal, Model m)
 	{
-		logger.info("Request new school");
-		
 		if(principal==null)
 		{
-			logger.error("Not connected");
-			return "redirect:/login";
+			logger.error("Problem with logged user");
+			m.addAttribute("error","Problem with logged user");
+			return null;
 		}
+		
 		String username = principal.getName();
 		if(!userRepository.existsByUserName(username))
 		{
 			logger.error("User doesn't exist");
-			return "redirect:/login";
+			m.addAttribute("error","User doesn't exist");
+			return null;
 		}
-		User manager = userRepository.findByUserName(username);
+		
+		return userRepository.findByUserName(username);
+	}
+	
+	@RequestMapping("/newSchool")
+	public String newSchool(Principal principal, Model m, @RequestParam(value="schoolName",required=true) String schoolName)
+	{
+		logger.info("Request new school");
+		
+		User manager = getActualConnectedUser(principal, m);
+		if(manager==null)
+			return "redirect:/login";
 		
 		if(schoolRepository.existsBySchoolName(schoolName))
 		{
+			logger.error("School name already taken");
 			m.addAttribute("error","School name already taken");
+
+			return "redirect:/login";
 		}
 		else
 		{
@@ -87,7 +101,7 @@ public class SchoolManagementController
 
 		if(principal==null)
 		{
-			logger.error("Not connected");
+			logger.error("Problem with logged user");
 			return "redirect:/login";
 		}
 
@@ -127,7 +141,7 @@ public class SchoolManagementController
 
 		if(principal==null)
 		{
-			logger.error("Not connected");
+			logger.error("Problem with logged user");
 			return "redirect:/login";
 		}
 		
@@ -161,8 +175,8 @@ public class SchoolManagementController
 	{
 		if(principal==null)
 		{
-			logger.error("Not connected");
-			return "redirect:/error";
+			logger.error("Problem with logged user");
+			return "redirect:/login";
 		}
 
 		String userName = principal.getName();
@@ -183,26 +197,22 @@ public class SchoolManagementController
 		School school = schoolRepository.findByManager(manager);
 		List<SchoolClass> schoolClasses = schoolClassRepository.findAllBySchool(school);
 		
-		logger.info(schoolClasses.size());
-		
 		m.addAttribute("school", school);
 		m.addAttribute("schoolClasses", schoolClasses);
 		return "schoolManagement";
 	}
 	
 	@RequestMapping("/schoolClassManagement")
-	public String getSchoolClassManagement(Principal principal, Model m, @RequestParam("id") int id)
+	public String getSchoolClassManagement(Principal principal, Model m, @RequestParam(value="id",required=true) int id)
 	{
+		
 		if(principal==null)
 		{
-			logger.error("Not connected");
-			return "redirect:/error";
-		}
-
-		String userName = principal.getName();
-		logger.info(userName);
-		//TODO Vérifier qu'il a le droit d'afficher ça
+			logger.error("Problem with logged user");
+			return "redirect:/login";
+		}	
 		
+		String userName = principal.getName();
 		if(!userRepository.existsByUserName(userName))
 		{
 			logger.error("User not found");
@@ -215,6 +225,7 @@ public class SchoolManagementController
 			logger.info("School not found");
 			return "schoolCreation";
 		}
+		
 		School school = schoolRepository.findByManager(manager);
 		SchoolClass schoolClass = schoolClassRepository.findBySchoolClassId(id);
 		
