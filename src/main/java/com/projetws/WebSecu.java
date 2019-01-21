@@ -48,7 +48,13 @@ public class WebSecu extends WebSecurityConfigurerAdapter
 		http.authorizeRequests()    
 		.antMatchers("/upload").hasRole("PHOTOGRAPHER")
 		.antMatchers("/testUpload").hasRole("PHOTOGRAPHER")
+		
 		.antMatchers("/schoolManagement").hasRole("SCHOOLADMIN")
+		.antMatchers("/schoolClassManagement").hasRole("SCHOOLADMIN")
+		.antMatchers("/newSchool").hasRole("SCHOOLADMIN")
+		.antMatchers("/newSchoolClass").hasRole("SCHOOLADMIN")
+		.antMatchers("/newChild").hasRole("SCHOOLADMIN")
+		
 		.and()
 		.formLogin()
 		.loginPage("/login")
@@ -62,8 +68,6 @@ public class WebSecu extends WebSecurityConfigurerAdapter
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 		.logoutSuccessUrl("/")
 		.permitAll();
-		
-//		http.csrf().disable();
 	}
 
 	@Autowired
@@ -77,14 +81,6 @@ public class WebSecu extends WebSecurityConfigurerAdapter
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception
 	{
-		auth.inMemoryAuthentication()
-		.withUser("parent").password("parent").roles("PARENT")
-		.and()
-		.withUser("photographer").password("photographer").roles("PHOTOGRAPHER")
-		.and()
-		.withUser("SCHOOLADMIN").password("SCHOOLADMIN").roles("SCHOOLADMIN")
-		.and()
-		.withUser("m.brochant").password("m.brochant").roles("PARENT","PHOTOGRAPHER","SCHOOLADMIN"); // ON A LES DROITS !
 		auth
 		.userDetailsService(userDetailsService)
 		.passwordEncoder(userDetailsService.encoder);
