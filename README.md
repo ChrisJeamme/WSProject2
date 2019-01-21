@@ -26,3 +26,11 @@ Le directeur aura une interface de **visualisation des commandes**.
 - Lancer MySQL Workbench et ajouter un utilisateur *springuser* avec le mot de passe *ThePassword* avec tous les droits
 - Ajouter un schéma vide nommé *wsprojet*
 - (Retour dans Eclipse) Lancer en tant comme Spring Boot App
+
+## Deployement wsproject.war
+- Installer JDK
+- Installer Tomcat
+- Démarrer Tomcat (bin/starup.bat)
+- Copier dans le répertoire ‘webapps’ de tomcat la livraison **wsproject.war**
+- Lancer votre navigateur vers : http://localhost:8080/wsproject
+
