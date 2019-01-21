@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -138,6 +139,7 @@ public class SchoolManagementController
 	
 	/**
 	 *  Create a new child and a new associated parent
+	 * @param request The request which call this function
 	 * @param principal The connected user's principal
 	 * @param m Model
 	 * @param firstName firstName of the child
@@ -148,7 +150,9 @@ public class SchoolManagementController
 	 * @return A redirection to schoolManagement page or login page
 	 */
 	@RequestMapping(value="/newChild",method=RequestMethod.POST)
-	public String newChild(Principal principal,
+	public String newChild(
+							HttpServletRequest request,
+							Principal principal,
 							Model m,
 							@RequestParam("firstName") String firstName,
 							@RequestParam("lastName") String lastName,
@@ -164,8 +168,14 @@ public class SchoolManagementController
 			return "redirect:/login";
 		}
 		
+		// Generation of role set
 		List<String> roles = SecurityTools.generateRolesWith("ROLE_DEFAULT","ROLE_PARENT");
 		
+		// Verification of the email
+		if(!SecurityTools.emailNotUsedVerification(userRepository, emailParent))
+			return SecurityTools.displayErrorAndRedirect(m, "Email already used", SecurityTools.samePage(request));
+		
+		// Add the parent
         int parentAdd = userService.addUser(new User(emailParent, "M./MS.", lastName, ""+phoneNumberParent, ""+phoneNumberParent, emailParent, roles));
         if(parentAdd == 1)
         {
@@ -174,12 +184,13 @@ public class SchoolManagementController
         }
         logger.info("New parents created");
 		
+        // Add the child
         User parent = userRepository.findByEmail(emailParent);
 		SchoolClass schoolClass = schoolClassRepository.findBySchoolClassId(Long.parseLong(schoolClassId));
 		Child child = childRepository.save(new Child(firstName, lastName, parent, schoolClass));
 		logger.info("New child created = "+firstName+" "+lastName+" (ID="+child.getChildId()+")");
 
-		
+		// Add the child to his school class
 		schoolClass.getChildren().add(child);
 		schoolClassRepository.save(schoolClass);
 		logger.info("New child add to the school class : "+schoolClass.getSchoolClassName()+" "+schoolClass.getYear());
@@ -267,4 +278,12 @@ public class SchoolManagementController
 
 		return "schoolClassManagement";
 	}
+	
+	@RequestMapping("/testtt")
+	public String testtt(HttpServletRequest request)
+	{
+		SecurityTools.samePage(request);
+		return "redirect:/";
+	}
+	
 }
