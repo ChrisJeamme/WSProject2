@@ -19,7 +19,26 @@
     color: #fff;
     border-radius: 8px;
     padding: 10px 20px;
-    margin: 10px 30% 10px 30%;
+    margin: 10px 20% 10px 20%;
+}
+
+@media only screen and (max-width: 900px)
+{
+	.connectionBox
+	{
+	    border-radius: 0;
+	    margin: 10px 0 10px 0;
+	}
+	nav
+	{
+		display: flex;
+		flex-direction: column;
+	}
+	nav .btn
+	{
+		display: flex;
+		flex-direction: column;
+	}
 }
 
 .dark
