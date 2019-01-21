@@ -9,7 +9,7 @@
 		
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
-
+<form id="orderForm" name="orderForm">
 <div class="container">
 	<div class="row">
 
@@ -27,7 +27,7 @@
 						</div>
 						<div class="table-container">
 							<table class="table table-filter">
-								<tbody>
+								<tbody id="DisplayArea" name="displayArea">
 									<tr data-status="individual">
 										<td>
 											<div class="ckbox">
@@ -179,7 +179,7 @@
 	</div>
 </div>
 			
-			<form id="orderForm" name="orderForm">
+			
 				
 				<button type="button" onclick="onSubmit()" class="btn btn-dark m-3">Order</button>
 			</form>

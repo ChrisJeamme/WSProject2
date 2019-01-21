@@ -23,7 +23,7 @@ $(document).ready(function () {
 	    
 	    if(xhr.status == 200) {
 	    	console.log("Request OK");
-	    	console.log("response = " + response + "(" + response.size + ")");
+	    	console.log("response = " + response + "(" + response.length + ")");
 	    	
 	    	for (var i=0, n=response.length;i<n;i++) 
 	        {
