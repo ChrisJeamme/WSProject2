@@ -7,6 +7,7 @@
 	<a href="/schoolManagement" class="btn btn-info btn-lg mt-2">Back to the school page</a>
 	<section class="m-5">
 	
+    <p th:if="${error}!=null" th:text="${error}" class="alert alert-danger"></p>
 	<div class="connectionBox">
 		<h2>School Class</h2>
 		<strong>Name : </strong>		<small><span th:text="${schoolClass.schoolClassName}"></span></small><br />	
@@ -53,7 +54,7 @@
 		<h4>Children</h4>
 		
 		<table class="table text-light text-center border border-info">
-			<thead class="bg-info border border-info">
+			<thead>
 				<tr>
 					<th>First Name</th>
 					<th>Last Name</th>
