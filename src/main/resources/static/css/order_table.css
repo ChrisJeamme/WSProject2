@@ -16,7 +16,7 @@
 }
 .table-filter tbody tr:hover {
 	cursor: pointer;
-	background-color: #eee;
+	background-color: #555;
 }
 .table-filter tbody tr td {
 	padding: 10px;
@@ -84,7 +84,7 @@
 	color: #F0AD4E;
 }
 .table-filter .media-photo {
-	width: 80px;
+	width: 180px;
 }
 .table-filter .media-body {
     display: block;

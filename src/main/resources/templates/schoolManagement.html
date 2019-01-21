@@ -37,6 +37,16 @@
 	</div>
 	
 	<h4>Sales</h4>
+	<div th:if="${orders.empty}">No orders found...</div>
+	<div th:each="order : ${orders}">
+			<a th:href="@{'/order?id='+${order.orderId}}" class="btn-info btn btn-lg mb-2">
+				<strong>Order Infos : </strong>
+				<small>
+					From : <span th:text="${order.parent.email}"></span>
+					(order Id : <span th:text="${order.orderId}"></span>)
+				</small>
+			</a>
+	</div>
     </section>
 
     <div th:insert="../fragments/scripts.html :: min_scripts"></div>

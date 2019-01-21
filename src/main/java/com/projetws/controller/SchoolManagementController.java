@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.projetws.model.Child;
 import com.projetws.model.ChildRepository;
+import com.projetws.model.Order;
+import com.projetws.model.OrderRepository;
 import com.projetws.model.School;
 import com.projetws.model.SchoolClass;
 import com.projetws.model.SchoolClassRepository;
@@ -47,7 +49,9 @@ public class SchoolManagementController
 	UserService userService;
 	@Autowired
 	SchoolClassRepository schoolClassRepository;
-
+	@Autowired
+	OrderRepository orderRepository;
+	
 	private User getActualConnectedUser(Principal principal, Model m)
 	{
 		if(principal==null)
@@ -232,9 +236,10 @@ public class SchoolManagementController
 		}
 		School school = schoolRepository.findByManager(manager);
 		List<SchoolClass> schoolClasses = schoolClassRepository.findAllBySchool(school);
-		
+		List<Order> orders = orderRepository.findAll();
 		m.addAttribute("school", school);
 		m.addAttribute("schoolClasses", schoolClasses);
+		m.addAttribute("orders", orders);
 		return "schoolManagement";
 	}
 	
