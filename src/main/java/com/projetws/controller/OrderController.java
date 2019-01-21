@@ -56,7 +56,7 @@ public class OrderController {
 	@Autowired
 	private SchoolClassRepository schoolClassRepository;
 	 
-	@ApiOperation(value="Store a Photo into the database" , httpMethod="POST", response= UploadPhotoResponse.class)
+	@ApiOperation(value="Provide photos related to current user" , httpMethod="GET", response= UploadPhotoResponse.class)
 	@GetMapping("/display")
 	public List<DisplayPhotoResponse> displayPhotos(Principal principal)				
 	{
@@ -88,7 +88,7 @@ public class OrderController {
 					.path("/download/")
 					.path("" + p.getPhotoId())
 					.toUriString();
-			photoResponseList.add(new DisplayPhotoResponse(p.getName(), downloadUri, p.getExtension(), p.getDescription()));
+			photoResponseList.add(new DisplayPhotoResponse(p.getPhotoId(),p.getName(), downloadUri, p.getType(), p.getDescription(), p.getDate()));
 		}
 		
 		return photoResponseList;

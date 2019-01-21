@@ -176,4 +176,10 @@ public class MainController
     	return "upload";
     }
 	
+	@RequestMapping("/order")
+    private String order(/*Model model*/)
+    {
+    	return "order";
+    }
+	
 }
