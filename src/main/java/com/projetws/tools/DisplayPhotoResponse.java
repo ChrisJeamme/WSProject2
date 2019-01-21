@@ -1,6 +1,9 @@
 package com.projetws.tools;
 
+import java.util.Date;
+
 import com.projetws.model.Child;
+import com.projetws.model.PhotoType;
 
 public class DisplayPhotoResponse {
 	private String name;
@@ -20,14 +23,6 @@ public class DisplayPhotoResponse {
 		this.downloadUri = downloadUri;
 	}
 
-	public String getExtension() {
-		return extension;
-	}
-
-	public void setExtension(String extension) {
-		this.extension = extension;
-	}
-
 	public String getDescription() {
 		return description;
 	}
@@ -37,13 +32,51 @@ public class DisplayPhotoResponse {
 	}
 
 	private String downloadUri;
-    private String extension;
     private String description;
-
-    public DisplayPhotoResponse(String name, String downloadUri, String extension, String description) {
+    private Long id;
+    private Date date;
+    private String type;
+    
+    public DisplayPhotoResponse(Long id,String name, String downloadUri, PhotoType photoType, String description, Date date) {
         this.name = name;
         this.downloadUri = downloadUri;
-        this.extension = extension;
         this.description = description;
+        this.date = date;
+        
+        switch (photoType) {
+		case INDIVIDUAL_PHOTO:
+			type = "individual";
+			break;
+		case CLASS_PHOTO:
+			type = "class";
+			break;
+		default:
+			type = "not_tagged";
+			break;
+		}
     }
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 }
