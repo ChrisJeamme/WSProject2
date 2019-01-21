@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="../fragments/head.html :: head('Phemp')"></head>
-<body class="text-center">
+<body class="text-center backgroundManagement">
     <header th:replace="../fragments/header.html :: header('Phemp')"></header>
 
 	<a href="/" class="btn btn-info btn-lg mt-2">Back to the hub</a>
@@ -37,14 +37,16 @@
 					<tr>
 						<th>First Name</th>
 						<th>Last Name</th>
-						<th>Parent Access</th>
+						<th>Parent Access Login</th>
+						<th>Parent Access Password (Default)</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="child : ${schoolClass.children}">
 						<td th:text="${child.childFirstName}"></td>
 						<td th:text="${child.childLastName}"></td>
-						<td><button class="btn btn-info" th:text="'test'+${child.parent}"></button></td>
+						<td th:text="${child.parent.email}"></td>
+						<td>parent</td>
 					</tr>			
 				</tbody>
 			</table>
