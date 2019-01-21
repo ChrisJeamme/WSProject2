@@ -1,6 +1,7 @@
 package com.projetws.tools;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -57,5 +58,10 @@ public class PhotoStorageService {
 	public List<Photo> getChildPhoto(long childId)
 	{
 		return photoRepository.findDistinctByChilds_ChildId(childId);
+	}
+
+	public List<Photo> getAll() {
+		
+		return photoRepository.findAll();
 	}
 }
