@@ -119,12 +119,14 @@ public class OrderController {
 		
 		String[] photos = photosId.split(",");
 		ArrayList<Photo> photosList= new ArrayList<>();
+		ArrayList<Long> photoIdsList= new ArrayList<>();
 		
 		if(photos.length > 0)
 		{
 			for(String photoId: photos)
 			{
 				photosList.add(photoStorageService.getFile(Long.parseLong(photoId)));
+				photoIdsList.add(Long.parseLong(photoId));
 			}
 		}
 		else
@@ -134,7 +136,7 @@ public class OrderController {
 		
 		Order order = new Order(parent, photosList);
 		orderRepository.save(order);
-		OrderResponse or = new OrderResponse(order.getOrderId(), parent.getUserId(), photosList);
+		OrderResponse or = new OrderResponse(order.getOrderId(), parent.getUserId(), photoIdsList);
 		
 		return or;
 	}

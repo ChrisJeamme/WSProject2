@@ -7,12 +7,12 @@ import com.projetws.model.Photo;
 public class OrderResponse {
 	private Long orderId;
 	private Long parentId;	
-	private List<Photo> photos;
+	private List<Long> photoIds;
 	
-	public OrderResponse(Long orderId, Long parentId, List<Photo> photos) {
+	public OrderResponse(Long orderId, Long parentId, List<Long> photoIds) {
 		this.orderId = orderId;
 		this.parentId = parentId;
-		this.photos = photos;
+		this.photoIds = photoIds;
 		
 	}
 	public Long getOrderId() {
@@ -27,11 +27,11 @@ public class OrderResponse {
 	public void setParentId(Long parentId) {
 		this.parentId = parentId;
 	}
-	public List<Photo> getPhotos() {
-		return photos;
+	public List<Long> getPhotoIds() {
+		return photoIds;
 	}
-	public void setPhotos(List<Photo> photos) {
-		this.photos = photos;
+	public void setPhotos(List<Long> photoIds) {
+		this.photoIds = photoIds;
 	}
 
 }

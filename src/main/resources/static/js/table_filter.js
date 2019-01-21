@@ -4,6 +4,11 @@
 
 $(document).ready(function () {
 
+
+	
+	$( ".photoCheck" ).prop( "checked", true );
+ 
+	$( ".photoCheck" ).prop( "checked", false );
 	$('.star').on('click', function () {
       $(this).toggleClass('star-checked');
     });

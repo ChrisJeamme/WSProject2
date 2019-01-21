@@ -42,6 +42,7 @@ public class DisplayPhotoResponse {
         this.downloadUri = downloadUri;
         this.description = description;
         this.date = date;
+        this.id = id;
         
         switch (photoType) {
 		case INDIVIDUAL_PHOTO:

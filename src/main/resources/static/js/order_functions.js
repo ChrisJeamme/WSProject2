@@ -45,10 +45,10 @@ function displayPhoto(photo)
 	displayArea.innerHTML +=
 		"<tr data-status=\"" + photo.type +"\">" +
 			"<td><div class=\"ckbox\">" +
-			"<input type=\"checkbox\" name = \"checkPhoto\" id=" + photo.id +">" +
+			"<input type=\"checkbox\" name = \"checkPhoto\"  id=\"" + photo.id + "\" onClick=\"<script>$(this).is(':checked')</script> \">" +
 			"<label for=" + photo.id + "></label>" +
 			"</div></td>" +
-			"<td><a href=\"javascript:;\" class=\"star\"><i class=\"glyphicon glyphicon-star\"></i></a> </td>"+
+			//"<td><a href=\"javascript:;\" class=\"star\"><i class=\"glyphicon glyphicon-star\"></i></a> </td>"+
 			"<td><div class=\"media\"><a href=\"" + photo.downloadUri + "\" class=\"pull-left\">" +
 				"<img  src=\"" + photo.downloadUri + "\" class=\"media-photo\"></a>" +
 				"<div class=\"media-body\">" +
@@ -57,16 +57,6 @@ function displayPhoto(photo)
 					"<p class=\"summary\">"+ photo.description + "</p>" +
 		"</div></div></td></tr>";
 	displayArea.style.display = "block";
-}
-
-function displayGroupPhoto(photo)
-{
-	
-}
-
-function displayNotTaggedPhoto(photo)
-{
-	
 }
 
 function executeOrder(photosId)
@@ -106,12 +96,12 @@ function onSubmit()
     {
         if (checkboxes[i].checked) 
         {
-        	photosId += ","+checkboxes[i].value;
+        	photosId += ","+checkboxes[i].id;
         }
     }
     if (photosId) 
     	photosId = photosId.substring(1);
     
-    console.log("order");
+    console.log("order :" + photosId);
     executeOrder(photosId);
 }
