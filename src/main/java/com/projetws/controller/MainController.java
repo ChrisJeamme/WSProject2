@@ -167,10 +167,9 @@ public class MainController
 		return "redirect:/"; 
 	}
     
-	@RequestMapping("/testUpload")
+	@RequestMapping("/photo")
     private String upload(Model model)
     {
-    	
     	model.addAttribute("schoolClasss", schoolClassRepository.findAll());
     	model.addAttribute("childs", childRepository.findAll());
     	return "upload";

@@ -29,8 +29,8 @@
 		   		
 		        <div class="list-group">
 		            <a sec:authorize="hasRole('ROLE_SCHOOLADMIN')" href="/schoolManagement" class="list-group-item list-group-item-action list-group-item-info">School Management</a>
-		            <a sec:authorize="hasRole('ROLE_PHOTOGRAPHER')" href="/testUpload" class="list-group-item list-group-item-action list-group-item-info">Upload a photo</a>
-		            
+		            <a sec:authorize="hasRole('ROLE_PHOTOGRAPHER')" href="/photo" class="list-group-item list-group-item-action list-group-item-info">Upload a photo</a>
+		            <a sec:authorize="hasRole('ROLE_PARENT')" href="/order" class="list-group-item list-group-item-action list-group-item-info">Order</a>
 		            <a sec:authorize="hasRole('ROLE_SCHOOLADMIN')&&hasRole('ROLE_PHOTOGRAPHER')" href="/test" class="list-group-item list-group-item-action list-group-item-info">Test Entities</a>
 		        </div>
 		    </div>
