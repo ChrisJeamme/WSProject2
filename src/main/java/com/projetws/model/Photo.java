@@ -124,6 +124,7 @@ public class Photo implements Serializable
 		this.description = description;
 	}
 
+	@JsonIgnore
 	public byte[] getData() {
 		return data;
 	}
