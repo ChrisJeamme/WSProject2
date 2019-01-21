@@ -1,70 +1,85 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="../fragments/head.html :: head('Phemp')"></head>
 <body class="text-center backgroundPhotograph">
-    <header th:replace="../fragments/header.html :: header('Phemp')"></header>
+	<header th:replace="../fragments/header.html :: header('Phemp')"></header>
 
 	<section class="m-5">
-	
-        <p th:if="${error}!=null" th:text="${error}" class="alert alert-danger"></p>
-        <div class="connectionBox">
-            <h2>Sign up as Photographer</h2>
-        
-        	<p class="info">Only photographers can sign up here. If you are a parent, you have to ask login credentials to your school administrator.
-        	If you are a school administrator, sign up <a href="/signupSchoolAdministrator">here</a></p>
-        
-            <form th:action="@{/register}" method="POST">
+
+		<p th:if="${error}!=null" th:text="${error}"
+			class="alert alert-danger"></p>
+		<div class="connectionBox">
+			<h2>Sign up as Photographer</h2>
+
+			<p class="info">
+				Only photographers can sign up here. If you are a parent, you have
+				to ask login credentials to your school administrator. If you are a
+				school administrator, sign up <a href="/signupSchoolAdministrator">here</a>
+			</p>
+
+			<form th:action="@{/register}" method="POST">
 				<div class="form-group row">
 					<label for="userName" class="col-sm-2 col-form-label">Username</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="userName" name="userName" placeholder="Username" required/>
+						<input type="text" class="form-control" id="userName"
+							name="userName" placeholder="Username" required />
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="firstName" class="col-sm-2 col-form-label">First Name</label>
+					<label for="firstName" class="col-sm-2 col-form-label">First
+						Name</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" required/>
+						<input type="text" class="form-control" id="firstName"
+							name="firstName" placeholder="First Name" required />
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="lastName" class="col-sm-2 col-form-label">Last Name</label>
+					<label for="lastName" class="col-sm-2 col-form-label">Last
+						Name</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" required/>
+						<input type="text" class="form-control" id="lastName"
+							name="lastName" placeholder="Last Name" required />
 					</div>
 				</div>
 				<div class="form-group row">
 					<label for="mail" class="col-sm-2 col-form-label">Email</label>
 					<div class="col-sm-10">
-						<input type="email" class="form-control" id="mail" name="mail" placeholder="Email" required/>
+						<input type="email" class="form-control" id="mail" name="mail"
+							placeholder="Email" required />
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="phoneNumber" class="col-sm-2 col-form-label">Phone Number</label>
+					<label for="phoneNumber" class="col-sm-2 col-form-label">Phone
+						Number</label>
 					<div class="col-sm-10">
-						<input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Phone Number" required/>
+						<input type="tel" class="form-control" id="phoneNumber"
+							name="phoneNumber" placeholder="Phone Number" required />
 					</div>
 				</div>
 				<div class="form-group row">
 					<label for="password" class="col-sm-2 col-form-label">Password</label>
 					<div class="col-sm-10">
-						<input type="password" class="form-control" id="password" name="password" placeholder="Password" required/>
+						<input type="password" class="form-control" id="password"
+							name="password" placeholder="Password" required />
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="password2" class="col-sm-2 col-form-label">Repeated Password</label>
+					<label for="password2" class="col-sm-2 col-form-label">Repeated
+						Password</label>
 					<div class="col-sm-10">
-						<input type="password" class="form-control" id="password2" name="password2" placeholder="Repeated Password" required/>
+						<input type="password" class="form-control" id="password2"
+							name="password2" placeholder="Repeated Password" required />
 					</div>
 				</div>
-                
-                <input type="hidden" name="type" value="photographer"/>
-                <input type="submit" class="btn form-control btn-info" value="Register"/>
-        	</form>
-        </div>
+
+				<input type="hidden" name="type" value="photographer" /> <input
+					type="submit" class="btn form-control btn-info" value="Register" />
+			</form>
+		</div>
 
 	</section>
 
 	<script th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
-    <script th:src="@{/webjars/chartjs/2.7.3/Chart.min.js}"></script>
-    
+	<script th:src="@{/webjars/chartjs/2.7.3/Chart.min.js}"></script>
+
 </body>
 </html>

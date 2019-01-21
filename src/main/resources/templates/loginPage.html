@@ -1,31 +1,34 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="../fragments/head.html :: head('Phemp')"></head>
 <body class="text-center backgroundDefault">
-    <header th:replace="../fragments/header.html :: header('Phemp')"></header>
-
+	<header th:replace="../fragments/header.html :: header('Phemp')"></header>
 	<section class="m-5">
-        <div class="connectionBox">
-            <h2>Login</h2>
-            <div th:if="${param.error}">
-                <div class="alert alert-danger">
-                    Incorrect user / password.
-                </div>
-            </div>
-            <form th:action="@{/appLogin}" method="POST"> 
-                User : <input type="text" th:value="${user}!=null? ${user} : '' " class="form-control" name="app_username" required=""/> <br/>
-                Password: <input type="password" class="form-control" th:value="${mdp}!=null? ${mdp} : ''"  name="app_password" required=""/> <br/>
-
-                <input type="submit" class="btn form-control btn-secondary" value="Login"/>
-            </form>
-            <p class="info">If you are a school administrator, you can <a href="/signupSchoolAdministrator">sign up here</a></p>
-            <p class="info">If you are a photographer, you can <a href="/signupPhotographer">sign up here</a></p>
-            <p class="info">If you are a parent, you have to ask login credentials to your school administrator</p>
-        </div>
-
+		<div class="connectionBox">
+			<h2>Login</h2>
+			<div th:if="${param.error}">
+				<div class="alert alert-danger">Incorrect user / password.</div>
+			</div>
+			<form th:action="@{/appLogin}" method="POST">
+				User : <input type="text" th:value="${user}!=null? ${user} : '' "
+					class="form-control" name="app_username" required="" /> <br />
+				Password: <input type="password" class="form-control"
+					th:value="${mdp}!=null? ${mdp} : ''" name="app_password"
+					required="" /> <br /> <input type="submit"
+					class="btn form-control btn-secondary" value="Login" />
+			</form>
+			<p class="info">
+				If you are a school administrator, you can <a
+					href="/signupSchoolAdministrator">sign up here</a>
+			</p>
+			<p class="info">
+				If you are a photographer, you can <a href="/signupPhotographer">sign
+					up here</a>
+			</p>
+			<p class="info">If you are a parent, you have to ask login
+				credentials to your school administrator</p>
+		</div>
 	</section>
-
 	<script th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
-    <script th:src="@{/webjars/chartjs/2.7.3/Chart.min.js}"></script>
-    
+	<script th:src="@{/webjars/chartjs/2.7.3/Chart.min.js}"></script>
 </body>
 </html>

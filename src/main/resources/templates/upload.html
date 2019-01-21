@@ -3,45 +3,46 @@
 <body class="text-center backgroundUploadPhoto">
 	<header th:replace="../fragments/header.html :: header('Phemp')"></header>
 	<section class="m-5">
-		<div class="form-group form-row justify-content-md-center connectionBox">
+		<div
+			class="form-group form-row justify-content-md-center connectionBox">
 
 			<h2>Upload Photo</h2>
 			<form id="uploadForm" name="uploadForm">
-				<input type="hidden" th:value="${_csrf.parameterName}" id="csrf_parameter_name"/>
-				<input type="hidden" th:value="${_csrf.token}" id="csrf_token"/>
-			
-                <label>Image :</label>
-			  	<div class="custom-file">
-			    	<input type="file" required class="custom-file-input" id="uploadFile" aria-describedby="inputGroupFileAddon01">
-			    	<label class="custom-file-label" for="inputGroupFile01">Choose a photo</label>
+				<input type="hidden" th:value="${_csrf.parameterName}"
+					id="csrf_parameter_name" /> <input type="hidden"
+					th:value="${_csrf.token}" id="csrf_token" /> <label>Image
+					:</label>
+				<div class="custom-file">
+					<input type="file" required class="custom-file-input"
+						id="uploadFile" aria-describedby="inputGroupFileAddon01">
+					<label class="custom-file-label" for="inputGroupFile01">Choose
+						a photo</label>
 				</div>
-                
-                <label>Description :</label>
-                <input placeholder="Photo description" class="form-control" id="description" type="text" name="description" />
-                
-                <label>Capture date :</label>
-                <input class="form-control" id="date" type="date" name="date" />
-                
-                <label>Captured Childs :</label>
-                <th:block th:each="child : ${childs}">
-                <div>
-                	<input type="checkbox" name="capturedChild" th:value="${child.childId}" />
-                 	<label id="defaultUnchecked" th:text="${child.childFirstName + ' ' + child.childLastName}"></label>
-               	</div>
-               	</th:block>
 
-                    
-                <label> SchoolClass :</label>
-                <select  class="custom-select form-control">
-                    <option th:each="schoolClass : ${schoolClasss}" name="schoolClassId"  th:value="${schoolClass.schoolClassId}"
-                        data-th-text="${schoolClass.SchoolClassName} + ' - (' + ${schoolClass.school.schoolName} + ')'"></option>
-                </select>
-                <label>Photo type :</label>
-                <select id="type" name="type" class="custom-select form-control">
-                    <option th:value="0" data-th-text="Individual"></option>
-                    <option th:value="1" data-th-text="Class"></option>
-                    <option th:value="2" data-th-text="Unknown" selected="selected"></option>
-                </select>
+				<label>Description :</label> <input placeholder="Photo description"
+					class="form-control" id="description" type="text"
+					name="description" /> <label>Capture date :</label> <input
+					class="form-control" id="date" type="date" name="date" /> <label>Captured
+					Childs :</label>
+				<th:block th:each="child : ${childs}">
+					<div>
+						<input type="checkbox" name="capturedChild"
+							th:value="${child.childId}" /> <label id="defaultUnchecked"
+							th:text="${child.childFirstName + ' ' + child.childLastName}"></label>
+					</div>
+				</th:block>
+
+				<label> SchoolClass :</label> <select
+					class="custom-select form-control">
+					<option th:each="schoolClass : ${schoolClasss}"
+						name="schoolClassId" th:value="${schoolClass.schoolClassId}"
+						data-th-text="${schoolClass.SchoolClassName} + ' - (' + ${schoolClass.school.schoolName} + ')'"></option>
+				</select> <label>Photo type :</label> <select id="type" name="type"
+					class="custom-select form-control">
+					<option th:value="0" data-th-text="Individual"></option>
+					<option th:value="1" data-th-text="Class"></option>
+					<option th:value="2" data-th-text="Unknown" selected="selected"></option>
+				</select>
 
 				<button type="button" onclick="onSubmit()" class="btn btn-dark m-3">Submit</button>
 			</form>
@@ -53,8 +54,8 @@
 
 	</section>
 
-    <div th:insert="../fragments/scripts.html :: min_scripts"></div>
-    <script th:src="@{/js/upload_functions.js}"></script>
+	<div th:insert="../fragments/scripts.html :: min_scripts"></div>
+	<script th:src="@{/js/upload_functions.js}"></script>
 
 </body>
 </html>

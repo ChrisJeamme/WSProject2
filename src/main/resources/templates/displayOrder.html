@@ -3,46 +3,38 @@
 <body class="text-center">
 	<header th:replace="../fragments/header.html :: header('Phemp')"></header>
 	<section class="m-8">
-	<a href="/" class="btn btn-info btn-lg mt-2">Back to the hub</a>
-	<a href="/schoolManagement" class="btn btn-info btn-lg mt-2">Back to the school page</a>
+		<a href="/" class="btn btn-info btn-lg mt-2">Back to the hub</a> <a
+			href="/schoolManagement" class="btn btn-info btn-lg mt-2">Back to
+			the school page</a>
 		<div class="connectionBox">
 			<h2 th:text="'Order : ' + ${order.orderId}"></h2>
 			<p th:text="'Ordered by : ' + ${order.parent.email}"></p>
 		</div>
-	
-				<div class="container">
-					
-					
-										<div class="table-container">
-											<table class="table table-filter">
-												<thead>
-													<tr>
-														<td>Photo ID</td>
-														<td>Photo Type</td>
-														<td>Description</td>
-														<td>Capture Date</td>
-														<td>School Class Name</td>
-													</tr>
-												</thead>
-												<tbody th:if="${order.photos != null}">
-													<tr th:each="photo : ${order.photos}">
-														<td th:text="${photo.photoId}"></td>
-														<td th:text="${photo.type}"></td>
-														<td th:text="${photo.description}"></td>
-														<td th:text="${photo.date}"></td>
-														<td th:text="${photo.schoolClass.schoolClassName}"></td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-
-	
+		<div class="container">
+			<div class="table-container">
+				<table class="table table-filter">
+					<thead>
+						<tr>
+							<td>Photo ID</td>
+							<td>Photo Type</td>
+							<td>Description</td>
+							<td>Capture Date</td>
+							<td>School Class Name</td>
+						</tr>
+					</thead>
+					<tbody th:if="${order.photos != null}">
+						<tr th:each="photo : ${order.photos}">
+							<td th:text="${photo.photoId}"></td>
+							<td th:text="${photo.type}"></td>
+							<td th:text="${photo.description}"></td>
+							<td th:text="${photo.date}"></td>
+							<td th:text="${photo.schoolClass.schoolClassName}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
 	<div th:insert="../fragments/scripts.html :: min_scripts"></div>
-	<script th:src="@{/js/order_functions.js}"></script>
-	<script th:src="@{/js/table_filter.js}"></script>
 </body>
 </html>

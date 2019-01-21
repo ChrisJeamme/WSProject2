@@ -1,35 +1,42 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="../fragments/head.html :: head('Phemp')"></head>
 <body class="text-center backgroundSchoolAdmin">
-    <header th:replace="../fragments/header.html :: header('Phemp')"></header>
+	<header th:replace="../fragments/header.html :: header('Phemp')"></header>
 
 	<section class="m-5">
-	
-        <p th:if="${error}!=null" th:text="${error}" class="alert alert-danger"></p>
-        <div class="connectionBox">
-            <h2>Sign up as School Administrator</h2>
-        
-        	<p class="info">Only school administrators can sign up here. If you are a parent, you have to ask login credentials to your school administrator.
-        	If you are a photographer, sign up <a href="/signupPhotographer">here</a></p>
-        
-            <form th:action="@{/register}" method="POST">
-                <label>Username:</label> <input type="text" class="form-control" name="userName" required/><br/>
-                <label>First Name:</label> <input type="text" class="form-control" name="firstName" required/><br/>
-                <label>Last Name:</label> <input type="text" class="form-control" name="lastName" required/><br/>
-                <label>E-Mail:</label> <input type="email" class="form-control"  name="mail" required/><br/>
-                <label>Phone Number:</label> <input type="tel" class="form-control"  name="phoneNumber" required/><br/>
-                <label>Password:</label> <input type="password" class="form-control"  name="password" required/><br/>
-                <label>Repeated Password:</label> <input type="password" class="form-control"  name="password2" required/><br/>
-                
-                <input type="hidden" name="type" value="schoolAdmin"/>
-                <input type="submit" class="btn form-control btn-info" value="Register"/>
-        	</form>
-        </div>
+
+		<p th:if="${error}!=null" th:text="${error}"
+			class="alert alert-danger"></p>
+		<div class="connectionBox">
+			<h2>Sign up as School Administrator</h2>
+
+			<p class="info">
+				Only school administrators can sign up here. If you are a parent,
+				you have to ask login credentials to your school administrator. If
+				you are a photographer, sign up <a href="/signupPhotographer">here</a>
+			</p>
+
+			<form th:action="@{/register}" method="POST">
+				<label>Username:</label> <input type="text" class="form-control"
+					name="userName" required /><br /> <label>First Name:</label> <input
+					type="text" class="form-control" name="firstName" required /><br />
+				<label>Last Name:</label> <input type="text" class="form-control"
+					name="lastName" required /><br /> <label>E-Mail:</label> <input
+					type="email" class="form-control" name="mail" required /><br /> <label>Phone
+					Number:</label> <input type="tel" class="form-control" name="phoneNumber"
+					required /><br /> <label>Password:</label> <input type="password"
+					class="form-control" name="password" required /><br /> <label>Repeated
+					Password:</label> <input type="password" class="form-control"
+					name="password2" required /><br /> <input type="hidden" name="type"
+					value="schoolAdmin" /> <input type="submit"
+					class="btn form-control btn-info" value="Register" />
+			</form>
+		</div>
 
 	</section>
 
 	<script th:src="@{/webjars/bootstrap/4.1.3/js/bootstrap.min.js}"></script>
-    <script th:src="@{/webjars/chartjs/2.7.3/Chart.min.js}"></script>
-    
+	<script th:src="@{/webjars/chartjs/2.7.3/Chart.min.js}"></script>
+
 </body>
 </html>

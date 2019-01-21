@@ -1,22 +1,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="../fragments/head.html :: head('Phemp')"></head>
 <body class="text-center">
-    <header th:replace="../fragments/header.html :: header('Phemp')"></header>
+	<header th:replace="../fragments/header.html :: header('Phemp')"></header>
 
-    <p th:if="${error}!=null" th:text="${error}" class="alert alert-danger"></p>
+	<p th:if="${error}!=null" th:text="${error}" class="alert alert-danger"></p>
 	<section class="m-5">
-        <div class="connectionBox">
-            <h2>School Creation</h2>
-            <form th:action="@{/newSchool}" method="POST"> 
-                School Name : <input type="text" class="form-control" name="schoolName" required/> <br/>
-
-                <input type="submit" class="btn form-control btn-secondary" value="Add"/>
-            </form>
-        </div>
+		<div class="connectionBox">
+			<h2>School Creation</h2>
+			<form th:action="@{/newSchool}" method="POST">
+				School Name : <input type="text" class="form-control"
+					name="schoolName" required /> <br /> <input type="submit"
+					class="btn form-control btn-secondary" value="Add" />
+			</form>
+		</div>
 
 	</section>
 
-    <div th:insert="../fragments/scripts.html :: min_scripts"></div>
-    <script th:src="@{/js/school_management_functions.js}"></script>
+	<div th:insert="../fragments/scripts.html :: min_scripts"></div>
+	<script th:src="@{/js/school_management_functions.js}"></script>
 </body>
 </html>
