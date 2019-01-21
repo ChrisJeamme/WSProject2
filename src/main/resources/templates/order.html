@@ -8,8 +8,11 @@
 			<h2>Photo Order</h2>
 		
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+
 <form id="orderForm" name="orderForm">
+<input type="hidden" th:value="${_csrf.parameterName}" id="csrf_parameter_name"/>
+				<input type="hidden" th:value="${_csrf.token}" id="csrf_token"/>
+			
 <div class="container">
 	<div class="row">
 

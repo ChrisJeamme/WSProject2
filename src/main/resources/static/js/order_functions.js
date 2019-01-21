@@ -8,8 +8,8 @@ var orderError = document.querySelector('#orderError');
 var orderSuccess = document.querySelector('#orderSuccess');
 var displayArea = document.querySelector('#displayArea');
 
-//let csrfParameterName = document.querySelector("#csrf_parameter_name").value;
-//let csrfToken = document.querySelector("#csrf_token").value;
+let csrfParameterName = document.querySelector("#csrf_parameter_name").value;
+let csrfToken = document.querySelector("#csrf_token").value;
 
 $(document).ready(function () {
 	let xhr = new XMLHttpRequest();
