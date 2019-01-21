@@ -143,11 +143,4 @@ public class OrderController {
 		return or;
 	}
 	
-	@ApiOperation(value="Display Order with orderId matching param Id" , httpMethod="GET", response= UploadPhotoResponse.class)
-	@GetMapping("/displayOrder")
-	public Order getitem(@RequestParam("id") String orderId){
-		Order o = orderRepository.findByOrderId(Long.parseLong(orderId));
-	    
-	    return o;
-	}
 }

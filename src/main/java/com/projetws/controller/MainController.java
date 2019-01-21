@@ -10,11 +10,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.projetws.model.Child;
 import com.projetws.model.ChildRepository;
+import com.projetws.model.Order;
+import com.projetws.model.OrderRepository;
 import com.projetws.model.School;
 import com.projetws.model.SchoolClass;
 import com.projetws.model.SchoolClassRepository;
@@ -22,6 +26,9 @@ import com.projetws.model.SchoolRepository;
 import com.projetws.model.User;
 import com.projetws.model.UserRepository;
 import com.projetws.model.UserRole;
+import com.projetws.tools.UploadPhotoResponse;
+
+import io.swagger.annotations.ApiOperation;
 
 @Controller
 public class MainController
@@ -36,6 +43,8 @@ public class MainController
 	SchoolClassRepository schoolClassRepository;
 	@Autowired
 	ChildRepository childRepository;
+	@Autowired
+	OrderRepository orderRepository;
 	
 	@RequestMapping("/")
 	public String hub()
@@ -180,5 +189,14 @@ public class MainController
     {
     	return "order";
     }
+	
+	@ApiOperation(value="Display Order with orderId matching param Id" , httpMethod="GET", response= UploadPhotoResponse.class)
+	@GetMapping("/displayOrder")
+	public String displayOrder(@RequestParam("id") String orderId, Model model){
+		Order o = orderRepository.findByOrderId(Long.parseLong(orderId));
+	    model.addAttribute("order", o);
+	    
+	    return "displayOrder";
+	}
 	
 }

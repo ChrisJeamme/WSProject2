@@ -237,6 +237,8 @@ public class SchoolManagementController
 		
 		School school = schoolRepository.findByManager(manager);
 		List<SchoolClass> schoolClasses = schoolClassRepository.findAllBySchool(school);
+		
+		// TODO : Need to take into account the School
 		List<Order> orders = orderRepository.findAll();
 		m.addAttribute("school", school);
 		m.addAttribute("schoolClasses", schoolClasses);
