@@ -34,7 +34,7 @@
                 <label> SchoolClass :</label>
                 <select  class="custom-select form-control">
                     <option th:each="schoolClass : ${schoolClasss}" name="schoolClassId"  th:value="${schoolClass.schoolClassId}"
-                        data-th-text="${schoolClass.SchoolClassName}"></option>
+                        data-th-text="${schoolClass.SchoolClassName} + ' - (' + ${schoolClass.school.schoolName} + ')'"></option>
                 </select>
                 <label>Photo type :</label>
                 <select id="type" name="type" class="custom-select form-control">

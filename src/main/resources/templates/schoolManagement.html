@@ -41,7 +41,7 @@
 	
 		<div th:if="${orders.empty}">No orders found...</div>
 		<div th:each="order : ${orders}">
-				<a th:href="@{'/order?id='+${order.orderId}}" class="btn-info btn btn-lg mb-2">
+				<a th:href="@{'/displayOrder?id='+${order.orderId}}" class="btn-info btn btn-lg mb-2">
 					<strong>Order Infos : </strong>
 					<small>
 						From : <span th:text="${order.parent.email}"></span>
