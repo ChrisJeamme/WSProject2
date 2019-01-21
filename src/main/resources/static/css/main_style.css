@@ -34,28 +34,51 @@
 	font-family: 'Pacifico', cursive;
 }
 
-.backgroundSchoolAdmin
+/*No copyright on these image*/
+.backgroundSchoolAdmin	{background-image: url('../img/image5blur10px.jpg'); 	background-size: 100%;}
+.backgroundPhotograph	{background-image: url('../img/image1blur10px.jpg'); 	background-size: 100%;}
+.backgroundDefault		{background-image: url('../img/image4blur10px.jpg'); 	background-size: 100%;}
+.backgroundManagement	{background-image: url('../img/image6blur10px.jpg'); 	background-size: 100%;}
+.backgroundUploadPhoto	{background-image: url('../img/image8blur10px.jpg'); 	background-size: 100%;}
+.backgroundHub			{background-image: url('../img/texture3blur33px.jpg'); 	background-size: 100%;}
+
+   /********/
+  /* Menu */
+ /********/
+ 
+.mainMenu
 {
-	background-image: url('../img/image5blur10px.jpg');
+	display: flex;
+	flex-direction: column;
+}
+ 
+.mainMenuItem
+{
+	position: relative;
+	display: block;
+	border-radius: 0 !important;
+	font-size: 1.5em;
+	padding: 25px;
 }
 
-.backgroundPhotograph
+.colorFlat
 {
-	background-image: url('../img/image1blur10px.jpg');
+	color: white;
+	font-weight: bold;
 }
-
-.backgroundDefault
+.colorFlat:hover
 {
-	background-image: url('../img/image4blur10px.jpg');
-	background-size: 100%;
+	color: white;
+	background-color: grey;
 }
+.colorFlatYellow{background-color: #f1c40f;}
+.colorFlatYellow:hover{background-color: #FFE26C;}
 
-.backgroundManagement
-{
-	background-image: url('../img/image6blur10px.jpg');
-	background-size: 100%;
-}
+.colorFlatBlue{background-color: #3498db;}
+.colorFlatBlue:hover{background-color: #58ACE3;}
 
+.colorFlatRed{background-color: #e74c3c;}
+.colorFlatRed:hover{background-color: #FF7364;}
 
   /*******/
  /* Ads */
