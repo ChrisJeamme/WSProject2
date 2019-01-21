@@ -26,6 +26,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.projetws.model.Child;
 import com.projetws.model.ChildRepository;
+import com.projetws.model.Order;
+import com.projetws.model.OrderRepository;
 import com.projetws.model.Photo;
 import com.projetws.model.PhotoRepository;
 import com.projetws.model.PhotoType;
@@ -33,12 +35,15 @@ import com.projetws.model.SchoolClassRepository;
 import com.projetws.model.User;
 import com.projetws.model.UserRepository;
 import com.projetws.tools.DisplayPhotoResponse;
+import com.projetws.tools.OrderResponse;
 import com.projetws.tools.PhotoStorageService;
 import com.projetws.tools.UploadPhotoResponse;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
+@Api(value="Handle requests related to photo ordering")
 @RestController
 public class OrderController {
 
@@ -54,7 +59,7 @@ public class OrderController {
 	private UserRepository parentRepository;
 	
 	@Autowired
-	private SchoolClassRepository schoolClassRepository;
+	private OrderRepository orderRepository;
 	 
 	@ApiOperation(value="Provide photos related to current user" , httpMethod="GET", response= UploadPhotoResponse.class)
 	@GetMapping("/display")
@@ -95,5 +100,42 @@ public class OrderController {
 		}
 		
 		return photoResponseList;
+	}
+	
+	@ApiOperation(value="Register a photo order" , httpMethod="POST", response= UploadPhotoResponse.class)
+	@PostMapping("/executeOrder")
+	public OrderResponse executeOrder(Principal principal,@ApiParam(value="Ordered Photos", required=true) @RequestParam("photosId") String photosId)				
+	{
+		logger.info("principal = " + principal);
+		String username = principal.getName();
+		if(!parentRepository.existsByUserName(username))
+		{
+			logger.error("User doesn't exist");
+			return null;
+		}
+		logger.info("Getting parent");
+		User parent = parentRepository.findByUserName(username);
+		
+		
+		String[] photos = photosId.split(",");
+		ArrayList<Photo> photosList= new ArrayList<>();
+		
+		if(photos.length > 0)
+		{
+			for(String photoId: photos)
+			{
+				photosList.add(photoStorageService.getFile(Long.parseLong(photoId)));
+			}
+		}
+		else
+		{
+			//send response order is empty
+		}
+		
+		Order order = new Order(parent, photosList);
+		orderRepository.save(order);
+		OrderResponse or = new OrderResponse(order.getOrderId(), parent.getUserId(), photosList);
+		
+		return or;
 	}
 }

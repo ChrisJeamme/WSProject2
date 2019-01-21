@@ -80,7 +80,7 @@ function executeOrder(photosId)
         var response = JSON.parse(xhr.responseText);
         if(xhr.status == 200) {
             orderError.style.display = "none";
-            orderSuccess.innerHTML = "<p>Order Successfully.</p>";
+            orderSuccess.innerHTML = "<p>Order Successfull.</p>";
             orderSuccess.style.display = "block";
         } else {
             orderSuccess.style.display = "none";
