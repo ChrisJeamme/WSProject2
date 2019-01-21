@@ -85,8 +85,7 @@ public class OrderController {
 			photoList.addAll(photoStorageService.getChildPhoto(c.getChildId()));	
 		}
 		
-		//TODO : remove this line
-		photoList.addAll(photoStorageService.getAll());
+	
 		
 		ArrayList<DisplayPhotoResponse> photoResponseList = new ArrayList<DisplayPhotoResponse>();
 		logger.info("Building response");
@@ -132,6 +131,7 @@ public class OrderController {
 		else
 		{
 			//send response order is empty
+			return null;
 		}
 		
 		Order order = new Order(parent, photosList);
