@@ -3,6 +3,7 @@
 <body class="text-center backgroundDefault">
     <header th:replace="../fragments/header.html :: header('Phemp')"></header>
     
+    <p th:if="${error}!=null" th:text="${error}" class="alert alert-danger"></p>
 	<section>
 		<span sec:authorize="!isAuthenticated()"> <!-- NOT CONNECTED USERS INTERFACE -->
 	   		<div class="cover-container d-flex h-100 mx-auto flex-column">
