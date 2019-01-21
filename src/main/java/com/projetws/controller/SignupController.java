@@ -18,6 +18,7 @@ import com.projetws.model.User;
 import com.projetws.model.UserRepository;
 import com.projetws.model.UserService;
 import com.projetws.tools.InputDataVerification;
+import com.projetws.tools.SecurityTools;
 
 import io.swagger.annotations.Api;
 
@@ -44,6 +45,12 @@ public class SignupController
             Model m
     )
     {
+    	if(userRepository.existsByEmail(mail))
+    		return SecurityTools.displayErrorAndRedirect(m, "Mail already taken", SecurityTools.samePage(request));
+    	
+    	if(userRepository.existsByUserName(userName))
+    		return SecurityTools.displayErrorAndRedirect(m, "Username already taken", SecurityTools.samePage(request));
+    	
     	logger.info("Signup asked");
     	if (password.compareTo(password2) != 0) //The 2 passwords are different
         {
@@ -78,20 +85,8 @@ public class SignupController
     		return "redirect:"+request.getHeader("Referer");
     	}
     	
-        int add = userService.addUser(new User(mail, firstName, lastName, phoneNumber, password, userName, roles)); //Try to add the user
-
-        if (add == 1)
-        {
-        	logger.warn("Username already used");
-            m.addAttribute("error", "Username already used");
-            return "redirect:"+request.getHeader("Referer");
-        }
-        if (add == 2)
-        {
-        	logger.warn("Mail already used");
-            m.addAttribute("mailExists", "Mail already used");
-            return "redirect:"+request.getHeader("Referer");
-        }
+        userService.addUser(new User(mail, firstName, lastName, phoneNumber, password, userName, roles));
+        
         logger.info("Sign up success : username="+userName);
         m.addAttribute("app_username", userName);
         m.addAttribute("app_password", password);
